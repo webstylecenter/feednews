@@ -13,7 +13,7 @@ class CreateNoteTable extends Migration
      */
     public function up()
     {
-        Schema::create('note', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->string('name')->nullable();
@@ -32,6 +32,6 @@ class CreateNoteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('note');
+        Schema::dropIfExists('notes');
     }
 }

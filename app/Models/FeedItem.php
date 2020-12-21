@@ -3,26 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FeedItem extends Model
 {
-    use HasTimestamps;
+    use HasTimestamps, HasFactory;
 
     protected $fillable = [
         'title',
         'description',
-        'url',
-        'pinned'
-    ];
-
-    protected $casts = [
-        'pinned' => 'boolean'
-    ];
-
-    protected $attributes = [
-        'pinned' => false
+        'url'
     ];
 
     public function feed(): BelongsTo

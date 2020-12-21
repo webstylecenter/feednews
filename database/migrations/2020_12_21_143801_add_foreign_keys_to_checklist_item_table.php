@@ -13,7 +13,7 @@ class AddForeignKeysToChecklistItemTable extends Migration
      */
     public function up()
     {
-        Schema::table('checklist_item', function (Blueprint $table) {
+        Schema::table('checklist_items', function (Blueprint $table) {
             $table->foreign('user_id', 'fk_ci_user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
@@ -25,7 +25,7 @@ class AddForeignKeysToChecklistItemTable extends Migration
      */
     public function down()
     {
-        Schema::table('checklist_item', function (Blueprint $table) {
+        Schema::table('checklist_items', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
     }

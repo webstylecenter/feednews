@@ -11,8 +11,11 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(UserSeeder::class);
+        $this->call(FeedSeeder::class);
+        $this->call(UserFeedSeeder::class);
+        $this->call(NoteSeeder::class);
     }
 }

@@ -13,7 +13,7 @@ class CreateUserFeedTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_feed', function (Blueprint $table) {
+        Schema::create('user_feeds', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('feed_id')->unsigned();
@@ -34,6 +34,6 @@ class CreateUserFeedTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_feed');
+        Schema::dropIfExists('user_feeds');
     }
 }

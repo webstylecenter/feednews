@@ -13,14 +13,13 @@ class CreateFeedItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('feed_item', function (Blueprint $table) {
+        Schema::create('feed_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('feed_id')->unsigned();
             $table->string('guid');
             $table->string('title');
             $table->string('description')->nullable();
             $table->longText('url');
-            $table->tinyInteger('pinned')->default(false);
             $table->timestamps();
 
             $table->index('feed_id', 'feed_id_idx');
@@ -34,6 +33,6 @@ class CreateFeedItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feed_item');
+        Schema::dropIfExists('feed_items');
     }
 }

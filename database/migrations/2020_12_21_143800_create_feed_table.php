@@ -13,7 +13,7 @@ class CreateFeedTable extends Migration
      */
     public function up()
     {
-        Schema::create('feed', function (Blueprint $table) {
+        Schema::create('feeds', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->longText('url');
@@ -29,6 +29,6 @@ class CreateFeedTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feed');
+        Schema::dropIfExists('feeds');
     }
 }

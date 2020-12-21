@@ -13,14 +13,14 @@ class CreateUserFeedItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_feed_item', function (Blueprint $table) {
+        Schema::create('user_feed_items', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('feed_item_id')->unsigned();
             $table->bigInteger('user_feed_id')->unsigned();
             $table->tinyInteger('viewed')->default(false);
             $table->tinyInteger('pinned')->default(false);
-            $table->dateTime('opened')->nullable();
+            $table->dateTime('opened_at')->nullable();
             $table->timestamps();
 
             $table->index('user_id', 'user_id_idx');
@@ -36,6 +36,6 @@ class CreateUserFeedItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_feed_item');
+        Schema::dropIfExists('user_feed_items');
     }
 }

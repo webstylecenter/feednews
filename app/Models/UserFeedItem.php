@@ -19,13 +19,12 @@ class UserFeedItem extends Model
     protected $attributes = [
         'viewed' => false,
         'pinned' => false,
-        'opened' => false,
     ];
 
     protected $casts = [
         'viewed' => 'boolean',
         'pinned' => 'boolean',
-        'opened' => 'boolean',
+        'opened_at' => 'datetime',
     ];
 
     public function user(): BelongsTo

@@ -13,9 +13,9 @@ class AddForeignKeysToUserFeedTable extends Migration
      */
     public function up()
     {
-        Schema::table('user_feed', function (Blueprint $table) {
-            $table->foreign('feed_id', 'FK_59C1086251A5BC03')->references('id')->on('feed')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('user_id', 'FK_59C10862A76ED395')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::table('user_feeds', function (Blueprint $table) {
+            $table->foreign('feed_id', 'FK_59C1086251A5BC03')->references('id')->on('feeds')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('user_id', 'FK_59C10862A76ED395')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -26,7 +26,7 @@ class AddForeignKeysToUserFeedTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_feed', function (Blueprint $table) {
+        Schema::table('user_feeds', function (Blueprint $table) {
             $table->dropForeign('FK_59C1086251A5BC03');
             $table->dropForeign('FK_59C10862A76ED395');
         });

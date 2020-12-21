@@ -13,8 +13,8 @@ class AddForeignKeysToNoteTable extends Migration
      */
     public function up()
     {
-        Schema::table('note', function (Blueprint $table) {
-            $table->foreign('user_id', 'FK_CFBDFA14A76ED395')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+        Schema::table('notes', function (Blueprint $table) {
+            $table->foreign('user_id', 'FK_CFBDFA14A76ED395')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -25,7 +25,7 @@ class AddForeignKeysToNoteTable extends Migration
      */
     public function down()
     {
-        Schema::table('note', function (Blueprint $table) {
+        Schema::table('notes', function (Blueprint $table) {
             $table->dropForeign('FK_CFBDFA14A76ED395');
         });
     }

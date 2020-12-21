@@ -21,9 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'hideXFrameNotice',
-        'ipAddress',
-        'userAgent'
+        'hide_xframe_notice',
+        'ip_address',
+        'user_agent',
+        'enabled'
     ];
 
     /**
@@ -34,6 +35,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $attributes = [
+        'enabled' => true,
+        'hide_xframe_notice' => false,
     ];
 
     /**

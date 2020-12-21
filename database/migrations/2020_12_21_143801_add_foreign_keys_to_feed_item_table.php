@@ -13,8 +13,8 @@ class AddForeignKeysToFeedItemTable extends Migration
      */
     public function up()
     {
-        Schema::table('feed_item', function (Blueprint $table) {
-            $table->foreign('feed_id', 'FK_9F8CCE4951A5BC03')->references('id')->on('feed')->onUpdate('RESTRICT')->onDelete('CASCADE');
+        Schema::table('feed_items', function (Blueprint $table) {
+            $table->foreign('feed_id', 'FK_9F8CCE4951A5BC03')->references('id')->on('feeds')->onUpdate('cascade')->onDelete('CASCADE');
         });
     }
 
@@ -25,7 +25,7 @@ class AddForeignKeysToFeedItemTable extends Migration
      */
     public function down()
     {
-        Schema::table('feed_item', function (Blueprint $table) {
+        Schema::table('feed_items', function (Blueprint $table) {
             $table->dropForeign('FK_9F8CCE4951A5BC03');
         });
     }
