@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', ['bodyClass' => 'test']);
-});
+require 'checklist.php';
+require 'feedback.php';
+require 'feed.php';
+require 'homepage.php';
+require 'notes.php';
+require 'screensaver.php';
+require 'settings.php';
+require 'user.php';
+require 'welcome.php';
