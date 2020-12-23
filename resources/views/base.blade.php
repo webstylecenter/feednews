@@ -12,14 +12,15 @@
     <meta name="keywords" content="online rss reader, feed, news">
     <meta name="theme-color" content="#f5f5f5">
     @section('stylesheets')
-
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @endsection
 </head>
 <body class="@if($bodyClass) {{ $bodyClass }} @endif" data-refresh-date="{{ \Carbon\Carbon::now() }}">
 @section('body')
 @endsection
 @include('modals/dialog')
+<!-- Javascript section -->
 @section('javascripts')
-
+    <script src="{{ asset('js/app.js')}}"></script>
 @endsection
 </body>
