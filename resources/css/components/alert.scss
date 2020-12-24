@@ -1,0 +1,23 @@
+.alert {
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: white;
+    color: black;
+}
+
+.alert-danger {
+    background-color: #d78e8e;
+    border-color: red;
+}
+
+.alert-warning {
+    background-color: #cda077;
+    border-color: #ff6f00;
+}
+
+.alert-success {
+    background-color: #8bc368;
+    border-color: #347925;
+}

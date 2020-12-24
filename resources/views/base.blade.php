@@ -13,14 +13,14 @@
     <meta name="theme-color" content="#f5f5f5">
     @section('stylesheets')
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @endsection
+    @show
 </head>
 <body class="@if($bodyClass) {{ $bodyClass }} @endif" data-refresh-date="{{ \Carbon\Carbon::now() }}">
 @section('body')
-@endsection
+@show
 @include('modals/dialog')
 <!-- Javascript section -->
 @section('javascripts')
     <script src="{{ asset('js/app.js')}}"></script>
-@endsection
+@show
 </body>

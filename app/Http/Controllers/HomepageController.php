@@ -8,6 +8,7 @@ class HomepageController extends BaseController
 {
     public function index()
     {
+        return view('welcome', ['bodyClass' => 'homepage']);
         // TODO: Add functionality to method
     }
 
@@ -18,6 +19,6 @@ class HomepageController extends BaseController
 
     public function privacyPolicy()
     {
-        // TODO: Add functionality to method
+        return view('user.privacy', ['bodyClass' => 'privacy']);
     }
 }

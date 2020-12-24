@@ -46623,10 +46623,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/css/app.css":
-/*!*******************************!*\
-  !*** ./resources/css/app.css ***!
-  \*******************************/
+/***/ "./resources/css/app.scss":
+/*!********************************!*\
+  !*** ./resources/css/app.scss ***!
+  \********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -46648,6 +46648,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var handlebars_dist_handlebars_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! handlebars/dist/handlebars.min.js */ "./node_modules/handlebars/dist/handlebars.min.js");
 /* harmony import */ var handlebars_dist_handlebars_min_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(handlebars_dist_handlebars_min_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_fluent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/fluent */ "./resources/js/components/fluent.js");
+/* VENDOR */
+window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+__webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
+
+__webpack_require__(/*! jquery-jscroll */ "./node_modules/jquery-jscroll/jquery.jscroll.js");
+
+__webpack_require__(/*! jquery-modal */ "./node_modules/jquery-modal/jquery.modal.js");
+
+__webpack_require__(/*! spectrum-colorpicker */ "./node_modules/spectrum-colorpicker/spectrum.js");
+
+__webpack_require__(/*! jquery-hammerjs */ "./node_modules/jquery-hammerjs/jquery.hammer.js");
+
+window.Handlebars = __webpack_require__(/*! handlebars/dist/handlebars.min.js */ "./node_modules/handlebars/dist/handlebars.min.js");
+
+
+
+/** global: WOW */
+
+new wowjs__WEBPACK_IMPORTED_MODULE_0__["WOW"]({
+  scrollContainer: '.scroll',
+  mobile: false
+}).init();
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/main */ "./resources/js/components/main.js");
@@ -46679,31 +46703,6 @@ window.showDialog = function (title, description) {
     fadeDuration: 100
   });
 };
-/* VENDOR */
-
-
-window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-
-__webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
-
-__webpack_require__(/*! jquery-jscroll */ "./node_modules/jquery-jscroll/jquery.jscroll.js");
-
-__webpack_require__(/*! jquery-modal */ "./node_modules/jquery-modal/jquery.modal.js");
-
-__webpack_require__(/*! spectrum-colorpicker */ "./node_modules/spectrum-colorpicker/spectrum.js");
-
-__webpack_require__(/*! jquery-hammerjs */ "./node_modules/jquery-hammerjs/jquery.hammer.js");
-
-window.Handlebars = __webpack_require__(/*! handlebars/dist/handlebars.min.js */ "./node_modules/handlebars/dist/handlebars.min.js");
-
-
-
-/** global: WOW */
-
-new wowjs__WEBPACK_IMPORTED_MODULE_0__["WOW"]({
-  scrollContainer: '.scroll',
-  mobile: false
-}).init();
 
 /***/ }),
 
@@ -47661,14 +47660,14 @@ $(function () {
 /***/ }),
 
 /***/ 0:
-/*!***********************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/css/app.css ***!
-  \***********************************************************/
+/*!************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/css/app.scss ***!
+  \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\xampp\htdocs\feednews\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\feednews\resources\css\app.css */"./resources/css/app.css");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\feednews\resources\css\app.scss */"./resources/css/app.scss");
 
 
 /***/ })
