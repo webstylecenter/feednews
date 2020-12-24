@@ -54,41 +54,9 @@ class UserController extends BaseController
         return redirect()->intended(route('homepage.index'));
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
-        // TODO: Add functionality to method
-    }
-
-
-    /**
-     * TODO: Move this to a different place
-     */
-    private function validateRegister()
-    {
-        // TODO: Add functionality to method
-    }
-
-    /**
-     * TODO: Move this to a different place
-     */
-    private function createUser()
-    {
-        // TODO: Add functionality to method
-    }
-
-    /**
-     * TODO: Move this to a different place
-     */
-    private function validateUser()
-    {
-        // TODO: Add functionality to method
-    }
-
-    /**
-     * TODO: Move this to a different place
-     */
-    private function signinUser()
-    {
-        // TODO: Add functionality to method
+        Auth::logout();
+        return redirect(route('homepage.index'));
     }
 }
