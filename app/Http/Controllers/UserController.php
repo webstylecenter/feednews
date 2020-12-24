@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
@@ -50,6 +51,12 @@ class UserController extends BaseController
         if (!Auth::attempt($credentials)) {
             return back()->withErrors(['Invalid credentials']);
         }
+
+        $user = Auth::user();
+        $user->last_login = Carbon::now();
+        $user->ip_address = $request->ip();
+        $user->user_agent = $request->userAgent();
+        $user->save();
 
         return redirect()->intended(route('homepage.index'));
     }

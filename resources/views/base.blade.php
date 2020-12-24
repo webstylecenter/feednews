@@ -11,6 +11,9 @@
     <meta name="Description" content="Read the news as it happens from different sources, watch YouTube and manage your todo's all in one place! Join us now on your Desktop, Tablet and phone">
     <meta name="keywords" content="online rss reader, feed, news">
     <meta name="theme-color" content="#f5f5f5">
+
+    <!-- TODO: Make this a preload -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" crossorigin="anonymous">
     @section('stylesheets')
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @show
