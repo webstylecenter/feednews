@@ -47362,10 +47362,10 @@ function refreshPage() {
   /** global: Image */
   var newImage = new Image();
   var time = $.now();
-  newImage.src = '/screensaver/images/' + time + '.jpg';
+  newImage.src = '/images/' + time + '.jpg';
 
   newImage.onload = function () {
-    $('.notActive').css('background-image', 'url("/screensaver/images/' + time + '.jpg")').fadeIn(3000);
+    $('.notActive').css('background-image', 'url("/images/' + time + '.jpg")').fadeIn(3000);
     $('.active').fadeOut(3000);
     $('.notActive, .active').toggleClass('active notActive');
   };

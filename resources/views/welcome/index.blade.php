@@ -14,7 +14,7 @@
 
             <div class="views">
                 <div class="view widgets">
-                    @include('widgets.note', ['notes' => $notes])
+                    @include('widgets.notes', ['notes' => $notes])
                     <div class="checklist-widget">
                         @include('widgets.checklist', ['todos' => $todos])
                     </div>

@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UserRepository;
+use Detection\MobileDetect;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class HomepageController extends BaseController
 {
-    public function index()
+    public function index(MobileDetect $mobileDetect, UserRepository $userRepository)
     {
-        return view('welcome', ['bodyClass' => 'homepage']);
-        // TODO: Add functionality to method
+        return view('home.index', [
+            'bodyClass' => 'Homepage',
+            'device' => $mobileDetect,
+            'user' => Auth::user(),
+            'userFeedItems' => $userRepository->getFeedItems(),
+            'userFeedSettings' => Auth::user()->settings ?? [],
+            'forecast' => []
+        ]);
     }
 
     public function offline()

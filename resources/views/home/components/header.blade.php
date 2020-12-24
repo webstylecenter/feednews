@@ -7,7 +7,7 @@
     </div>
     <div class="header--bar-actions wow slideInRight">
 
-        @if($device->isMobile)
+        @if($device->isMobile())
             <div data-balloon="Click to see weather forecast" data-balloon-pos="down" class="js-update-weather-icon header--bar-weather-icon hide-if-tablet hide-if-mobile">{% include 'weather/icon.html.twig' %}</div>
             <div class="js-show-weather-radar header--bar-weather-radar"><img class="js-weather-radar" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512" />
                 <div class="header--bar-weather-radar-overview">

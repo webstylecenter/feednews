@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasMany(UserFeed::class);
     }
 
+    public function feedItems(): hasMany
+    {
+        return $this->hasMany(UserFeedItem::class);
+    }
+
     public function checklistItems(): hasMany
     {
         return $this->hasMany(ChecklistItem::class);
@@ -64,5 +69,10 @@ class User extends Authenticatable
     public function notes(): hasMany
     {
         return $this->hasMany(Note::class);
+    }
+
+    public function settings(): hasMany
+    {
+        return $this->hasMany(UserSetting::class);
     }
 }
