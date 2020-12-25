@@ -17,9 +17,13 @@ $(function () {
 });
 
 function checkItem(el) {
-    postToChecklist({
-        id: $(el).data('database-id'),
-        checked: $(el).is(':checked')
+    $.post(route('checklist.update'), {
+        id: $(el).data('database-id')
+    }).then(function (data) {
+        $('.checklist--list').html(data);
+        $('.js-checklist-item').on('click', function () {
+            checkItem(this);
+        });
     });
 }
 

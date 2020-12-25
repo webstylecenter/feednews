@@ -46702,6 +46702,12 @@ window.showDialog = function (title, description) {
   });
 };
 
+$.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -46762,9 +46768,13 @@ $(function () {
 });
 
 function checkItem(el) {
-  postToChecklist({
-    id: $(el).data('database-id'),
-    checked: $(el).is(':checked')
+  $.post(route('checklist.update'), {
+    id: $(el).data('database-id')
+  }).then(function (data) {
+    $('.checklist--list').html(data);
+    $('.js-checklist-item').on('click', function () {
+      checkItem(this);
+    });
   });
 }
 
@@ -47062,8 +47072,7 @@ function removeNote(id) {
       id: $(this).data('pin-id')
     }, function (response) {
       if (response.status !== 'success') {
-        alert('Pin status not changed!'); // TODO: Make a nice modal for this
-
+        showDialog('Error while pinning', 'Pin status cannot be changed right now. Bad connection?');
         return;
       }
 
@@ -47269,7 +47278,7 @@ $(function () {
   $('.registerBox input[type="submit"]').on('click', function (e) {
     if (!$('.registerBox input[type="checkbox"]').is(':checked')) {
       e.preventDefault();
-      alert('Registration can\'t continue, you must agree if you want to use Feednews.');
+      showDialog('Cannot create account', 'You must agree with the privacy policy if you want to sign up a FeedNews account');
     }
   });
 });

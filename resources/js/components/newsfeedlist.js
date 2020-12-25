@@ -56,7 +56,7 @@ $(function () {
             var that = this;
             $.post(route('feed.pin'), {id: $(this).data('pin-id')}, function (response) {
                 if (response.status !== 'success') {
-                    alert('Pin status not changed!'); // TODO: Make a nice modal for this
+                    showDialog('Error while pinning', 'Pin status cannot be changed right now. Bad connection?');
                     return;
                 }
 

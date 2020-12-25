@@ -38,6 +38,11 @@ window.showDialog = function(title, description) {
     $('.dialog').modal({fadeDuration: 100});
 }
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 
 
 
