@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        '/feed/*', // Makes sure when you have an old csrf session, the website still works. Might fix in the future but because it's behind a login, I don't see it has high priority
     ];
 }

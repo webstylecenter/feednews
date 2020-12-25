@@ -47058,9 +47058,22 @@ function removeNote(id) {
   }).on('click', '.pin', function (e) {
     e.stopImmediatePropagation();
     var that = this;
-    $.post(route('feed.pin') + $(this).data('pin-id'), function () {
+    $.post(route('feed.pin'), {
+      id: $(this).data('pin-id')
+    }, function (response) {
+      if (response.status !== 'success') {
+        alert('Pin status not changed!'); // TODO: Make a nice modal for this
+
+        return;
+      }
+
       $(that).parent().addClass('animated shake');
-      $(that).parent().toggleClass('feed-list-item--state-pinned');
+
+      if (response.current_state === true) {
+        $(that).parent().addClass('feed-list-item--state-pinned');
+      } else {
+        $(that).parent().removeClass('feed-list-item--state-pinned');
+      }
     }, 'json');
   }).on('click', '.pip', function (e) {
     e.stopImmediatePropagation();

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserFeedItem;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class FeedController extends BaseController
@@ -21,9 +24,21 @@ class FeedController extends BaseController
         // TODO: Add functionality to method
     }
 
-    public function pin()
+    public function pin(Request $request): array
     {
-        // TODO: Add functionality to method
+        $request->validate([
+            'id' => ['required', 'integer'],
+        ]);
+
+        $userFeedItem = UserFeedItem::find($request->get('id'));
+        $userFeedItem->pinned = !$userFeedItem->pinned;
+        $userFeedItem->save();
+
+        return [
+            'status' => 'success',
+            'message' => 'Pin toggled',
+            'current_state' => $userFeedItem->pinned
+        ];
     }
 
     public function refresh()
