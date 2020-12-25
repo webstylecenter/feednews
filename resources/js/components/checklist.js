@@ -24,7 +24,7 @@ function checkItem(el) {
 }
 
 function postToChecklist(data) {
-    $.post("/checklist/add/", data).then(function (data) {
+    $.post(route('checklist.add'), data).then(function (data) {
         $('.checklist--list').html(data);
         $('.checklist--form input[type="text"]').val('');
 

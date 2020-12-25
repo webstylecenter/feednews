@@ -46680,8 +46680,6 @@ __webpack_require__(/*! ./components/clipboard */ "./resources/js/components/cli
 
 __webpack_require__(/*! ./components/checklist */ "./resources/js/components/checklist.js");
 
-__webpack_require__(/*! ./components/droplist */ "./resources/js/components/droplist.js");
-
 __webpack_require__(/*! ./components/newsfeedlist */ "./resources/js/components/newsfeedlist.js");
 
 __webpack_require__(/*! ./components/screensaver */ "./resources/js/components/screensaver.js");
@@ -46771,7 +46769,7 @@ function checkItem(el) {
 }
 
 function postToChecklist(data) {
-  $.post("/checklist/add/", data).then(function (data) {
+  $.post(route('checklist.add'), data).then(function (data) {
     $('.checklist--list').html(data);
     $('.checklist--form input[type="text"]').val('');
     $('.js-checklist-item').on('click', function () {
@@ -46806,77 +46804,6 @@ document.addEventListener('copy', function (e) {
   e.clipboardData.setData('text/plain', textToCopy);
   e.preventDefault();
 });
-
-/***/ }),
-
-/***/ "./resources/js/components/droplist.js":
-/*!*********************************************!*\
-  !*** ./resources/js/components/droplist.js ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var dropDomain = 'https://pvd.onl/';
-$('.js-toggle').on('click', function (e) {
-  e.preventDefault();
-  var targetElement = $($(this).data('toggle-element'));
-  targetElement.load(targetElement.data('target'), function () {
-    showDropList();
-    activateDropListEvents();
-  });
-});
-$('.js-more-droplist').on('click', function () {
-  window.location.href = '/droplist/all';
-});
-$('.content-overlay, .feed-list').on('click', function () {
-  hideDropList();
-  $('.profileMenu').slideUp();
-});
-$(function () {
-  activateDropListEvents();
-});
-
-function showDropList() {
-  $('.js-screenshot-list').slideDown();
-  $('.content-overlay').fadeIn();
-}
-
-function hideDropList() {
-  $('.js-screenshot-list').slideUp();
-  $('.content-overlay').fadeOut();
-}
-
-function activateDropListEvents() {
-  $('.dropOpen').on('click', function () {
-    var image = $(this).data('image');
-    var tab = window.open(dropDomain + image, '_blank');
-    tab.focus();
-    hideDropList();
-  });
-  $('.dropCopy').on('click', function () {
-    $(this).css('color', 'red');
-  });
-  $('.dropHide').on('click', function () {
-    var image = $(this).data('image');
-    dropAction(this, image, 'hide');
-  });
-  $('.dropRemove').on('click', function () {
-    var image = $(this).data('image');
-    dropAction(this, image, 'delete');
-  });
-}
-
-function dropAction(el, file, action) {
-  $.ajax({
-    method: "GET",
-    url: dropDomain + "pages/" + action + ".php",
-    data: {
-      file: file
-    }
-  }).done(function (data) {
-    $(el).parents(':eq(2)').html(data).css('background', 'none').css('background-color', 'rgba(107, 193, 103, 0.7)').css('text-align', 'center').css('height', 'auto').css('padding', '20px 0');
-  });
-}
 
 /***/ }),
 
@@ -46946,7 +46873,7 @@ $(function () {
     $(this).parent().find('textarea').trigger('blur');
   });
   setInterval(function () {
-    $('.js-update-weahter-icon').load('/weather/icon/');
+    $('.js-update-weahter-icon').load(route('weahter.icon'));
     $('.js-weather-radar').attr('src', 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512&time=' + Math.random());
   }, 5 * 60 * 1000);
   $(document).on('click', '.js-open-note', function () {
@@ -46986,7 +46913,7 @@ $(function () {
     $('.mainContent nav span').removeClass('active');
     $('.' + $(this).data('page')).slideDown();
     $(this).addClass('active');
-    $('.page--homepage .feeds').load('/feeds/overview/');
+    $('.page--homepage .feeds').load(route('feed.overview'));
   });
   $('.js-toggle-fullscreen').on('dblclick', function () {
     var sidebarWidth = $('.container .feed-list').css('width');
@@ -47013,7 +46940,7 @@ function getUrlMetaData() {
     $('.js-form-feed [name="description"]').val("");
     $.ajax({
       method: "POST",
-      url: "/meta/",
+      url: route('feed.metadata'),
       data: {
         url: Url
       }
@@ -47036,7 +46963,7 @@ function saveNote($el) {
   var note = $el.val();
   $.ajax({
     method: "POST",
-    url: "/note/save/",
+    url: route('notes.save'),
     data: {
       id: id,
       position: position,
@@ -47062,7 +46989,7 @@ function removeNote(id) {
   if (confirm("Are you sure you want to remove this note?")) {
     $.ajax({
       method: "POST",
-      url: "/note/remove/",
+      url: route('notes.remove'),
       data: {
         id: id
       }
@@ -47106,16 +47033,16 @@ function removeNote(id) {
   });
   $(document).on('click', '.js-open-url', function () {
     $('.header--bar, footer').css('backgroundColor', '#337dff');
-    openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
+    openPage($(this).data('url') !== '' ? $(this).data('url') : route('feed.no.url'), $(this).data('share-id'), $(this).data('id'));
   }).on('click', '.js-action-feed-list-click', function () {
     $(this).addClass('animated pulse feed-list-item--state-selected');
     $('.feed-list-item').removeClass('feed-list-item--state-selected');
     $('.header--bar, footer').css('backgroundColor', $(this).css('borderLeftColor'));
-    openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
+    openPage($(this).data('url') !== '' ? $(this).data('url') : route('feed.no.url'), $(this).data('share-id'), $(this).data('id'));
   }).on('click', '.js-return', function (e) {
     e.preventDefault();
     $('.header--bar, footer').css('backgroundColor', '#337dff');
-    $('.content iframe').prop('src', '/welcome/');
+    $('.content iframe').prop('src', route('welcome.index'));
     $('.content').addClass('hide-if-mobile');
     $('aside').removeClass('hide-if-mobile');
     $('.Homepage').removeClass('pageOpen');
@@ -47123,7 +47050,7 @@ function removeNote(id) {
     $('footer .defaultView').show();
   }).on('click', '.js-reload-page', function () {
     event.preventDefault();
-    $('.content-frame').attr('src', '/welcome/');
+    $('.content-frame').attr('src', route('welcome.index'));
     $('.urlbar a').text('').attr('data-clipboard-text', '');
     $('.header--bar, footer').css('backgroundColor', '#337dff');
     $('aside').scrollTop(0);
@@ -47131,7 +47058,7 @@ function removeNote(id) {
   }).on('click', '.pin', function (e) {
     e.stopImmediatePropagation();
     var that = this;
-    $.post("/feed/pin/" + $(this).data('pin-id'), function () {
+    $.post(route('feed.pin') + $(this).data('pin-id'), function () {
       $(that).parent().addClass('animated shake');
       $(that).parent().toggleClass('feed-list-item--state-pinned');
     }, 'json');
@@ -47147,7 +47074,7 @@ function removeNote(id) {
       fadeDuration: 100
     });
   }).on('click', '.js-form-feed button', function () {
-    $.post('/feed/add-item/', $('.js-form-feed').serialize(), function (data) {
+    $.post(route('feed.add'), $('.js-form-feed').serialize(), function (data) {
       data.status === 'success' ? $.modal.close() : showDialog('Adding item failed!', 'Failed to add item due to a server error.');
     }, 'json');
   }).on('click', '.js-open-new-window', function () {
@@ -47182,7 +47109,7 @@ function removeNote(id) {
 });
 
 global.requestNewFeedItems = function () {
-  $.get('/feed/refresh/', function (html) {
+  $.get(route('feed.refresh'), function (html) {
     $('.feed-list').prepend(html);
     $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
     $('.js-form-feed').find("input[type=text], textarea").val("");
@@ -47208,7 +47135,7 @@ function openPage(url, shareId, userFeedItemId) {
 }
 
 function hasXFrameHeader(url, shareId) {
-  $.post('/feed/check-header/', {
+  $.post(route('feed.check.x.frame.header'), {
     url: url
   }).then(function (data) {
     if (data.found === true) {
@@ -47220,7 +47147,7 @@ function hasXFrameHeader(url, shareId) {
 }
 
 function setItemToOpened(userFeedItemId) {
-  $.post('/feed/set-opened/', {
+  $.post(route('feed.set.opened.item'), {
     userFeedItemId: userFeedItemId
   });
 }
@@ -47240,7 +47167,7 @@ function openInNewWindow(url) {
   window.open(url);
 
   if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
-    $('.content-frame').attr('src', '/feed/opened-in-popup/');
+    $('.content-frame').attr('src', route('feed.popup.opened'));
   }
 }
 
@@ -47388,7 +47315,7 @@ function updateTime() {
 }
 
 function updateWeather() {
-  $('.screensaver .weather').load('/weather/icon/');
+  $('.screensaver .weather').load(route('weather.icon'));
 }
 
 function showItems() {
@@ -47435,7 +47362,9 @@ var searchFeeds = function searchFeeds(searchQuery) {
     return;
   }
 
-  $.getJSON('/feed/search/?query=' + encodeURIComponent(searchQuery), function (data) {
+  $.getJSON(route('feed.search', {
+    query: searchQuery
+  }), function (data) {
     if (data.status !== 'success') {
       return;
     }
@@ -47468,7 +47397,7 @@ $(function () {
     var button = $(this);
 
     if (check) {
-      $.post("/settings/feeds/remove/", {
+      $.post(route('settings.remove'), {
         feedId: feedId
       }).done(function () {
         $(button).parent().parent().addClass('removed');
@@ -47494,7 +47423,7 @@ $(function () {
       return;
     }
 
-    $.post("/settings/feeds/add/", {
+    $.post(route('settings.add'), {
       url: url,
       website: website,
       color: color,
@@ -47513,7 +47442,7 @@ $(function () {
   $('.js-update-feed-color').on('change', function () {
     var newColor = $(this).val();
     var userFeedId = $(this).parent().parent().parent().data('feed-id');
-    $.post("/settings/feeds/update/", {
+    $.post(route('settings.update'), {
       id: userFeedId,
       color: newColor
     }).done(function () {// Do nothing
@@ -47531,7 +47460,7 @@ $(function () {
     }
 
     $(that).hide();
-    $.post("/settings/feeds/update/", {
+    $.post(route('settings.update'), {
       id: feedId,
       autoPin: autoPin
     }).done(function () {
@@ -47558,7 +47487,7 @@ $(function () {
     }
 
     if (parseInt(id) > 0) {
-      $.post("/settings/feeds/update/", {
+      $.post(route('settings.update'), {
         id: id,
         icon: name
       }).done(function () {
@@ -47573,7 +47502,7 @@ $(function () {
   });
   $('.js-follow-feed').on('click', function () {
     var that = this;
-    $.post("/settings/feeds/follow/", {
+    $.post(route('settings.follow'), {
       feed_id: $(this).data('feed-id')
     }).done(function (data) {
       if (data.status === 'success') {
@@ -47654,7 +47583,7 @@ $(function () {
     parent.$('.urlbar a').text(url).attr('href', url);
     parent.$('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile');
   });
-  $('.weather--content').load('/weather/detail/');
+  $('.weather--content').load(route('weather.detail'));
 });
 
 /***/ }),

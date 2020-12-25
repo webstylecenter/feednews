@@ -7,7 +7,7 @@ $(function () {
         let button = $(this);
 
         if (check) {
-            $.post("/settings/feeds/remove/", {feedId: feedId})
+            $.post(route('settings.remove'), {feedId: feedId})
                 .done(function () {
                     $(button).parent().parent().addClass('removed');
                 })
@@ -36,7 +36,7 @@ $(function () {
             return;
         }
 
-        $.post("/settings/feeds/add/", {
+        $.post(route('settings.add'), {
             url: url,
             website: website,
             color: color,
@@ -59,7 +59,7 @@ $(function () {
         let newColor = $(this).val();
         let userFeedId = $(this).parent().parent().parent().data('feed-id');
 
-        $.post("/settings/feeds/update/", {
+        $.post(route('settings.update'), {
             id: userFeedId,
             color: newColor
         })
@@ -82,7 +82,7 @@ $(function () {
         }
         $(that).hide();
 
-        $.post("/settings/feeds/update/", {
+        $.post(route('settings.update'), {
             id: feedId,
             autoPin: autoPin
         })
@@ -111,7 +111,7 @@ $(function () {
         }
 
         if (parseInt(id) > 0) {
-            $.post("/settings/feeds/update/", {
+            $.post(route('settings.update'), {
                 id: id,
                 icon: name
             })
@@ -132,7 +132,7 @@ $(function () {
 
         let that = this;
 
-        $.post("/settings/feeds/follow/", {
+        $.post(route('settings.follow'), {
             feed_id: $(this).data('feed-id'),
         })
           .done(function (data) {

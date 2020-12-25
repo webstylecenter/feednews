@@ -9,6 +9,8 @@ class WelcomeController extends BaseController
 {
     public function index(): View
     {
+        app('debugbar')->disable();
+
         return view('welcome.index', [
             'bodyClass' => 'page--homepage',
             'notes' => [],

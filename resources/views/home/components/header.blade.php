@@ -1,8 +1,8 @@
 <header class="header--bar js-toggle-fullscreen">
     <div class="header--bar-site  wow slideInLeft">
         <div class="title">
-            <a href="/" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
-            <a data-balloon="Click to refresh feedlist" data-balloon-pos="down" href="/" class="js-reload-page"><b>FEEDNEWS</b><em>.me</em></a>
+            <a href="{{ route('homepage.index') }}" class="title--back noselect js-return"><span class="fa fa-chevron-circle-left"></span></a>
+            <a data-balloon="Click to refresh feedlist" data-balloon-pos="down" href="{{ route('homepage.index') }}" class="js-reload-page"><b>FEEDNEWS</b><em>.me</em></a>
         </div>
     </div>
     <div class="header--bar-actions wow slideInRight">

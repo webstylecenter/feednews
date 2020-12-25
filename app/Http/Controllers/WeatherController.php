@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\View\View;
 
 class WeatherController extends BaseController
 {
-    public function index()
+    public function details(): View
     {
-        // TODO: Add functionality to method
+        return view('weather.detail', [
+            'bodyClasss' => 'WeahterMobilePage',
+            'forecast' => []
+        ]);
+    }
+
+    public function icon(): View
+    {
+        return view('weather.icon', [
+            'bodyClasss' => 'WeahterMobilePage',
+            'forecast' => []
+        ]);
     }
 }

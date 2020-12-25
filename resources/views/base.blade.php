@@ -17,6 +17,7 @@
     @section('stylesheets')
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @show
+    @routes
 </head>
 <body class="@if($bodyClass) {{ $bodyClass }} @endif" data-refresh-date="{{ \Carbon\Carbon::now() }}">
 @section('body')

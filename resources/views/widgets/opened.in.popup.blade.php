@@ -28,7 +28,7 @@
 
                     <p>1. <a href="/downloads/chrome-extension.zip">Download Chrome extension</a></p>
                     <p>2. <a href="https://www.cnet.com/how-to/how-to-install-chrome-extensions-manually/" target="_blank">Install the chrome extension</a></p>
-                    <p>3. <a href="/feed/disable-xframe/">Disable this message</a></p>
+                    <p>3. <a href="{{ route('settings.disable.x.frame.notice') }}">Disable this message</a></p>
                 </div>
 
             </div>

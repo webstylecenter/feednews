@@ -31,7 +31,7 @@ class FeedController extends BaseController
         // TODO: Add functionality to method
     }
 
-    public function loadMore()
+    public function loadMore(int $page)
     {
         // TODO: Add functionality to method
     }
@@ -57,6 +57,11 @@ class FeedController extends BaseController
     }
 
     public function openSharedItem()
+    {
+        // TODO: Add functionality to method
+    }
+
+    public function setOpenedItem()
     {
         // TODO: Add functionality to method
     }

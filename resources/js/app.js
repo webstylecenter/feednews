@@ -24,7 +24,6 @@ require('./bootstrap');
 require('./components/main');
 require('./components/clipboard');
 require('./components/checklist');
-require('./components/droplist');
 require('./components/newsfeedlist');
 require('./components/screensaver');
 require('./components/searchbox');

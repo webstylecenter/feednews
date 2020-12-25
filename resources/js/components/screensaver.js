@@ -44,7 +44,7 @@ function updateTime() {
 }
 
 function updateWeather() {
-    $('.screensaver .weather').load('/weather/icon/');
+    $('.screensaver .weather').load(route('weather.icon'));
 }
 
 function showItems() {

@@ -22,7 +22,7 @@
             $hidePinnedItem = true;
         @endphp
 
-        @if($hadHiddenPinnedItem)
+        @if(!$hadHiddenPinnedItem)
             <div class="hidden-feed-items js-show-hidden-pinned-items">
                 Show old pinned items
             </div>
@@ -99,5 +99,7 @@
 @endforeach
 
 @if($userFeedItems && isset($nextPageNumber))
-    <a href="/feed/page/{{ $nextPageNumber }}" class="feed-list-item jscroll-next">Next page</a>
+    <a href="{{ route('feed.load.more', [
+        'page' => $nextPageNumber
+    ]) }}" class="feed-list-item jscroll-next">Next page</a>
 @endif

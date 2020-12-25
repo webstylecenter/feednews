@@ -11,5 +11,5 @@ $(function () {
         parent.$('.js-copy-to-clipboard').attr('data-clipboard-text', url).addClass('show-if-mobile');
     });
 
-    $('.weather--content').load('/weather/detail/');
+    $('.weather--content').load(route('weather.detail'));
 });

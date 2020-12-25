@@ -30,7 +30,7 @@
             <input type="text" name="email" placeholder="Email address" value="{{ $request->old('email') }}" />
             <input type="password" name="password" id="password" placeholder="Password"  />
 
-            <input type="checkbox" value="on" name="gdpr" id="gdpr" /><label for="gdpr">I agree that the above filled in data will be stored on Feednews servers for login purposes as described in our <a href="/privacy-policy/">Privacy Policy</a>.</label><br />&nbsp;<br />
+            <input type="checkbox" value="on" name="gdpr" id="gdpr" /><label for="gdpr">I agree that the above filled in data will be stored on Feednews servers for login purposes as described in our <a href="{{ route('homepage.privacy.policy') }}">Privacy Policy</a>.</label><br />&nbsp;<br />
             <input type="submit" value="Create account" />
             @csrf
         </form>

@@ -25,18 +25,18 @@ $(function () {
     $(document)
         .on('click', '.js-open-url', function () {
             $('.header--bar, footer').css('backgroundColor', '#337dff');
-            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
+            openPage($(this).data('url') !== '' ? $(this).data('url') : route('feed.no.url'), $(this).data('share-id'), $(this).data('id'));
         })
         .on('click', '.js-action-feed-list-click', function () {
             $(this).addClass('animated pulse feed-list-item--state-selected');
             $('.feed-list-item').removeClass('feed-list-item--state-selected');
             $('.header--bar, footer').css('backgroundColor', $(this).css('borderLeftColor'));
-            openPage($(this).data('url') !== '' ? $(this).data('url') : '/nourl/', $(this).data('share-id'), $(this).data('id'));
+            openPage($(this).data('url') !== '' ? $(this).data('url') : route('feed.no.url'), $(this).data('share-id'), $(this).data('id'));
         })
         .on('click', '.js-return', function (e) {
             e.preventDefault();
             $('.header--bar, footer').css('backgroundColor', '#337dff');
-            $('.content iframe').prop('src', '/welcome/');
+            $('.content iframe').prop('src', route('welcome.index'));
             $('.content').addClass('hide-if-mobile');
             $('aside').removeClass('hide-if-mobile');
             $('.Homepage').removeClass('pageOpen');
@@ -45,7 +45,7 @@ $(function () {
         })
         .on('click', '.js-reload-page', function () {
             event.preventDefault();
-            $('.content-frame').attr('src', '/welcome/');
+            $('.content-frame').attr('src', route('welcome.index'));
             $('.urlbar a').text('').attr('data-clipboard-text', '');
             $('.header--bar, footer').css('backgroundColor', '#337dff');
             $('aside').scrollTop(0);
@@ -54,7 +54,7 @@ $(function () {
         .on('click', '.pin', function (e) {
             e.stopImmediatePropagation();
             var that = this;
-            $.post("/feed/pin/" + $(this).data('pin-id'), function () {
+            $.post(route('feed.pin') + $(this).data('pin-id'), function () {
                 $(that).parent().addClass('animated shake');
                 $(that).parent().toggleClass('feed-list-item--state-pinned');
             }, 'json');
@@ -72,7 +72,7 @@ $(function () {
             $($(this).data('modal-target')).modal({fadeDuration: 100});
         })
         .on('click', '.js-form-feed button', function () {
-            $.post('/feed/add-item/', $('.js-form-feed').serialize(), function (data) {
+            $.post(route('feed.add'), $('.js-form-feed').serialize(), function (data) {
                 data.status === 'success'
                     ? $.modal.close()
                     : showDialog('Adding item failed!', 'Failed to add item due to a server error.');
@@ -119,7 +119,7 @@ $(function () {
 });
 
 global.requestNewFeedItems = function () {
-    $.get('/feed/refresh/', function (html) {
+    $.get(route('feed.refresh'), function (html) {
         $('.feed-list').prepend(html);
         $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
         $('.js-form-feed').find("input[type=text], textarea").val("");
@@ -145,7 +145,7 @@ function openPage(url, shareId, userFeedItemId) {
 }
 
 function hasXFrameHeader(url, shareId) {
-    $.post('/feed/check-header/', {url: url}).then(function (data) {
+    $.post(route('feed.check.x.frame.header'), {url: url}).then(function (data) {
         if (data.found === true) {
             openInNewWindow(url);
         } else {
@@ -155,7 +155,7 @@ function hasXFrameHeader(url, shareId) {
 }
 
 function setItemToOpened(userFeedItemId) {
-    $.post('/feed/set-opened/', {userFeedItemId: userFeedItemId});
+    $.post(route('feed.set.opened.item'), {userFeedItemId: userFeedItemId});
 }
 
 function openInFrame(url, shareId) {
@@ -173,7 +173,7 @@ function openInNewWindow(url) {
     window.open(url);
 
     if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
-        $('.content-frame').attr('src', '/feed/opened-in-popup/');
+        $('.content-frame').attr('src', route('feed.popup.opened'));
     }
 }
 

@@ -17,7 +17,7 @@ $(function () {
     });
 
     setInterval(function () {
-        $('.js-update-weahter-icon').load('/weather/icon/');
+        $('.js-update-weahter-icon').load(route('weahter.icon'));
         $('.js-weather-radar').attr('src', 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512&time=' + Math.random());
     }, 5 * 60 * 1000);
 
@@ -65,7 +65,7 @@ $(function () {
         $('.mainContent nav span').removeClass('active');
         $('.' + $(this).data('page')).slideDown();
         $(this).addClass('active');
-        $('.page--homepage .feeds').load('/feeds/overview/');
+        $('.page--homepage .feeds').load(route('feed.overview'));
     });
 
     $('.js-toggle-fullscreen').on('dblclick', function () {
@@ -95,7 +95,7 @@ function getUrlMetaData() {
 
         $.ajax({
             method: "POST",
-            url: "/meta/",
+            url: route('feed.metadata'),
             data: {url: Url}
         })
             .done(function (response) {
@@ -106,7 +106,6 @@ function getUrlMetaData() {
                     $('.js-form-feed [name="title"]').val("");
                     $('.js-form-feed [name="description"]').val("");
                 }
-
             });
     }
 }
@@ -119,7 +118,7 @@ function saveNote($el) {
 
     $.ajax({
         method: "POST",
-        url: "/note/save/",
+        url: route('notes.save'),
         data: {
             id: id,
             position: position,
@@ -146,7 +145,7 @@ function removeNote(id) {
     if (confirm("Are you sure you want to remove this note?")) {
         $.ajax({
             method: "POST",
-            url: "/note/remove/",
+            url: route('notes.remove'),
             data: {id: id}
         })
             .done(function () {

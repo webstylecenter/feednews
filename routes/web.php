@@ -22,3 +22,4 @@ require 'screensaver.php';
 require 'settings.php';
 require 'user.php';
 require 'welcome.php';
+require 'weather.php';
