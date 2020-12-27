@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends BaseController
 {
     public function index()
     {
-        // TODO: Add functionality to method
+        return view('settings.index', [
+            'bodyClass' => 'settings',
+            'isAdmin' => Auth::user()->is_admin,
+            'availableFeeds' => [],
+            'userFeeds' => Auth::user()->userFeeds,
+            'users' => User::all()
+        ]);
     }
 
     public function add()
@@ -44,20 +52,5 @@ class SettingController extends BaseController
     public function createUserFeed()
     {
         // TODO: Add functionality to method
-    }
-
-    /**
-     * TODO: Replace this with a helper of some sorts
-     *
-     * @return string
-     */
-    protected function generateRandomColor(): string
-    {
-        return round(rand(0, 9)) .
-            round(rand(0, 9)) .
-            round(rand(0, 9)) .
-            round(rand(0, 9)) .
-            round(rand(0, 9)) .
-            round(rand(0, 9));           ;
     }
 }

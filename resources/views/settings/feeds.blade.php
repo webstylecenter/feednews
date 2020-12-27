@@ -1,5 +1,5 @@
 @php
-    $values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
+    $values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 @endphp
 <div class="content-left">
     <div class="form">
@@ -11,7 +11,7 @@
 
             <input type="text" name="icon" value="" placeholder="FontAwesome icon (optional)" /><br />
             <input type="checkbox" name="autoPin" value="1" id="autoPin"/><label for="autoPin">Automatically pin new items</label><br />
-            <input type="text" name="color" class="spectrum" value="#{{ random($values) . random($values) . random($values) . random($values) . random($values) . random($values) }}" placeholder="Insert RGB without the #" /><br />
+            <input type="text" name="color" class="spectrum" value="#{{ $values[array_rand($values, 1)] . $values[array_rand($values, 1)] . $values[array_rand($values, 1)] . $values[array_rand($values, 1)] . $values[array_rand($values, 1)] . $values[array_rand($values, 1)] }}" placeholder="Insert RGB without the #" /><br />
             <input type="submit" value="Add" class="js-settings-add-feed fluent-blue" />
         </p>
     </div>
@@ -41,7 +41,7 @@
             <table>
                 <tbody>
                 @foreach($userFeeds as $feed)
-                    <tr data-feed-id="{{ $feed->id }}" data-feed-name="{{ $feed->$feed->name }}">
+                    <tr data-feed-id="{{ $feed->id }}" data-feed-name="{{ $feed->feed->name }}">
                         <td>
                             <div class="feedColor">
                                 <input type="text" class="spectrum js-update-feed-color" name="color" value="{{ $feed->color }}" />

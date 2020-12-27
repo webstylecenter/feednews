@@ -8,7 +8,7 @@
         <header>
             <h1>
                 @section('headerTitle')
-                @endsection
+                @show
             </h1>
             <div class="weather">
                 @include('widgets/weather')
@@ -18,12 +18,12 @@
         <div class="mainContent">
             <nav>
                 @section('tabs')
-                @endsection
+                @show
             </nav>
 
             <div class="views">
                 @section('content')
-                @endsection
+                @show
             </div>
         </div>
     </div>

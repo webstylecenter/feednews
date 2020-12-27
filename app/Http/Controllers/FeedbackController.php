@@ -8,6 +8,6 @@ class FeedbackController extends BaseController
 {
     public function index()
     {
-        // TODO: Add functionality to method
+        return view('feedback.index', ['bodyClass' => 'feedback']);
     }
 }

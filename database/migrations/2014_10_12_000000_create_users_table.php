@@ -20,7 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->tinyInteger('enabled');
+            $table->tinyInteger('enabled')->default(true);
+            $table->tinyInteger('is_admin')->default(false);
             $table->dateTime('last_login')->nullable();
             $table->tinyInteger('hide_xframe_notice');
             $table->string('ip_address');
