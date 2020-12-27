@@ -27,6 +27,15 @@ class UserFeedSeeder extends Seeder
             'auto_pin' => true
         ]);
 
+        $thirdUserFeed = UserFeed::create([
+            'user_id' => 3,
+            'feed_id' => 1,
+            'icon' => null,
+            'color' => '#FFFFFF',
+            'auto_pin' => false
+        ]);
+
+
         foreach (FeedItem::all() as $feedItem) {
             UserFeedItem::create([
                 'user_id' => 1,
@@ -41,6 +50,15 @@ class UserFeedSeeder extends Seeder
                 'user_id' => 1,
                 'feed_item_id' => $feedItem->id,
                 'user_feed_id' => $secondUserFeed->id,
+                'viewed' => false,
+                'pinned' => rand(1, 25) === 1,
+                'opened_at' => null
+            ]);
+
+            UserFeedItem::create([
+                'user_id' => 3,
+                'feed_item_id' => $feedItem->id,
+                'user_feed_id' => $thirdUserFeed->id,
                 'viewed' => false,
                 'pinned' => rand(1, 25) === 1,
                 'opened_at' => null

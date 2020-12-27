@@ -11,6 +11,9 @@ class UserFeedItem extends Model
     use HasTimestamps;
 
     protected $fillable = [
+        'user_id',
+        'user_feed_id',
+        'feed_item_id',
         'viewed',
         'pinned',
         'opened'
