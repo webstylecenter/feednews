@@ -58,8 +58,7 @@ After saving your config, make sure to run the following commands from your term
 
 - fill .env file with server settings
 - composer install
-- bin/console doctrine:schema:create
-- bin/console fos:user:create
+- php artisan reset
 
 If you want to change styling, also run:
 - yarn install
