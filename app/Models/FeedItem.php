@@ -14,7 +14,10 @@ class FeedItem extends Model
     protected $fillable = [
         'title',
         'description',
-        'url'
+        'url',
+        'feed_id',
+        'guid',
+        'created_at'
     ];
 
     public function feed(): BelongsTo
