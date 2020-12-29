@@ -43,14 +43,6 @@ $(function () {
             $('footer .pageView').hide();
             $('footer .defaultView').show();
         })
-        .on('click', '.js-reload-page', function () {
-            event.preventDefault();
-            $('.content-frame').attr('src', route('welcome.index'));
-            $('.urlbar a').text('').attr('data-clipboard-text', '');
-            $('.header--bar, footer').css('backgroundColor', '#337dff');
-            $('aside').scrollTop(0);
-            requestNewFeedItems();
-        })
         .on('click', '.pin', function (e) {
             e.stopImmediatePropagation();
             var that = this;
@@ -127,14 +119,6 @@ $(function () {
 
     $('.content-close-pip, .content-maximize-pip').hide();
 });
-
-global.requestNewFeedItems = function () {
-    $.get(route('feed.refresh'), function (html) {
-        $('.feed-list').prepend(html);
-        $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
-        $('.js-form-feed').find("input[type=text], textarea").val("");
-    });
-};
 
 function openPage(url, shareId, userFeedItemId) {
     let isMobile = $('.feed-list--type-sidebar').attr('data-is-mobile');

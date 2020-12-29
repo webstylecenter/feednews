@@ -21,7 +21,7 @@ function loadHistory() {
   /** global: Handlebars */
   let template = Handlebars.compile(source);
 
-  $.getJSON('/feed/opened/', function (data) {
+  $.getJSON(route('feed.opened.items'), function (data) {
     if (data.status !== 'success') {
       return;
     }

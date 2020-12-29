@@ -48,7 +48,7 @@
             $showedEarlierTodayMessage = true;
         @endphp
 
-    @elseif($item->viewed && !$hadYesterdayBefore && $item->createdAt->format('Y-m-d') == \Carbon\Carbon::yesterday()->format('Y-m-d') && $loop->index > 1)
+    @elseif($item->viewed && !$hadYesterdayBefore && $item->created_at->format('Y-m-d') == \Carbon\Carbon::yesterday()->format('Y-m-d') && $loop->index > 1)
         <div class="feed-list--separator">
             Yesterday
         </div>

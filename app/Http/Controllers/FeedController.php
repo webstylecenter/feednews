@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\FeedItem;
 use App\Models\Meta;
+use App\Models\User;
 use App\Models\UserFeedItem;
+use App\Repositories\UserRepository;
+use App\Services\FeedService;
 use App\Services\MetaService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\View\View;
 
 class FeedController extends BaseController
 {
@@ -49,14 +53,78 @@ class FeedController extends BaseController
         ];
     }
 
-    public function chromeImport()
-    {
-        // TODO: Add functionality to method
+    public function chromeImport(
+        ?string $email,
+        Request $request,
+        MetaService $metaService,
+        FeedItem $feedItem,
+        UserFeedItem $userFeedItem,
+        User $user
+    ) {
+        if (strlen($email) > 0 && !Auth::check()) {
+            $user = $user->where('email', '=', $email)->first();
+
+            if (!$user) {
+                abort(403);
+            }
+
+            Auth::loginUsingId($user->id);
+        }
+
+        try {
+            $meta = $metaService->getMetaByUrl($request->get('url'));
+
+            $feedItem = $feedItem->create([
+                'guid' => sha1(time()),
+                'title' => $meta->title,
+                'description' => $meta->description,
+                'url' => $meta->url
+            ]);
+
+            $userFeedItem->create([
+                'user_id' => Auth::user()->id,
+                'feed_item_id' => $feedItem->id,
+                'pinned' => true
+            ]);
+        } catch (\Throwable $e) {
+            if (strlen($email) > 0) {
+                Auth::logout();
+            }
+
+            return [
+                'status' => 'error',
+                'message' => 'Something went wrong'
+            ];
+
+        }
+
+        if (strlen($email) > 0) {
+            Auth::logout();
+        }
+
+        return [
+            'status' => 'success',
+            'title' => $meta->title,
+            'description' => $meta->description,
+            'url' => $meta->url
+        ];
     }
 
-    public function getMetaData()
+    public function getMetaData(Request $request, MetaService $metaService): array
     {
-        // TODO: Add functionality to method
+        $request->validate([
+            'url' => 'required'
+        ]);
+
+        $meta = $metaService->getMetaByUrl($request->get('url'));
+
+        return [
+            'status' => 'success',
+            'data' => [
+                'title' => $meta->title,
+                'description' => $meta->description
+            ]
+        ];
     }
 
     public function pin(Request $request): array
@@ -76,14 +144,14 @@ class FeedController extends BaseController
         ];
     }
 
-    public function refresh()
+    public function loadMore(int $page, UserRepository $userRepository): View
     {
-        // TODO: Add functionality to method
-    }
+        $userFeedItems = $userRepository->getFeedItems(50, $page);
 
-    public function loadMore(int $page)
-    {
-        // TODO: Add functionality to method
+        return view('home.components.newsfeed', [
+            'userFeedItems' => $userFeedItems,
+            'nextPageNumber' => $userFeedItems->count() > 0 ? ($page + 1) : null
+        ]);
     }
 
     public function search()
@@ -91,19 +159,32 @@ class FeedController extends BaseController
         // TODO: Add functionality to method
     }
 
-    public function overview()
+    public function overview(): View
     {
-        // TODO: Add functionality to method
+        return view('widgets.feed-overview', [
+            'userFeeds' => Auth::user()->userFeeds()->get()
+        ]);
     }
 
-    public function checkForXFrameHeader()
+    public function checkForXFrameHeader(Request $request): array
     {
-        // TODO: Add functionality to method
+        try {
+            $header = get_headers($request->get('url'), 1);
+        } catch(\Throwable $e) {
+            return [
+                'found' => false,
+                'not_sure' => true
+            ];
+        }
+
+        return [
+            'found' => isset($header['X-Frame-Options']),
+        ];
     }
 
-    public function popupOpened()
+    public function popupOpened(): View
     {
-        // TODO: Add functionality to method
+        return view('widgets.opened-in-popup');
     }
 
     public function openSharedItem()
@@ -111,18 +192,38 @@ class FeedController extends BaseController
         // TODO: Add functionality to method
     }
 
-    public function setOpenedItem()
+    public function setOpenedItem(Request $request, FeedService $feedService): array
     {
-        // TODO: Add functionality to method
+        $request->validate([
+            'userFeedItemId' => ['required', 'integer']
+        ]);
+
+        $feedService->setOpenedItemForUser($request->get('userFeedItemId'));
+
+        return [
+            'status' => 'success',
+            'message' => 'Item set to opened'
+        ];
     }
 
-    public function getOpenedItems()
+    public function getOpenedItems(FeedService $feedService): array
     {
-        // TODO: Add functionality to method
-    }
+        return [
+            'status' => 'success',
+            'items' => array_map(function (UserFeedItem $userFeedItem) {
+                $feedItem = $userFeedItem->feedItem;
 
-    public function createFeedItem()
-    {
-        // TODO: Add functionality to method
+                return [
+                    'id' => $userFeedItem->id,
+                    'title' => $feedItem->title,
+                    'description' => $feedItem->description,
+                    'url' => $feedItem->url,
+                    'color' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->color : ''),
+                    'feedIcon' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->icon : ''),
+                    'shareId' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->feed->name : 'item') . '/' . $userFeedItem->id . '/',
+                    'pinned' => $userFeedItem->is_pinned
+                ];
+            }, $feedService->getOpenedItems())
+        ];
     }
 }

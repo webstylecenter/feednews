@@ -6,6 +6,7 @@ use App\Models\Feed;
 use App\Models\FeedItem;
 use App\Models\UserFeed;
 use App\Models\UserFeedItem;
+use App\Repositories\UserRepository;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -15,10 +16,12 @@ use willvincent\Feeds\Facades\FeedsFacade;
 class FeedService
 {
     private FeedsFacade $feedReader;
+    private UserRepository $userRepository;
 
-    public function __construct(FeedsFacade $feedReader)
+    public function __construct(FeedsFacade $feedReader, UserRepository $userRepository)
     {
         $this->feedReader = $feedReader;
+        $this->userRepository = $userRepository;
     }
 
     public function getAvailableFeeds(): Collection
@@ -76,6 +79,30 @@ class FeedService
         if ($command) {
             $command->info(Carbon::now() . ' ' . $feed->name . ': Added ' . $newItems . ' new items');
         }
+    }
+
+    public function setOpenedItemForUser(int $userFeedItemId): void
+    {
+        $userFeeditem = UserFeedItem::where('user_id', '=', Auth::user()->id)
+            ->where('id', '=', $userFeedItemId)
+            ->first();
+
+        if (!$userFeeditem) {
+            return;
+        }
+
+        $userFeeditem->opened_at = Carbon::now();
+        $userFeeditem->save();
+    }
+
+    public function getOpenedItems(): array
+    {
+        $output = [];
+        foreach ($this->userRepository->getOpenedItems() as $openedItem) {
+            $output[] = $openedItem;
+        }
+
+        return $output;
     }
 
     protected function createUserFeedItems(Feed $feed, FeedItem $feedItem): void

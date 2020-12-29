@@ -5,10 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('feed.')->prefix('feed')->group(function() {
     Route::post('/add', [FeedController::class, 'add'])->name('add');
-    Route::post('/chrome-import', [FeedController::class, 'chromeImport'])->name('chrome.import');
+    Route::post('/chrome-import/{email?}', [FeedController::class, 'chromeImport'])->name('chrome.import');
     Route::post('/get-meta-data', [FeedController::class, 'getMetaData'])->name('metadata');
     Route::post('/pin', [FeedController::class, 'pin'])->name('pin');
-    Route::get('/refresh', [FeedController::class, 'refresh'])->name('refresh');
     Route::get('/load-more/{page}', [FeedController::class, 'loadMore'])->name('load.more');
     Route::post('/search', [FeedController::class, 'search'])->name('search');
     Route::get('/overview', [FeedController::class, 'overview'])->name('overview');

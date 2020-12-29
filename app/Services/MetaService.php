@@ -56,7 +56,8 @@ class MetaService
     {
         $descriptionMap = [
             'description' => null,
-            'og-description' => null
+            'og-description' => null,
+            'og:description' => null
         ];
 
         $metas = $doc->getElementsByTagName('meta');
@@ -64,9 +65,10 @@ class MetaService
             $meta = $metas->item($i);
             $descriptionMap['description'] = $this->getMetaContent($descriptionMap, $meta, 'name', 'description');
             $descriptionMap['og-description'] = $this->getMetaContent($descriptionMap, $meta, 'property', 'og-description');
+            $descriptionMap['og:description'] = $this->getMetaContent($descriptionMap, $meta, 'property', 'og:description');
         }
 
-        return trim($descriptionMap['og-description'] ?: $descriptionMap['description']);
+        return trim($descriptionMap['og-description'] ?: $descriptionMap['description'] ?: $descriptionMap['og:description']);
     }
 
     protected function getMetaContent(array $currentMeta, \DOMNode $meta, string $attribute, string $name): string

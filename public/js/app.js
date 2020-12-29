@@ -47017,9 +47017,9 @@ function removeNote(id) {
   !*** ./resources/js/components/newsfeedlist.js ***!
   \*************************************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-/* WEBPACK VAR INJECTION */(function(global) {$(function () {
+$(function () {
   // Endless scroll
   $('.feed-list').jscroll({
     padding: 150,
@@ -47058,13 +47058,6 @@ function removeNote(id) {
     $('.Homepage').removeClass('pageOpen');
     $('footer .pageView').hide();
     $('footer .defaultView').show();
-  }).on('click', '.js-reload-page', function () {
-    event.preventDefault();
-    $('.content-frame').attr('src', route('welcome.index'));
-    $('.urlbar a').text('').attr('data-clipboard-text', '');
-    $('.header--bar, footer').css('backgroundColor', '#337dff');
-    $('aside').scrollTop(0);
-    requestNewFeedItems();
   }).on('click', '.pin', function (e) {
     e.stopImmediatePropagation();
     var that = this;
@@ -47129,14 +47122,6 @@ function removeNote(id) {
   });
   $('.content-close-pip, .content-maximize-pip').hide();
 });
-
-global.requestNewFeedItems = function () {
-  $.get(route('feed.refresh'), function (html) {
-    $('.feed-list').prepend(html);
-    $('.noFeedItems').html(html).addClass('feed-list').removeClass('noFeedItems');
-    $('.js-form-feed').find("input[type=text], textarea").val("");
-  });
-};
 
 function openPage(url, shareId, userFeedItemId) {
   var isMobile = $('.feed-list--type-sidebar').attr('data-is-mobile');
@@ -47263,7 +47248,6 @@ function hexToRgb(hex) {
     b: parseInt(result[3], 16)
   } : null;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
 
@@ -47571,7 +47555,7 @@ function loadHistory() {
   /** global: Handlebars */
 
   var template = Handlebars.compile(source);
-  $.getJSON('/feed/opened/', function (data) {
+  $.getJSON(route('feed.opened.items'), function (data) {
     if (data.status !== 'success') {
       return;
     }
