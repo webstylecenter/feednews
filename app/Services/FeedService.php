@@ -105,6 +105,16 @@ class FeedService
         return $output;
     }
 
+    public function search(string $query): array
+    {
+        $output = [];
+        foreach ($this->userRepository->search($query) as $openedItem) {
+            $output[] = $openedItem;
+        }
+
+        return $output;
+    }
+
     protected function createUserFeedItems(Feed $feed, FeedItem $feedItem): void
     {
         foreach (UserFeed::where('feed_id', '=', $feed->id)->get() as $userFeed) {

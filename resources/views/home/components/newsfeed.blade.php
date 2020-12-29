@@ -3,7 +3,7 @@
     $showedEarlierTodayMessage = false;
     $hadYesterdayBefore = false;
     $hadHiddenPinnedItem = false;
-
+    $shownPinnedItems = 0;
 @endphp
 
 @if(!$userFeedItems && !$searchQueryString)

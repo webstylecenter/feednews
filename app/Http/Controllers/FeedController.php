@@ -9,14 +9,17 @@ use App\Models\UserFeedItem;
 use App\Repositories\UserRepository;
 use App\Services\FeedService;
 use App\Services\MetaService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class FeedController extends BaseController
 {
-    public function add(Request $request, FeedItem $feedItem, UserFeedItem $userFeedItem, MetaService $metaService, Meta $meta)
+    public function add(Request $request, FeedItem $feedItem, UserFeedItem $userFeedItem, MetaService $metaService, Meta $meta): array
     {
         $request->validate([
             'url' => 'required',
@@ -60,7 +63,7 @@ class FeedController extends BaseController
         FeedItem $feedItem,
         UserFeedItem $userFeedItem,
         User $user
-    ) {
+    ): array {
         if (strlen($email) > 0 && !Auth::check()) {
             $user = $user->where('email', '=', $email)->first();
 
@@ -154,9 +157,29 @@ class FeedController extends BaseController
         ]);
     }
 
-    public function search()
+    public function search(Request $request, FeedService $feedService): array
     {
-        // TODO: Add functionality to method
+        $request->validate([
+            'query' => ['required', 'min:2']
+        ]);
+
+        return [
+            'status' => 'success',
+            'data' => array_map(function (UserFeedItem $userFeedItem) {
+                $feedItem = $userFeedItem->feedItem;
+
+                return [
+                    'id' => $userFeedItem->id,
+                    'title' => $feedItem->title,
+                    'description' => $feedItem->description,
+                    'url' => $feedItem->url,
+                    'color' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->color : ''),
+                    'feedIcon' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->icon : ''),
+                    'shareId' => ($userFeedItem->userFeed !== null ? Str::slug($userFeedItem->userFeed->feed->name) : 'item') . '/' . $userFeedItem->id . '/',
+                    'pinned' => $userFeedItem->is_pinned
+                ];
+            }, $feedService->search($request->get('query')))
+        ];
     }
 
     public function overview(): View
@@ -187,9 +210,9 @@ class FeedController extends BaseController
         return view('widgets.opened-in-popup');
     }
 
-    public function openSharedItem()
+    public function openSharedItem(string $feedName, int $userFeedItemId): RedirectResponse
     {
-        // TODO: Add functionality to method
+        return redirect(UserFeedItem::find($userFeedItemId)->feedItem->url);
     }
 
     public function setOpenedItem(Request $request, FeedService $feedService): array
@@ -220,7 +243,7 @@ class FeedController extends BaseController
                     'url' => $feedItem->url,
                     'color' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->color : ''),
                     'feedIcon' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->icon : ''),
-                    'shareId' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->feed->name : 'item') . '/' . $userFeedItem->id . '/',
+                    'shareId' => ($userFeedItem->userFeed !== null ? Str::slug($userFeedItem->userFeed->feed->name) : 'item') . '/' . $userFeedItem->id . '/',
                     'pinned' => $userFeedItem->is_pinned
                 ];
             }, $feedService->getOpenedItems())

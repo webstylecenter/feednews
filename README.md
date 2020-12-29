@@ -64,10 +64,7 @@ If you want to change styling, also run:
 - yarn install
 - yarn build
 
-
-You need to set one cronjobs so the feed data can be imported. For DirectAdmin I've used:
-*/5	*	*	*	*	/usr/local/bin/php /home/USERNAME/domains/YOUR_DOMAIN/public_html/bin/console app:feeds:update
-
+Run `php artisan shedule:work` for the feeds to be updated every 10 minutes and perform maintenance tasks when needed
 
 # Mobile support
 This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the todo that is usefull for shoppinglists for example.

@@ -4,7 +4,7 @@
 
 <div class="tabs {{ $darkTheme }}">
     <div class="tab tab--recent">
-        <aside data-is-mobile="{{ $device->isMobile() }}" data-hideXframe="{{ $user->hideXframeNotice }}"
+        <aside data-is-mobile="{{ $device->isMobile() }}" data-hideXframe="{{ $user->hide_xframe_notice }}"
                class="feed-list feed-list--type-sidebar {{ $darkTheme }}">
             @include('home.components.newsfeed', ['userFeedItems' => $userFeedItems])
         </aside>

@@ -36,4 +36,16 @@ class UserRepository
             ->take(50)
             ->get();
     }
+
+    public function search(string $query): Collection
+    {
+        return Auth::user()
+            ->feedItems()
+            ->join('feed_items', 'feed_item_id', 'feed_items.id')
+            ->where('feed_items.title', 'like', '%' . $query .'%')
+            ->orderBy('pinned', 'DESC')
+            ->orderBy('opened_at', 'DESC')
+            ->take(25)
+            ->get();
+    }
 }
