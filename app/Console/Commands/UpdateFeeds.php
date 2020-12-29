@@ -30,7 +30,7 @@ class UpdateFeeds extends Command
 
         foreach ($feeds as $feed) {
             $this->line(Carbon::now() . ' ' . $feed->name);
-            $this->info(Carbon::now() . ' ' . $feed->name . ': Parsing...');
+            $this->info(Carbon::now() . ' ' . $feed->name . ': Downloading...');
 
             try {
                 $this->feedService->parseFeed($feed, $this);

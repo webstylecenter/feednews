@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
-use SimplePie;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 class FeedService
@@ -47,6 +46,7 @@ class FeedService
     public function parseFeed(Feed $feed, ?Command $command): void
     {
         $feedData = $this->feedReader::make($feed->url);
+        $command->info(Carbon::now() . ' ' . $feed->name . ': Parsing...');
 
         $items = $feedData->get_items();
 

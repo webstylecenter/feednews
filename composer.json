@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "mobiledetect/mobiledetectlib": "^2.8",
         "tightenco/ziggy": "^1.0",
-        "willvincent/feeds": "^2.2"
+        "willvincent/feeds": "^2.2",
+        "ext-dom": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

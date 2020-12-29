@@ -65,11 +65,11 @@
         fluent
         @if(!$item->viewed) feed-list-item--state-new @endif
         @if($item->pinned) feed-list-item--state-pinned @endif
-        @if($item->userFeed->icon) hasIcon @endif
+        @if($item->userFeed && $item->userFeed->icon) hasIcon @endif
         @if($item->pinned && $hidePinnedItem) hidden-pinned-item @endif
         "
          data-url="{{ $item->feedItem->url }}"
-         data-share-id="{{ Str::slug($item->feedItem->feed->name) }}/{{ $item->id }}/"
+         data-share-id="{{ $item->userFeed ? Str::slug($item->feedItem->feed->name) : Str::slug(Auth::user()->name) }}/{{ $item->id }}/"
          data-id="{{ $item->id }}"
          style="border-left-color:{{ $item->userFeed->color ?? '#f0d714' }};"
     >
@@ -80,7 +80,7 @@
             <span class="fa fa-window-restore"></span>
         </div>
 
-        @if($item->userFeed->icon)
+        @if($item->userFeed && $item->userFeed->icon)
             <div class="feed-icon" style="background-color:{{ $item->userFeed->color }}">
                 <span class="fa fa-{{ $item->userFeed->icon }}"></span>
             </div>
@@ -89,10 +89,8 @@
         <p class="description">
             @if($item->feedItem->description)
                 {{ substr($item->feedItem->description, 0, 120) }}
-            @else
-                @if(!$item->userFeed)
-                    {{ $item->userFeed->feed->name }}
-                @endif
+            @elseif($item->userFeed)
+                {{ $item->userFeed->feed->name }}
             @endif
         </p>
     </div>

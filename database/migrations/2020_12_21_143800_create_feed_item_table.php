@@ -15,7 +15,7 @@ class CreateFeedItemTable extends Migration
     {
         Schema::create('feed_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('feed_id')->unsigned();
+            $table->bigInteger('feed_id')->unsigned()->nullable();
             $table->string('guid');
             $table->string('title');
             $table->string('description')->nullable();

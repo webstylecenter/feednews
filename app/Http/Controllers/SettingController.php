@@ -65,7 +65,7 @@ class SettingController extends BaseController
 
         $userFeed->color = $request->get('color', $userFeed->color);
         $userFeed->icon = $request->get('icon', $userFeed->icon);
-        $userFeed->auto_pin = $request->get('autoPin', $userFeed->autoPin);
+        $userFeed->auto_pin = $request->get('autoPin', $userFeed->autoPin) === 'true' ? true : false;
         $userFeed->save();
 
         return [
