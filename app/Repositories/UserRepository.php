@@ -11,8 +11,10 @@ class UserRepository
     {
         $feedItems = Auth::user()
             ->feedItems()
-            ->orderBy('pinned', 'DESC')
-            ->orderBy('created_at', 'DESC')
+            ->join('feed_items', 'feed_item_id', 'feed_items.id')
+            ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
+            ->orderBy('user_feed_items.pinned', 'DESC')
+            ->orderBy('user_feed_items.created_at', 'DESC')
             ->skip($page * $limit)
             ->take($limit)
             ->get();
@@ -31,8 +33,11 @@ class UserRepository
     {
         return Auth::user()
             ->feedItems()
-            ->whereNotNull('opened_at')
-            ->orderBy('opened_at', 'DESC')
+            ->join('feed_items', 'feed_item_id', 'feed_items.id')
+            ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
+            ->whereNotNull('user_feed_items.opened_at')
+            ->orderBy('user_feed_items.pinned', 'DESC')
+            ->orderBy('user_feed_items.opened_at', 'DESC')
             ->take(50)
             ->get();
     }
@@ -42,9 +47,10 @@ class UserRepository
         return Auth::user()
             ->feedItems()
             ->join('feed_items', 'feed_item_id', 'feed_items.id')
+            ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
             ->where('feed_items.title', 'like', '%' . $query .'%')
-            ->orderBy('pinned', 'DESC')
-            ->orderBy('opened_at', 'DESC')
+            ->orderBy('user_feed_items.pinned', 'DESC')
+            ->orderBy('user_feed_items.opened_at', 'DESC')
             ->take(25)
             ->get();
     }

@@ -166,16 +166,14 @@ class FeedController extends BaseController
         return [
             'status' => 'success',
             'data' => array_map(function (UserFeedItem $userFeedItem) {
-                $feedItem = $userFeedItem->feedItem;
-
                 return [
                     'id' => $userFeedItem->id,
-                    'title' => $feedItem->title,
-                    'description' => $feedItem->description,
-                    'url' => $feedItem->url,
-                    'color' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->color : ''),
-                    'feedIcon' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->icon : ''),
-                    'shareId' => ($userFeedItem->userFeed !== null ? Str::slug($userFeedItem->userFeed->feed->name) : 'item') . '/' . $userFeedItem->id . '/',
+                    'title' => $userFeedItem->title,
+                    'description' => $userFeedItem->description,
+                    'url' => $userFeedItem->url,
+                    'color' => $userFeedItem->color ?? '',
+                    'feedIcon' => $userFeedItem->icon ?? '',
+                    'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
                     'pinned' => $userFeedItem->is_pinned
                 ];
             }, $feedService->search($request->get('query')))
@@ -234,16 +232,14 @@ class FeedController extends BaseController
         return [
             'status' => 'success',
             'items' => array_map(function (UserFeedItem $userFeedItem) {
-                $feedItem = $userFeedItem->feedItem;
-
                 return [
                     'id' => $userFeedItem->id,
-                    'title' => $feedItem->title,
-                    'description' => $feedItem->description,
-                    'url' => $feedItem->url,
-                    'color' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->color : ''),
-                    'feedIcon' => ($userFeedItem->userFeed !== null ? $userFeedItem->userFeed->icon : ''),
-                    'shareId' => ($userFeedItem->userFeed !== null ? Str::slug($userFeedItem->userFeed->feed->name) : 'item') . '/' . $userFeedItem->id . '/',
+                    'title' => $userFeedItem->title,
+                    'description' => $userFeedItem->description,
+                    'url' => $userFeedItem->url,
+                    'color' => $userFeedItem->color ?? '',
+                    'feedIcon' => $userFeedItem->icon ?? '',
+                    'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
                     'pinned' => $userFeedItem->is_pinned
                 ];
             }, $feedService->getOpenedItems())

@@ -65,13 +65,13 @@
         fluent
         @if(!$item->viewed) feed-list-item--state-new @endif
         @if($item->pinned) feed-list-item--state-pinned @endif
-        @if($item->userFeed && $item->userFeed->icon) hasIcon @endif
+        @if($item->icon) hasIcon @endif
         @if($item->pinned && $hidePinnedItem) hidden-pinned-item @endif
         "
-         data-url="{{ $item->feedItem->url }}"
-         data-share-id="{{ $item->userFeed ? Str::slug($item->feedItem->feed->name) : Str::slug(Auth::user()->name) }}/{{ $item->id }}/"
+         data-url="{{ $item->url }}"
+         data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->id }}/"
          data-id="{{ $item->id }}"
-         style="border-left-color:{{ $item->userFeed->color ?? '#f0d714' }};"
+         style="border-left-color:{{ $item->color ?? '#f0d714' }};"
     >
         <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->id }}">
             <span class="fa fa-thumbtack"></span>
@@ -80,17 +80,17 @@
             <span class="fa fa-window-restore"></span>
         </div>
 
-        @if($item->userFeed && $item->userFeed->icon)
-            <div class="feed-icon" style="background-color:{{ $item->userFeed->color }}">
-                <span class="fa fa-{{ $item->userFeed->icon }}"></span>
+        @if($item->icon)
+            <div class="feed-icon" style="background-color:{{ $item->color }}">
+                <span class="fa fa-{{ $item->icon }}"></span>
             </div>
         @endif
-        <p class="title ">{{ strip_tags($item->feedItem->title) }}</p>
+        <p class="title ">{{ strip_tags($item->title) }}</p>
         <p class="description">
-            @if($item->feedItem->description)
-                {{ substr($item->feedItem->description, 0, 120) }}
-            @elseif($item->userFeed)
-                {{ $item->userFeed->feed->name }}
+            @if($item->description)
+                {{ substr($item->description, 0, 120) }}
+            @else
+                {{ $item->name ? $item->name : Auth::user()->name }}
             @endif
         </p>
     </div>
