@@ -7,15 +7,15 @@
     </div>
     <div class="header--bar-actions wow slideInRight">
 
-        @if($device->isMobile())
-            <div data-balloon="Click to see weather forecast" data-balloon-pos="down" class="js-update-weather-icon header--bar-weather-icon hide-if-tablet hide-if-mobile">{% include 'weather/icon.html.twig' %}</div>
+        @if(!$device->isMobile())
+            <div data-balloon="Click to see weather forecast" data-balloon-pos="down" class="js-update-weather-icon header--bar-weather-icon hide-if-tablet hide-if-mobile">@include('weather.icon')</div>
             <div class="js-show-weather-radar header--bar-weather-radar"><img class="js-weather-radar" src="https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512" />
                 <div class="header--bar-weather-radar-overview">
                     @include('weather.detail')
                 </div>
             </div>
 
-            @if($settings->google_calendar)
+            @if(isset($settings) && $settings->google_calendar)
                 <div data-balloon="Click to see your calendar" data-balloon-pos="down" class="js-show-calendar header--bar-calendar-icon hide-if-tablet hide-if-mobile"><span class="fa fa-calendar"></span></div>
                 <div class="header--bar-calendar-view">
                     <iframe src="{{ $settings->google_calendar }}" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>

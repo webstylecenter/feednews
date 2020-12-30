@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FeedSeeder::class);
         $this->call(UserFeedSeeder::class);
         $this->call(NoteSeeder::class);
+        $this->call(WeatherSeeder::class);
     }
 }

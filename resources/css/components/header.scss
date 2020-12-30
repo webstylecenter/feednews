@@ -103,7 +103,7 @@
       .icon_rain {
         background-image: url('/images/rain-blue.png');
       }
-      .icon_cloud {
+      .icon_cloud, .icon_clouds {
         background-image: url('/images/cloud-blue.png');
       }
       .icon_partly_cloud {
@@ -113,6 +113,9 @@
         background-image: url('/images/snow-blue.png');
       }
       .icon_sun {
+        background-image: url('/images/sun-blue.png');
+      }
+      .icon_clear {
         background-image: url('/images/sun-blue.png');
       }
       .icon_thunderstorm {

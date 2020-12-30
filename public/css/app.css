@@ -4566,7 +4566,8 @@ a:hover {
   background-image: url("/images/rain-blue.png");
 }
 
-.header--bar-weather-radar-overview .icon_cloud {
+.header--bar-weather-radar-overview .icon_cloud,
+.header--bar-weather-radar-overview .icon_clouds {
   background-image: url("/images/cloud-blue.png");
 }
 
@@ -4579,6 +4580,10 @@ a:hover {
 }
 
 .header--bar-weather-radar-overview .icon_sun {
+  background-image: url("/images/sun-blue.png");
+}
+
+.header--bar-weather-radar-overview .icon_clear {
   background-image: url("/images/sun-blue.png");
 }
 
@@ -4967,6 +4972,35 @@ a:hover {
 
 .weather--forecast-day:last-child {
   padding-right: 0;
+}
+
+.icon_rain {
+  background-image: url("/images/rain.png");
+}
+
+.icon_cloud,
+.icon_clouds {
+  background-image: url("/images/cloud.png");
+}
+
+.icon_partly_cloud {
+  background-image: url("/images/partly_cloud.png");
+}
+
+.icon_snow {
+  background-image: url("/images/snow.png");
+}
+
+.icon_sun {
+  background-image: url("/images/sun.png");
+}
+
+.icon_clear {
+  background-image: url("/images/sun.png");
+}
+
+.icon_thunderstorm {
+  background-image: url("/images/thunder.png");
 }
 
 .checklist {
