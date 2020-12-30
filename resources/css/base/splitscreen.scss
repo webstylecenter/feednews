@@ -54,4 +54,20 @@
       }
     }
   }
+
+  .login-with-google {
+      display: inline-block;
+      border: 1px solid $blue;
+      color: $blue;
+      padding: 15px 37px;
+      border-radius: 15px;
+      margin: 10px 0;
+      transition: all 200ms ease;
+
+      &:hover {
+          text-decoration: none !important;
+          background-color: $blue;
+          color: white;
+      }
+  }
 }

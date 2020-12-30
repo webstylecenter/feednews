@@ -4335,6 +4335,22 @@ a:hover {
   text-decoration: underline;
 }
 
+.splitscreen .login-with-google {
+  display: inline-block;
+  border: 1px solid #337dff;
+  color: #337dff;
+  padding: 15px 37px;
+  border-radius: 15px;
+  margin: 10px 0;
+  transition: all 200ms ease;
+}
+
+.splitscreen .login-with-google:hover {
+  text-decoration: none !important;
+  background-color: #337dff;
+  color: white;
+}
+
 .profileMenu {
   position: fixed;
   top: 37px;

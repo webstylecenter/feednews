@@ -33,6 +33,10 @@
             <input type="submit" value="Login" /> <a class="createAccount" href="{{ route('register') }}">Create account</a>
             @csrf
         </form>
+
+        @if(env('GOOGLE_CLIENT_ID'))
+            <a class="login-with-google" href="{{ route('oauth.redirect') }}">Login with your Google account</a>
+        @endif
     </div>
 
     <p><a href="{{ route('homepage.privacy.policy') }}">Privacy Policy</a></p>

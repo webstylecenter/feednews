@@ -9,4 +9,7 @@ Route::middleware('web')->group(function() {
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
     Route::get('register', [UserController::class, 'register'])->name('register');
     Route::post('register/submit', [UserController::class, 'submitRegistration'])->name('register.submit');
+
+    Route::get('/auth/redirect', [UserController::class, 'redirectToOauth'])->name('oauth.redirect');
+    Route::get('/auth/callback', [UserController::class, 'oAuthCallBack'])->name('oauth.callback');
 });
