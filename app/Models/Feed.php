@@ -27,4 +27,9 @@ class Feed extends Model
     {
         return $this->hasMany(FeedItem::class);
     }
+
+    public function userFeeds(): hasMany
+    {
+        return $this->hasMany(UserFeed::class);
+    }
 }

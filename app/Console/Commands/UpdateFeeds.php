@@ -47,6 +47,11 @@ class UpdateFeeds extends Command
 
         }
 
-        $this->line(Carbon::now() . ' ' . 'Finished updating feeds');
+        $this->line(Carbon::now()
+            . ' '
+            . 'Finished updating feeds in '
+            . (microtime(true) - LARAVEL_START)
+            . ' seconds'
+        );
     }
 }

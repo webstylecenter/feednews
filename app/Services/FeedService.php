@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 class FeedService
@@ -59,7 +60,7 @@ class FeedService
 
         $newItems = 0;
         foreach ($items as $item) {
-            if (FeedItem::where('guid', '=', $item->get_id())->first()) {
+            if (DB::table('feed_items')->where('guid', $item->get_id())->first()) {
                 continue;
             }
 
@@ -117,7 +118,7 @@ class FeedService
 
     protected function createUserFeedItems(Feed $feed, FeedItem $feedItem): void
     {
-        foreach (UserFeed::where('feed_id', '=', $feed->id)->get() as $userFeed) {
+        foreach ($feed->userFeeds() as $userFeed) {
             UserFeedItem::create([
                 'user_id' => $userFeed->user_id,
                 'user_feed_id' => $userFeed->id,
