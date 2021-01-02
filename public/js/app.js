@@ -46940,6 +46940,9 @@ $(function () {
       left: sidebarWidth
     }, 1000);
   });
+  $('.js-other-login-options').on('click', function () {
+    $(this).slideUp().then($('.signinBox form').slideDown());
+  });
 });
 
 function getUrlMetaData() {

@@ -1,73 +1,86 @@
 .splitscreen {
-  font-size: 12pt;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 100%;
-  grid-template-areas: "left right";
-  width: 100vw;
-  height: 100vh;
-
-  @include respond-to(mobile) {
-    grid-template-columns: 100%;
-    grid-template-rows: auto;
-    grid-template-areas: "right"
-    "left";
-    height: auto;
-  }
-
-  .side {
-    padding: 50px;
+    font-size: 12pt;
     display: grid;
-    align-items: center;
-  }
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    grid-template-areas: "left right";
+    width: 100vw;
+    height: 100vh;
 
-  .left {
-    grid-area: left;
-    background-color: $blue;
-    color: white;
-
-    img {
-      width: 100%;
+    @include respond-to(mobile) {
+        grid-template-columns: 100%;
+        grid-template-rows: auto;
+        grid-template-areas: "right"
+    "left";
+        height: auto;
     }
 
-    a {
-      color: white;
-
-      &:hover {
-        text-decoration: underline;
-      }
+    .side {
+        padding: 50px;
+        display: grid;
+        align-items: center;
     }
-  }
-  .right {
-    z-index: 1;
-    grid-area: right;
-    background-color: white;
-    color: black;
 
-    overflow-y: auto;
+    .left {
+        grid-area: left;
+        background-color: $blue;
+        color: white;
 
-    a {
-      color: $blue;
+        img {
+            width: 100%;
+        }
 
-      &:hover {
-        text-decoration: underline;
-      }
+        a {
+            color: white;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
-  }
 
-  .login-with-google {
-      display: inline-block;
-      border: 1px solid $blue;
-      color: $blue;
-      padding: 15px 37px;
-      border-radius: 15px;
-      margin: 10px 0;
-      transition: all 200ms ease;
+    .right {
+        z-index: 1;
+        grid-area: right;
+        background-color: white;
+        color: black;
 
-      &:hover {
-          text-decoration: none !important;
-          background-color: $blue;
-          color: white;
-      }
-  }
+        overflow-y: auto;
+
+        a {
+            color: $blue;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .login-with-google {
+        background-image: url('/images/signin/btn-google-normal.png');
+        margin: 10px 0;
+        width: 191px;
+        height: 46px;
+        transition: all 200ms ease;
+        display: block;
+
+        &:hover {
+            background-image: url('/images/signin/btn-google-focus.png');
+        }
+
+        &:active {
+            background-image: url('/images/signin/btn-google-pressed.png');
+        }
+    }
+
+    .login-with-facebook {
+        background-image: url('/images/signin/login-with-facebook.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        margin: 10px 0;
+        width: 191px;
+        height: 46px;
+        transition: all 200ms ease;
+        display: block;
+    }
 }

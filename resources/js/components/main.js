@@ -44,12 +44,12 @@ $(function () {
         });
 
     $('.specialTxt').each(function () {
-        var p1 = 'peter';
-        var p3 = 'vdam';
-        var p2 = '.nl';
-        var p4 = 'mail';
-        var p5 = '@';
-        var p6 = 'to';
+        let p1 = 'peter';
+        let p3 = 'vdam';
+        let p2 = '.nl';
+        let p4 = 'mail';
+        let p5 = '@';
+        let p6 = 'to';
         $(this).html('<a href="' + p4 + p6 + ':' + p1 + p5 + p1 + p3 + p2 + '">' + p1 + p5 + p1 + p3 + p2 + '</a>');
     });
 
@@ -69,8 +69,8 @@ $(function () {
     });
 
     $('.js-toggle-fullscreen').on('dblclick', function () {
-        var sidebarWidth = $('.container .feed-list').css('width');
-        var headerColor = '#337dff';
+        let sidebarWidth = $('.container .feed-list').css('width');
+        let headerColor = '#337dff';
 
         if ($('.content').css('left') !== '0px') {
             sidebarWidth = 0;
@@ -83,10 +83,14 @@ $(function () {
             left: sidebarWidth
         }, 1000);
     });
+
+    $('.js-other-login-options').on('click', function() {
+        $(this).slideUp().then($('.signinBox form').slideDown());
+    })
 });
 
 function getUrlMetaData() {
-    var Url = $('.js-form-feed [name="url"]').val();
+    let Url = $('.js-form-feed [name="url"]').val();
 
     if (Url.length > 0) {
 
@@ -111,10 +115,10 @@ function getUrlMetaData() {
 }
 
 function saveNote($el) {
-    var id = $el.attr('data-id');
-    var name = $el.parent().find('input').val();
-    var position = $el.attr('data-position');
-    var note = $el.val();
+    let id = $el.attr('data-id');
+    let name = $el.parent().find('input').val();
+    let position = $el.attr('data-position');
+    let note = $el.val();
 
     $.ajax({
         method: "POST",

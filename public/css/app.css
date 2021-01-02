@@ -4336,19 +4336,31 @@ a:hover {
 }
 
 .splitscreen .login-with-google {
-  display: inline-block;
-  border: 1px solid #337dff;
-  color: #337dff;
-  padding: 15px 37px;
-  border-radius: 15px;
+  background-image: url("/images/signin/btn-google-normal.png");
   margin: 10px 0;
+  width: 191px;
+  height: 46px;
   transition: all 200ms ease;
+  display: block;
 }
 
 .splitscreen .login-with-google:hover {
-  text-decoration: none !important;
-  background-color: #337dff;
-  color: white;
+  background-image: url("/images/signin/btn-google-focus.png");
+}
+
+.splitscreen .login-with-google:active {
+  background-image: url("/images/signin/btn-google-pressed.png");
+}
+
+.splitscreen .login-with-facebook {
+  background-image: url("/images/signin/login-with-facebook.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin: 10px 0;
+  width: 191px;
+  height: 46px;
+  transition: all 200ms ease;
+  display: block;
 }
 
 .profileMenu {
@@ -6245,5 +6257,26 @@ a:hover {
 .error403 .createAccount,
 .register .createAccount {
   margin-left: 20px;
+}
+
+.error403 .signinBox button,
+.register .signinBox button {
+  background-color: #337dff;
+  border: 1px solid #337dff;
+  border-radius: 10px;
+  color: white;
+  padding: 5px 10px;
+}
+
+.error403 .signinBox button:hover,
+.register .signinBox button:hover {
+  cursor: pointer;
+  color: #337dff;
+  background-color: white;
+}
+
+.error403 .signinBox form,
+.register .signinBox form {
+  display: none;
 }
 

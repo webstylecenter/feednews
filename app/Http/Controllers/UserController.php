@@ -92,9 +92,49 @@ class UserController extends BaseController
             $dbUser->last_login = Carbon::now();
             $dbUser->ip_address = $request->ip();
             $dbUser->user_agent = $request->userAgent();
+            $dbUser->save();
         }
 
         Auth::loginUsingId($dbUser->id);
         return redirect(route('homepage.index'));
+    }
+
+    /**
+     * TODO: Combine this with the login methods above
+     */
+    public function facebookRedirectToOauth()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function facebookoAuthCallBack(Request $request): RedirectResponse
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        $dbUser = User::where('email', '=', $user->getEmail())->first();
+        if (!$dbUser) {
+            $dbUser = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'enabled' => true,
+                'last_login' => Carbon::now(),
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent(),
+                'password' => sha1(uniqid())
+            ]);
+        } else {
+            $dbUser->last_login = Carbon::now();
+            $dbUser->ip_address = $request->ip();
+            $dbUser->user_agent = $request->userAgent();
+            $dbUser->save();
+        }
+
+        Auth::loginUsingId($dbUser->id);
+        return redirect(route('homepage.index'));
+    }
+
+    public function facebookRemoveUser()
+    {
+        // TODO: Make this functionality work
     }
 }

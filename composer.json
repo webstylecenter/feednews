@@ -17,6 +17,7 @@
         "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "mobiledetect/mobiledetectlib": "^2.8",
+        "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/google": "^4.1",
         "tightenco/ziggy": "^1.0",
         "willvincent/feeds": "^2.2"

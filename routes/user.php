@@ -10,6 +10,13 @@ Route::middleware('web')->group(function() {
     Route::get('register', [UserController::class, 'register'])->name('register');
     Route::post('register/submit', [UserController::class, 'submitRegistration'])->name('register.submit');
 
+    // Google
+    // TODO: Improve urls
     Route::get('/auth/redirect', [UserController::class, 'redirectToOauth'])->name('oauth.redirect');
     Route::get('/auth/callback', [UserController::class, 'oAuthCallBack'])->name('oauth.callback');
+
+    // Facebook
+    Route::get('/auth/facebook/redirect', [UserController::class, 'facebookRedirectToOauth'])->name('oauth.facebook.redirect');
+    Route::get('/auth/facebook/callback', [UserController::class, 'facebookoAuthCallBack'])->name('oauth.facebook.callback');
+    Route::get('/auth/facebook/remove', [UserController::class, 'facebookRemoveUser'])->name('oauth.facebook.remove');
 });
