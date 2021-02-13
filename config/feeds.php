@@ -31,7 +31,7 @@ return [
     | Whether to disable the cache.
     |
     */
-    'cache.disabled'           => true,
+    'cache.disabled'           => false,
 
     /*
     |--------------------------------------------------------------------------

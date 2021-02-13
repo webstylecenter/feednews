@@ -118,7 +118,7 @@ class FeedService
 
     protected function createUserFeedItems(Feed $feed, FeedItem $feedItem): void
     {
-        foreach ($feed->userFeeds() as $userFeed) {
+        foreach ($feed->userFeeds as $userFeed) {
             UserFeedItem::create([
                 'user_id' => $userFeed->user_id,
                 'user_feed_id' => $userFeed->id,
