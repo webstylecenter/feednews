@@ -69,11 +69,11 @@
         @if($item->pinned && $hidePinnedItem) hidden-pinned-item @endif
         "
          data-url="{{ $item->url }}"
-         data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->id }}/"
+         data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->feed_item_id }}/"
          data-id="{{ $item->id }}"
          style="border-left-color:{{ $item->color ?? '#f0d714' }};"
     >
-        <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->id }}">
+        <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->feed_item_id }}">
             <span class="fa fa-thumbtack"></span>
         </div>
         <div data-balloon="Open in popup" data-balloon-pos="left" class="pip hide-if-mobile">
