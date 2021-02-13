@@ -60,6 +60,7 @@ task('release', [
     'deploy:writable',
     'deploy:symlink',
     'deploy:unlock',
+    'worker'
 ]);
 
 task('deploy', [
@@ -75,6 +76,10 @@ task('update_database', function () {
 
 task('upload', function () {
     upload(__DIR__ . "/.build/current/", '{{release_path}}');
+});
+
+task('worker', function () {
+    run('{{bin/php}} {{release_path}}/artisan queue:restart');
 });
 
 // [Optional] if deploy fails automatically unlock.
