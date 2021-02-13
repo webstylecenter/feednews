@@ -47,6 +47,21 @@ task('build', function () {
     //run('cd {{release_path}} && build');
 })->local();
 
+task('release', [
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:release',
+    'upload',
+    'deploy:shared',
+    'deploy:vendors',
+    'update_database',
+ //   'deploy:cache:clear',
+   // 'deploy:cache:warmup',
+    'deploy:writable',
+    'deploy:symlink',
+    'deploy:unlock',
+]);
+
 task('deploy', [
     'build',
     'release',
@@ -55,7 +70,7 @@ task('deploy', [
 ]);
 
 task('update_database', function () {
-    run('{{bin/console}} artisan migrate');
+    run('{{bin/php}} {{release_path}}/artisan migrate --force');
 })->desc('Update database schema');
 
 task('upload', function () {
