@@ -12,7 +12,7 @@ class WelcomeController extends BaseController
 {
     public function index(ChecklistRepository $checklistRepository): View
     {
-        app('debugbar')->disable();
+        // app('debugbar')->disable(); TODO: Triggers error on production
 
         return view('welcome.index', [
             'bodyClass' => 'page--homepage',
