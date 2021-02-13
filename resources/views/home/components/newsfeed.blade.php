@@ -16,8 +16,7 @@
     @php
         $hidePinnedItem = false;
     @endphp
-
-    @if(\Carbon\Carbon::now()->subDays(14)->format('Y-m-d') > $item->updated_at->format('Y-m-d') || $loop->index > 5)
+    @if($item->updated_at->gt(\Carbon\Carbon::now()->subDays(14)) || $loop->index > 5)
         @php
             $hidePinnedItem = true;
         @endphp
