@@ -20,10 +20,10 @@
         "socialiteproviders/facebook": "^4.1",
         "socialiteproviders/google": "^4.1",
         "tightenco/ziggy": "^1.0",
-        "willvincent/feeds": "^2.2"
+        "willvincent/feeds": "^2.2",
+        "barryvdh/laravel-debugbar": "^3.5"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.5",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "kitloong/laravel-migrations-generator": "^4.4",
