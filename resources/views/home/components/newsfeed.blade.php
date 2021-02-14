@@ -16,7 +16,7 @@
     @php
         $hidePinnedItem = false;
     @endphp
-    @if($item->updated_at->gt(\Carbon\Carbon::now()->subDays(14)) || $loop->index > 5)
+    @if($item->user_feed_item_updated_at->gt(\Carbon\Carbon::now()->subDays(14)) || $loop->index > 5)
         @php
             $hidePinnedItem = true;
         @endphp
@@ -68,11 +68,11 @@
         @if($item->pinned && $hidePinnedItem) hidden-pinned-item @endif
         "
          data-url="{{ $item->url }}"
-         data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->feed_item_id }}/"
-         data-id="{{ $item->feed_item_id }}"
+         data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->user_feed_item_id }}/"
+         data-id="{{ $item->user_feed_item_id }}"
          style="border-left-color:{{ $item->color ?? '#f0d714' }};"
     >
-        <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->feed_item_id }}">
+        <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->user_feed_item_id }}">
             <span class="fa fa-thumbtack"></span>
         </div>
         <div data-balloon="Open in popup" data-balloon-pos="left" class="pip hide-if-mobile">

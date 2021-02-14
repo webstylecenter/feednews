@@ -21,6 +21,7 @@ class UserFeedItem extends Model
         'viewed' => 'boolean',
         'pinned' => 'boolean',
         'opened_at' => 'datetime',
+        'user_feed_item_updated_at' => 'datetime'
     ];
 
     public function user(): BelongsTo

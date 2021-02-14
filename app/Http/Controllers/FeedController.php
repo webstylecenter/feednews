@@ -137,7 +137,7 @@ class FeedController extends BaseController
         ]);
 
         $userFeedItem = UserFeedItem::find($request->get('id'));
-        $userFeedItem->pinned = true;
+        $userFeedItem->pinned = !$userFeedItem->pinned;
         $userFeedItem->save();
 
         return [
