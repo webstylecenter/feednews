@@ -69,7 +69,7 @@
         "
          data-url="{{ $item->url }}"
          data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->feed_item_id }}/"
-         data-id="{{ $item->id }}"
+         data-id="{{ $item->feed_item_id }}"
          style="border-left-color:{{ $item->color ?? '#f0d714' }};"
     >
         <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->feed_item_id }}">
