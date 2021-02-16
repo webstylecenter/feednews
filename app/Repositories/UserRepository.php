@@ -14,10 +14,12 @@ class UserRepository
             ->select([
                 '*',
                 'user_feed_items.id AS user_feed_item_id',
-                'user_feed_items.updated_at AS user_feed_item_updated_at'
+                'user_feed_items.updated_at AS user_feed_item_updated_at',
+                'feed_items.url as url'
             ])
             ->join('feed_items', 'feed_item_id', 'feed_items.id')
             ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
+            ->join('feeds', 'user_feeds.feed_id', 'feeds.id')
             ->orderBy('user_feed_items.pinned', 'DESC')
             ->orderBy('user_feed_items.updated_at', 'DESC')
             ->skip($page * $limit)
