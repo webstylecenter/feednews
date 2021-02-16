@@ -123,6 +123,7 @@ class FeedService
                 'user_id' => $userFeed->user_id,
                 'user_feed_id' => $userFeed->id,
                 'feed_item_id' => $feedItem->id,
+                'pinned' => $userFeed->auto_pin
             ]);
         }
     }
