@@ -59,9 +59,9 @@
                         <td class="feedIcon hide-if-mobile">
                             <input data-balloon="Automaticly pin new items" data-balloon-pos="left" title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" @if($feed->auto_pin)checked="checked"@endif />
                         </td>
-                        <td class="feedAmount hide-if-mobile">
-                            {{ $feed->items->count() }}
-                        </td>
+{{--                        <td class="feedAmount hide-if-mobile">--}}
+{{--                            {{ $feed->items->count() }}--}}
+{{--                        </td>--}}
                         <td class="feedActions">
                             <button class="js-settings-remove-feed fa fa-trash"></button>
                         </td>
