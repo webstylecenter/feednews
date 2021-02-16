@@ -57,7 +57,7 @@
                             <a href="{{ $feed->feed->url }}" target="_blank">{{ $feed->feed->url }}</a>
                         </td>
                         <td class="feedIcon hide-if-mobile">
-                            <input data-balloon="Automaticly pin new items" data-balloon-pos="left" title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" @if($feed->autoPin)checked="checked"@endif />
+                            <input data-balloon="Automaticly pin new items" data-balloon-pos="left" title="Autopin new items" class="js-update-auto-pin" type="checkbox" value="1" @if($feed->auto_pin)checked="checked"@endif />
                         </td>
                         <td class="feedAmount hide-if-mobile">
                             {{ $feed->items->count() }}
