@@ -64,13 +64,13 @@
         fluent
         @if(!$item->viewed) feed-list-item--state-new @endif
         @if($item->pinned) feed-list-item--state-pinned @endif
-        @if($item->icon) hasIcon @endif
+        @if($item->feed_icon) hasIcon @endif
         @if($item->pinned && $hidePinnedItem) hidden-pinned-item @endif
         "
          data-url="{{ $item->url }}"
          data-share-id="{{ $item->name ? Str::slug($item->name) : Str::slug(Auth::user()->name) }}/{{ $item->user_feed_item_id }}/"
          data-id="{{ $item->user_feed_item_id }}"
-         style="border-left-color:{{ $item->color ?? '#f0d714' }};"
+         style="border-left-color:{{ $item->feed_color ?? '#f0d714' }};"
     >
         <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->user_feed_item_id }}">
             <span class="fa fa-thumbtack"></span>
@@ -80,8 +80,8 @@
         </div>
 
         @if($item->icon)
-            <div class="feed-icon" style="background-color:{{ $item->color }}">
-                <span class="fa fa-{{ $item->icon }}"></span>
+            <div class="feed-icon" style="background-color:{{ $item->feed_color }}">
+                <span class="fa fa-{{ $item->feed_icon }}"></span>
             </div>
         @endif
         <p class="title ">{{ strip_tags($item->title) }}</p>

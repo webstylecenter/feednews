@@ -15,7 +15,9 @@ class UserRepository
                 '*',
                 'user_feed_items.id AS user_feed_item_id',
                 'user_feed_items.updated_at AS user_feed_item_updated_at',
-                'feed_items.url as url'
+                'feed_items.url AS url',
+                'user_feeds.color AS feed_color',
+                'user_feeds.icon AS feed_icon'
             ])
             ->join('feed_items', 'feed_item_id', 'feed_items.id')
             ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
