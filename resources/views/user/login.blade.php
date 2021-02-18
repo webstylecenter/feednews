@@ -13,6 +13,11 @@
         <h1>Feednews.me</h1>
     </div>
     <h2>Public Beta</h2>
+    <div style="padding: 10px; border: 1px solid #337dff; border-radius: 5px;">
+        <b>Notice: </b> FeedNews is currently transitioning between frameworks and is experiencing a few bugs and glithes
+        at this time. Errors are being reported automaticly and will be fixed as soon as possible!
+        Thank you for understanding!
+    </div>
 
     <p>Please sign in below</p>
 

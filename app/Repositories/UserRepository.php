@@ -23,7 +23,7 @@ class UserRepository
             ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
             ->join('feeds', 'user_feeds.feed_id', 'feeds.id')
             ->orderBy('user_feed_items.pinned', 'DESC')
-            ->orderBy('user_feed_items.updated_at', 'DESC')
+            ->orderBy('user_feed_items.created_at', 'DESC')
             ->skip($page * $limit)
             ->take($limit)
             ->get();
