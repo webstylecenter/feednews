@@ -87,7 +87,8 @@
         <p class="title ">{{ strip_tags($item->title) }}</p>
         <p class="description">
             @if($item->description)
-                {{ substr($item->description, 0, 120) }}
+                {{ substr($item->description, 0, 120) }}<br />
+                <em>{{ $item->name }}</em>
             @else
                 {{ $item->name ? $item->name : Auth::user()->name }}
             @endif
