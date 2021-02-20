@@ -21,7 +21,7 @@
             $hidePinnedItem = true;
         @endphp
 
-        @if(!$hadHiddenPinnedItem && $item->pinnned)
+        @if(!$hadHiddenPinnedItem)
             <div class="hidden-feed-items js-show-hidden-pinned-items">
                 Show old pinned items
             </div>
