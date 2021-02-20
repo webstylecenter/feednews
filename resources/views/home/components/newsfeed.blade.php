@@ -16,12 +16,12 @@
     @php
         $hidePinnedItem = false;
     @endphp
-    @if($item->user_feed_item_updated_at->gt(\Carbon\Carbon::now()->subDays(14)) || $loop->index > 5)
+    @if(\Carbon\Carbon::now()->subdays(14)->isAfter($item->updated_at->format('Y-m-d'))  || $loop->index > 5)
         @php
             $hidePinnedItem = true;
         @endphp
 
-        @if(!$hadHiddenPinnedItem)
+        @if(!$hadHiddenPinnedItem && $item->pinnned)
             <div class="hidden-feed-items js-show-hidden-pinned-items">
                 Show old pinned items
             </div>
@@ -47,7 +47,7 @@
             $showedEarlierTodayMessage = true;
         @endphp
 
-    @elseif($item->viewed && !$hadYesterdayBefore && $item->created_at->format('Y-m-d') == \Carbon\Carbon::yesterday()->format('Y-m-d') && $loop->index > 1)
+    @elseif($item->viewed && !$hadYesterdayBefore && $item->created_at->isYesterday() && $loop->index > 1)
         <div class="feed-list--separator">
             Yesterday
         </div>
