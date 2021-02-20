@@ -22,8 +22,8 @@ class UserRepository
                 'user_feed_items.updated_at AS updated_at',
             ])
             ->join('feed_items', 'feed_item_id', 'feed_items.id')
-            ->join('user_feeds', 'user_feed_id', 'user_feeds.id')
-            ->join('feeds', 'user_feeds.feed_id', 'feeds.id')
+            ->leftJoin('user_feeds', 'user_feed_id', 'user_feeds.id')
+            ->leftJoin('feeds', 'user_feeds.feed_id', 'feeds.id')
             ->orderBy('user_feed_items.pinned', 'DESC')
             ->orderBy('user_feed_items.created_at', 'DESC')
             ->skip($page * $limit)
