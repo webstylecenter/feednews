@@ -3,7 +3,7 @@
 use App\Http\Controllers\FeedController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('feed.')->prefix('feed')->group(function() {
+Route::name('feed.')->prefix('feed')->middleware(['web', 'auth'])->group(function() {
     Route::post('/add', [FeedController::class, 'add'])->name('add');
     Route::post('/chrome-import/{email?}', [FeedController::class, 'chromeImport'])->name('chrome.import');
     Route::post('/get-meta-data', [FeedController::class, 'getMetaData'])->name('metadata');

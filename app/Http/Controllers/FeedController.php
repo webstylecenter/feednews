@@ -74,7 +74,7 @@ class FeedController extends BaseController
             Auth::loginUsingId($user->id);
         }
 
-        try {
+        //try {
             $meta = $metaService->getMetaByUrl($request->get('url'));
 
             $feedItem = $feedItem->create([
@@ -89,17 +89,17 @@ class FeedController extends BaseController
                 'feed_item_id' => $feedItem->id,
                 'pinned' => true
             ]);
-        } catch (\Throwable $e) {
-            if (strlen($email) > 0) {
-                Auth::logout();
-            }
-
-            return [
-                'status' => 'error',
-                'message' => 'Something went wrong'
-            ];
-
-        }
+//        } catch (\Throwable $e) {
+//            if (strlen($email) > 0) {
+//                Auth::logout();
+//            }
+//
+//            return [
+//                'status' => 'error',
+//                'message' => 'Something went wrong'
+//            ];
+//
+//        }
 
         if (strlen($email) > 0) {
             Auth::logout();

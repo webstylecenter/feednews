@@ -3,7 +3,7 @@
 use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('settings.')->prefix('settings')->group(function() {
+Route::name('settings.')->prefix('settings')->middleware(['web', 'auth'])->group(function() {
     Route::get('/', [SettingController::class, 'index'])->name('index');
     Route::post('/add', [SettingController::class, 'add'])->name('add');
     Route::post('/follow', [SettingController::class, 'follow'])->name('follow');
