@@ -120,7 +120,7 @@ $(function () {
     $('.content-close-pip, .content-maximize-pip').hide();
 });
 
-function openPage(url, shareId, userFeedItemId) {
+window.openPage = (url, shareId, userFeedItemId) => {
     let isMobile = $('.feed-list--type-sidebar').attr('data-is-mobile');
     let disableXcheck = $('.feed-list--type-sidebar').attr('data-hideXframe');
     $('.profileMenu').slideUp();

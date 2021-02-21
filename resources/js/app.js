@@ -19,7 +19,6 @@ new WOW({
     mobile: false
 }).init();
 
-
 require('./bootstrap');
 require('./components/main');
 require('./components/clipboard');
@@ -31,6 +30,7 @@ require('./components/settings');
 require('./components/welcome');
 require('./components/register');
 require('./components/tabs');
+require('./components/hotlink');
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);

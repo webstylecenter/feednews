@@ -109,7 +109,8 @@ class FeedController extends BaseController
             'status' => 'success',
             'title' => $meta->title,
             'description' => $meta->description,
-            'url' => $meta->url
+            'url' => $meta->url,
+            'id' => $feedItem->id,
         ];
     }
 

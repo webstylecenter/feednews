@@ -4,25 +4,31 @@
 const HEADER_BLACKLIST = [
   'content-security-policy',
   'x-frame-options',
+  'cross-origin-opener-policy',
 ];
 
 const pushLink = (link) => {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', 'https://www.feednews.me/chrome/import', true);
-  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    const formData = new FormData();
+    formData.append('url', link);
 
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== XMLHttpRequest.DONE) {
-      return;
-    }
-    const response = JSON.parse(xhr.responseText);
-    const title = response.status === 'success' ? response.title : 'Error occurred';
-    const body = response.status === 'success' ? response.description : response.message;
+    fetch('https://www.feednews.me/feed/chrome-import/peter@webstylecenter.com', { method: 'POST', body: formData })
+        .then(response => response.json())
+        .then(result => {
+            if (result.status !== 'success') {
+                throw result.message;
+            }
 
-    (() => new Notification(title, { icon: 'feednews.png', body }))();
-  };
-
-  xhr.send(`url=${encodeURIComponent(link)}`);
+            return result;
+        })
+        .then(result => {
+            let notification = new Notification(result.title, { icon: 'feednews.png', body: result.description });
+            notification.addEventListener('click', () => {
+                chrome.tabs.create({ url: `https://www.feednews.me/#item=${btoa(result.url)}` });
+            });
+        })
+        .catch(error => {
+            new Notification('Error occurred', { icon: 'feednews.png', body: error });
+        });
 };
 
 chrome.browserAction.onClicked.addListener(() => {
