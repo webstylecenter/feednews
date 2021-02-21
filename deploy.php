@@ -3,6 +3,9 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
+// Project name
+set('application', 'feednews');
+
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
 
@@ -49,9 +52,9 @@ task('release', [
     'deploy:info',
     'deploy:prepare',
     'upload',
-   // 'copy_env',
+//    'copy_env',
     'deploy:vendors',
-    'artisan:migrate',
+   // 'artisan:migrate',
     'artisan:storage:link',
     'artisan:view:cache',
     'artisan:config:cache',
