@@ -49,7 +49,7 @@ task('release', [
     'deploy:info',
     'deploy:prepare',
     'upload',
-//    'copy_env',
+   // 'copy_env',
     'deploy:vendors',
     'artisan:migrate',
     'artisan:storage:link',
