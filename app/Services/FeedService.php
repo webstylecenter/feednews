@@ -13,19 +13,18 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 class FeedService
 {
     private FeedsFacade $feedReader;
     private UserRepository $userRepository;
-    private array $feedItemsCache;
 
     public function __construct(FeedsFacade $feedReader, UserRepository $userRepository)
     {
         $this->feedReader = $feedReader;
         $this->userRepository = $userRepository;
-        $this->feedItemsCache = Cache::get('feed_item_cache', []);
     }
 
     public function getAvailableFeeds(): Collection
@@ -91,8 +90,6 @@ class FeedService
             $newItems++;
         }
 
-        $this->saveFeedItemCache();
-
         if ($command) {
             $command->warn(Carbon::now() . ' ' . $feed->name . ': Added ' . $newItems . ' new items, skipped ' . $skippedCacheItems . ' cached items');
         }
@@ -146,16 +143,11 @@ class FeedService
 
     protected function isInCache(string $value): bool
     {
-        return in_array($value, $this->feedItemsCache);
+        return Cache::has('feed_item_cache_' . Str::slug($value));
     }
 
     protected function addToFeedItemCache(string $value): void
     {
-        $this->feedItemsCache[] = $value;
-    }
-
-    protected function saveFeedItemCache(): void
-    {
-        Cache::put('feed_item_cache', $this->feedItemsCache, now()->addDays(7));
+        Cache::put('feed_item_cache_' . Str::slug($value), true, now()->addDays(rand(7, 31)));
     }
 }
