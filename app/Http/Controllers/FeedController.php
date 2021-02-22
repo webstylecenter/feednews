@@ -64,15 +64,15 @@ class FeedController extends BaseController
         UserFeedItem $userFeedItem,
         User $user
     ): array {
-        if (strlen($email) > 0 && !Auth::check()) {
-            $user = $user->where('email', '=', $email)->first();
-
-            if (!$user) {
-                abort(403);
-            }
-
-            Auth::loginUsingId($user->id);
-        }
+//        if (strlen($email) > 0 && !Auth::check()) {
+//            $user = $user->where('email', '=', $email)->first();
+//
+//            if (!$user) {
+//                abort(403);
+//            }
+//
+//            Auth::loginUsingId($user->id);
+//        }
 
         try {
             $meta = $metaService->getMetaByUrl($request->get('url'));
@@ -101,9 +101,9 @@ class FeedController extends BaseController
 
         }
 
-        if (strlen($email) > 0) {
-            Auth::logout();
-        }
+//        if (strlen($email) > 0) {
+//            Auth::logout();
+//        }
 
         return [
             'status' => 'success',
