@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use willvincent\Feeds\Facades\FeedsFacade;
 
@@ -18,11 +19,13 @@ class FeedService
 {
     private FeedsFacade $feedReader;
     private UserRepository $userRepository;
+    private array $feedItemsCache;
 
     public function __construct(FeedsFacade $feedReader, UserRepository $userRepository)
     {
         $this->feedReader = $feedReader;
         $this->userRepository = $userRepository;
+        $this->feedItemsCache = Cache::get('feed_item_cache', []);
     }
 
     public function getAvailableFeeds(): Collection
@@ -59,8 +62,18 @@ class FeedService
         }
 
         $newItems = 0;
+        $skippedCacheItems = 0;
         foreach ($items as $item) {
-            if (DB::table('feed_items')->where('guid', $item->get_id())->first()) {
+
+            $guid = $item->get_id();
+
+            if ($this->isInCache($guid)) {
+                $skippedCacheItems++;
+                continue;
+            }
+
+            if (DB::table('feed_items')->where('guid', $guid)->first()) {
+                $this->addToFeedItemCache($guid);
                 continue;
             }
 
@@ -74,11 +87,14 @@ class FeedService
             ]);
 
             $this->createUserFeedItems($feed, $feedItem);
+            $this->addToFeedItemCache($guid);
             $newItems++;
         }
 
+        $this->saveFeedItemCache();
+
         if ($command) {
-            $command->info(Carbon::now() . ' ' . $feed->name . ': Added ' . $newItems . ' new items');
+            $command->warn(Carbon::now() . ' ' . $feed->name . ': Added ' . $newItems . ' new items, skipped ' . $skippedCacheItems . ' cached items');
         }
     }
 
@@ -126,5 +142,20 @@ class FeedService
                 'pinned' => $userFeed->auto_pin
             ]);
         }
+    }
+
+    protected function isInCache(string $value): bool
+    {
+        return in_array($value, $this->feedItemsCache);
+    }
+
+    protected function addToFeedItemCache(string $value): void
+    {
+        $this->feedItemsCache[] = $value;
+    }
+
+    protected function saveFeedItemCache(): void
+    {
+        Cache::put('feed_item_cache', $this->feedItemsCache, now()->addDays(7));
     }
 }
