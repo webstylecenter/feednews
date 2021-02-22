@@ -7,11 +7,13 @@ const HEADER_BLACKLIST = [
   'cross-origin-opener-policy',
 ];
 
+const API_URL = 'https://www.feednews.me';
+
 const pushLink = (link) => {
     const formData = new FormData();
     formData.append('url', link);
 
-    fetch('https://www.feednews.me/feed/chrome-import/peter@webstylecenter.com', { method: 'POST', body: formData })
+    fetch(`${API_URL}/feed/chrome-import/peter%40webstylecenter.com`, { method: 'POST', body: formData })
         .then(response => response.json())
         .then(result => {
             if (result.status !== 'success') {
@@ -23,7 +25,7 @@ const pushLink = (link) => {
         .then(result => {
             let notification = new Notification(result.title, { icon: 'feednews.png', body: result.description });
             notification.addEventListener('click', () => {
-                chrome.tabs.create({ url: `https://www.feednews.me/#item=${btoa(result.url)}` });
+                chrome.tabs.create({ url: `${API_URL}/#item=${btoa(result.url)}` });
             });
         })
         .catch(error => {
