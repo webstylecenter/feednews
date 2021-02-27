@@ -46,7 +46,7 @@ class FeedService
             }
         }
 
-        return $availableFeeds->sortBy('name');
+        return $availableFeeds->sortBy(['category', 'name']);
     }
 
     public function parseFeed(Feed $feed, ?Command $command): void
