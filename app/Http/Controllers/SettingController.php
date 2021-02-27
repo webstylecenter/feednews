@@ -20,7 +20,7 @@ class SettingController extends BaseController
             'bodyClass' => 'settings',
             'isAdmin' => Auth::user()->is_admin,
             'availableFeeds' => $feedService->getAvailableFeeds(),
-            'userFeeds' => Auth::user()->userFeeds,
+            'userFeeds' => Auth::user()->userFeeds->sortBy('feed.name'),
             'users' => User::all()
         ]);
     }
