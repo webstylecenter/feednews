@@ -6,7 +6,7 @@
     $shownPinnedItems = 0;
 @endphp
 
-@if(!$userFeedItems && !$searchQueryString)
+@if($userFeedItems->count() === 0)
 <div class="noFeedItems">
     @include('home.welcome-text')
 </div>
