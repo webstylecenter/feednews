@@ -16,8 +16,6 @@ class ImportService
             ->take(25)
             ->get()
             ->each(function($feedItem) use ($userFeed) {
-                echo 'test '.$feedItem->id.'<br />';
-
                  UserFeedItem::create([
                      'user_id' => Auth::user()->id,
                      'feed_item_id' => $feedItem->id,

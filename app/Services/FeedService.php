@@ -46,7 +46,7 @@ class FeedService
             }
         }
 
-        return $availableFeeds;
+        return $availableFeeds->sortBy('name');
     }
 
     public function parseFeed(Feed $feed, ?Command $command): void
