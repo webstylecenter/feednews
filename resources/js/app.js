@@ -14,10 +14,12 @@ import 'handlebars/dist/handlebars.min.js';
 import './components/fluent';
 
 /** global: WOW */
-new WOW({
+window.wow = new WOW({
     scrollContainer: '.scroll',
     mobile: false
-}).init();
+});
+
+window.wow.init();
 
 require('./bootstrap');
 require('./components/main');
@@ -43,6 +45,7 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
+
 
 
 

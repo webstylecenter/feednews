@@ -46714,10 +46714,11 @@ window.Handlebars = __webpack_require__(/*! handlebars/dist/handlebars.min.js */
 
 /** global: WOW */
 
-new wowjs__WEBPACK_IMPORTED_MODULE_0__["WOW"]({
+window.wow = new wowjs__WEBPACK_IMPORTED_MODULE_0__["WOW"]({
   scrollContainer: '.scroll',
   mobile: false
-}).init();
+});
+window.wow.init();
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -47456,6 +47457,14 @@ var searchFeeds = function searchFeeds(searchQuery) {
       feedItems: data.data,
       query: searchQuery
     }));
+    $('.tab--search .js-action-feed-list-swipe').each(function () {
+      var mc = new Hammer(this);
+      var that = $(this);
+      mc.on('swiperight', function (ev) {
+        $(that).find('.pin').trigger('click');
+      });
+    });
+    window.wow.sync();
   });
 };
 
@@ -47636,6 +47645,14 @@ function loadHistory() {
     $('.tab--history').html(template({
       feedItems: data.items
     }));
+    $('.tab--history .js-action-feed-list-swipe').each(function () {
+      var mc = new Hammer(this);
+      var that = $(this);
+      mc.on('swiperight', function (ev) {
+        $(that).find('.pin').trigger('click');
+      });
+    });
+    window.wow.sync();
   });
 }
 

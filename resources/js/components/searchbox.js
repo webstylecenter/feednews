@@ -25,5 +25,15 @@ var searchFeeds = function (searchQuery) {
             feedItems: data.data,
             query: searchQuery
         }));
+
+        $('.tab--search .js-action-feed-list-swipe').each(function () {
+            var mc = new Hammer(this);
+            var that = $(this);
+            mc.on('swiperight', function(ev) {
+                $(that).find('.pin').trigger('click');
+            });
+        });
+
+        window.wow.sync();
     });
 }

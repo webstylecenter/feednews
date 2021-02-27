@@ -168,14 +168,14 @@ class FeedController extends BaseController
             'status' => 'success',
             'data' => array_map(function (UserFeedItem $userFeedItem) {
                 return [
-                    'id' => $userFeedItem->id,
+                    'id' => $userFeedItem->user_feed_item_id,
                     'title' => $userFeedItem->title,
                     'description' => $userFeedItem->description,
                     'url' => $userFeedItem->url,
-                    'color' => $userFeedItem->color ?? '',
-                    'feedIcon' => $userFeedItem->icon ?? '',
+                    'color' => $userFeedItem->feed_color ?? '',
+                    'feedIcon' => $userFeedItem->feed_icon ?? '',
                     'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
-                    'pinned' => $userFeedItem->is_pinned
+                    'pinned' => $userFeedItem->pinned
                 ];
             }, $feedService->search($request->get('query')))
         ];
@@ -234,14 +234,14 @@ class FeedController extends BaseController
             'status' => 'success',
             'items' => array_map(function (UserFeedItem $userFeedItem) {
                 return [
-                    'id' => $userFeedItem->id,
+                    'id' => $userFeedItem->user_feed_item_id,
                     'title' => $userFeedItem->title,
                     'description' => $userFeedItem->description,
                     'url' => $userFeedItem->url,
-                    'color' => $userFeedItem->color ?? '',
-                    'feedIcon' => $userFeedItem->icon ?? '',
+                    'color' => $userFeedItem->feed_color ?? '',
+                    'feedIcon' => $userFeedItem->feed_icon ?? '',
                     'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
-                    'pinned' => $userFeedItem->is_pinned
+                    'pinned' => $userFeedItem->pinned
                 ];
             }, $feedService->getOpenedItems())
         ];

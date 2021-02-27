@@ -29,5 +29,15 @@ function loadHistory() {
     $('.tab--history').html(template({
       feedItems: data.items
     }));
+
+    $('.tab--history .js-action-feed-list-swipe').each(function () {
+      var mc = new Hammer(this);
+      var that = $(this);
+      mc.on('swiperight', function(ev) {
+          $(that).find('.pin').trigger('click');
+      });
+    });
+
+    window.wow.sync();
   });
 }
