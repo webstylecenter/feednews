@@ -67,7 +67,7 @@ task('release', [
     //   'deploy:cache:clear',
     // 'deploy:cache:warmup',
     'deploy:writable',
-    'artisan:storage:link',
+   // 'artisan:storage:link',
     'artisan:view:cache',
     'artisan:config:cache',
     'deploy:symlink',
