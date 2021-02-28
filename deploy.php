@@ -49,9 +49,10 @@ task('release', [
     'deploy:info',
     'deploy:prepare',
     'upload',
-    'copy_env',
+   // 'copy_env',
     'deploy:vendors',
-    'artisan:migrate',
+    'update_database',
+ //   'artisan:migrate',
     'artisan:storage:link',
     'artisan:view:cache',
     'artisan:config:cache',
@@ -71,10 +72,10 @@ task('upload', function () {
     upload(__DIR__ . '/.build/current/', '{{release_path}}');
 });
 
+task('update_database', function () {
+    run('{{bin/php}} {{release_path}}/artisan migrate --force');
+})->desc('Update database schema');
+
 task('clear_opcache', function () {
     run('curl {{domain}}/clear-opcache.php?PcaW1KQ3GCeaK32kY7t1PI1Tn9iCkMzG -v');
-});
-
-task('copy_env', function () {
-    run('/usr/bin/cp -rf {{release_path}}/.env_prod  {{release_path}}/.env');
 });
