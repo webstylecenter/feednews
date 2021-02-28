@@ -3,16 +3,22 @@ namespace Deployer;
 
 require 'recipe/laravel.php';
 
-set('ssh_type', 'native');
-set('ssh_multiplexing', true);
+// Project name
+set('application', 'feednews');
 
+// Project repository
 set('repository', 'https://github.com/webstylecenter/feednews.git');
 
-set('current_path', '{{deploy_path}}/release');
+// [Optional] Allocate tty for git clone. Default value is false.
+set('git_tty', true);
 
 // Shared files/dirs between deploys
 add('shared_files', []);
-add('shared_dirs', ['storage']);
+add('shared_dirs', [
+    'storage'
+]);
+
+// Writable dirs by web server
 add('writable_dirs', [
     'bootstrap/cache',
     'storage',
@@ -25,57 +31,69 @@ add('writable_dirs', [
     'storage/logs',
 ]);
 
+
 // Hosts
+
 host('vps.petervdam.nl')
     ->user('peter')
     ->forwardAgent()
     ->stage('production')
     ->set('prefix', 'prod')
-    ->set('domain', 'https://feednews.me')
-    ->set('deploy_path', '/home/peter/domains/feednews.me');
+    ->set('deploy_path', '~/domains/feednews.me');
+
+// Tasks
 
 task('build', function () {
     set('deploy_path', __DIR__ . '/.build');
     invoke('deploy:unlock');
     invoke('deploy:info');
     invoke('deploy:prepare');
+    invoke('deploy:lock');
     invoke('deploy:release');
     invoke('deploy:update_code');
     invoke('deploy:vendors');
     invoke('deploy:symlink');
+    //run('cd {{release_path}} && build');
 })->local();
 
 task('release', [
     'deploy:info',
     'deploy:prepare',
+    'deploy:release',
     'upload',
-   // 'copy_env',
+    'deploy:shared',
     'deploy:vendors',
     'update_database',
- //   'artisan:migrate',
+    //   'deploy:cache:clear',
+    // 'deploy:cache:warmup',
+    'deploy:writable',
     'artisan:storage:link',
     'artisan:view:cache',
     'artisan:config:cache',
     'deploy:symlink',
-    'clear_opcache',
+    'deploy:unlock',
+    'artisan:queue:restart',
 ]);
 
 task('deploy', [
     'build',
     'release',
     'cleanup',
-    'success',
+    'success'
 ]);
-
-// Tasks
-task('upload', function () {
-    upload(__DIR__ . '/.build/current/', '{{release_path}}');
-});
 
 task('update_database', function () {
     run('{{bin/php}} {{release_path}}/artisan migrate --force');
 })->desc('Update database schema');
 
-task('clear_opcache', function () {
-    run('curl {{domain}}/clear-opcache.php?PcaW1KQ3GCeaK32kY7t1PI1Tn9iCkMzG -v');
+task('upload', function () {
+    upload(__DIR__ . "/.build/current/", '{{release_path}}');
 });
+
+// [Optional] if deploy fails automatically unlock.
+after('deploy:failed', 'deploy:unlock');
+
+// Migrate database before symlink new release.
+
+//before('deploy:symlink', 'artisan:migrate');
+
