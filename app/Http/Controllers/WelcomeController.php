@@ -12,8 +12,6 @@ class WelcomeController extends BaseController
 {
     public function index(ChecklistRepository $checklistRepository): View
     {
-        // app('debugbar')->disable(); TODO: Triggers error on production
-
         return view('welcome.index', [
             'bodyClass' => 'page--homepage',
             'notes' => Note::where('user_id', '=', Auth::user()->id)->get(),

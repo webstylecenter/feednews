@@ -16,13 +16,12 @@ class ImportService
             ->take(25)
             ->get()
             ->each(function($feedItem) use ($userFeed) {
-                 UserFeedItem::create([
-                     'user_id' => Auth::user()->id,
-                     'feed_item_id' => $feedItem->id,
-                     'user_feed_id' => $userFeed->id,
-                     'pinned' => $userFeed->auto_pin,
-                     'viewed' => false,
-                 ]);
+                UserFeedItem::create([
+                    'user_id' => $userFeed->user_id,
+                    'user_feed_id' => $userFeed->id,
+                    'feed_item_id' => $feedItem->id,
+                    'pinned' => $userFeed->auto_pin
+                ]);
         });
     }
 }

@@ -3,7 +3,10 @@
         <span class="fa fa-cloud"></span>
     @endif
 
-    @if(strtolower($forecast->current_weather) === \App\Models\Weather::TYPE_SUN)
+    @if(
+        strtolower($forecast->current_weather) === \App\Models\Weather::TYPE_SUN
+        || strtolower($forecast->current_weather) === \App\Models\Weather::TYPE_CLEAR
+    )
         @if(\Carbon\Carbon::now()->hour > 6 && \Carbon\Carbon::now()->hour < 21)
             <span class="fa fa-sun"></span>
         @else

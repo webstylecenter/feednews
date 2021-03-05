@@ -1,0 +1,54 @@
+.introduction {
+    a {
+        color: $blue;
+        text-decoration: underline;
+    }
+
+    .category-to-follow-container {
+        clear: both;
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 20px;
+        grid-row-gap: 20px;
+        align-items: start;
+    }
+    .category-to-follow {
+        background-color: whitesmoke;
+        padding: 10px;
+        border-radius: 5px;
+        display: grid;
+        height: 400px;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        h3 {
+            color: $blue;
+            text-align: center;
+        }
+
+        li {
+          line-height: 2;
+        }
+    }
+
+    .good-to-know {
+        li {
+            margin-bottom: 50px;
+        }
+    }
+
+    @include respond-to(mobile) {
+        .category-to-follow-container {
+            grid-template-columns: 1fr;
+        }
+
+        .category-to-follow {
+            height: auto;
+
+            ul {
+                display: none;
+            }
+        }
+    }
+}

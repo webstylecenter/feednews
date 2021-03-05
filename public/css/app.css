@@ -4220,7 +4220,7 @@ html *:after {
 }
 
 body {
-  font-size: 10pt;
+  font-size: 12pt;
   font-family: "Lato", "Helvetica Neue", "Arial", sans-serif;
   font-weight: 300;
   margin: 0;
@@ -4274,6 +4274,27 @@ a:hover {
   .show-if-tablet {
     display: inline-block !important;
   }
+}
+
+.button {
+  background-color: #337dff;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.float-right {
+  float: right;
+}
+
+.large {
+  font-size: 12pt;
+  padding: 10px 20px;
 }
 
 .splitscreen {
@@ -5617,6 +5638,10 @@ a:hover {
   }
 }
 
+.Homepage {
+  font-size: 10pt;
+}
+
 .Homepage .content-overlay {
   display: none;
   position: fixed;
@@ -6278,5 +6303,57 @@ a:hover {
 .error403 .signinBox form,
 .register .signinBox form {
   display: none;
+}
+
+.introduction a {
+  color: #337dff;
+  text-decoration: underline;
+}
+
+.introduction .category-to-follow-container {
+  clear: both;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  align-items: start;
+}
+
+.introduction .category-to-follow {
+  background-color: whitesmoke;
+  padding: 10px;
+  border-radius: 5px;
+  display: grid;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.introduction .category-to-follow h3 {
+  color: #337dff;
+  text-align: center;
+}
+
+.introduction .category-to-follow li {
+  line-height: 2;
+}
+
+.introduction .good-to-know li {
+  margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 870px) {
+  .introduction .category-to-follow-container {
+    grid-template-columns: 1fr;
+  }
+
+  .introduction .category-to-follow {
+    height: auto;
+  }
+
+  .introduction .category-to-follow ul {
+    display: none;
+  }
 }
 

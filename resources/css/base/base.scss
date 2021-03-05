@@ -4,7 +4,7 @@ html *:before,
 html *:after { box-sizing: inherit; }
 
 body {
-  font-size: 10pt;
+  font-size: 12pt;
   font-family: $font-default;
   font-weight: 300;
   margin: 0;
@@ -60,4 +60,25 @@ a {
   @include respond-to(tablet) {
     display: inline-block !important;
   }
+}
+
+.button {
+    background-color: $blue;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 3px 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.float-right {
+    float: right;
+}
+
+.large {
+    font-size: 12pt;
+    padding: 10px 20px;
 }

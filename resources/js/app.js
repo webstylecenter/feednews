@@ -33,6 +33,7 @@ require('./components/welcome');
 require('./components/register');
 require('./components/tabs');
 require('./components/hotlink');
+require('./components/introduction');
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);

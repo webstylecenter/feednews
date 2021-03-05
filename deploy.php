@@ -34,7 +34,7 @@ add('writable_dirs', [
 
 // Hosts
 
-host('vps.petervdam.nl')
+host('vps01.petervdam.nl')
     ->user('peter')
     ->forwardAgent()
     ->stage('production')
@@ -64,7 +64,7 @@ task('release', [
     'deploy:shared',
     'deploy:vendors',
     'update_database',
-    //   'deploy:cache:clear',
+    'deploy:cache:clear',
     // 'deploy:cache:warmup',
     'deploy:writable',
    // 'artisan:storage:link',

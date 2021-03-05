@@ -17,6 +17,7 @@ class Weather extends Model
     const TYPE_RAIN = 'rain';
     const TYPE_PARTLY_CLOUD = 'partly_cloud';
     const TYPE_SUN = 'sun';
+    const TYPE_CLEAR = 'clear';
     const TYPE_SNOW = 'snow';
     const TYPE_THUNDER = 'thunderstorm';
     const TYPE_UNKNOWN = 'unknown';
@@ -26,6 +27,7 @@ class Weather extends Model
         self::TYPE_RAIN,
         self::TYPE_PARTLY_CLOUD,
         self::TYPE_SUN,
+        self::TYPE_CLEAR,
         self::TYPE_SNOW,
         self::TYPE_THUNDER
     ];

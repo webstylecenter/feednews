@@ -137,7 +137,7 @@ $(function () {
         })
           .done(function (data) {
               if (data.status === 'success') {
-                  $(that).html('Following').css('background-color', 'whitesmoke').css('color' , 'gray');
+                  $(that).html('Following').css('background-color', 'whitesmoke').css('color' , 'gray').prop('disabled', true).css('backgroundImage', '');
                   $('.refreshNotice').show();
               } else {
                   showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.message.substr(0, 300));

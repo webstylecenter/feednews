@@ -46744,6 +46744,8 @@ __webpack_require__(/*! ./components/tabs */ "./resources/js/components/tabs.js"
 
 __webpack_require__(/*! ./components/hotlink */ "./resources/js/components/hotlink.js");
 
+__webpack_require__(/*! ./components/introduction */ "./resources/js/components/introduction.js");
+
 window.showDialog = function (title, description) {
   $('.dialog .title').html(title);
   $('.dialog .description').html(description);
@@ -46862,7 +46864,6 @@ $(function () {
 document.addEventListener('copy', function (e) {
   /** global: textToCopy */
   e.clipboardData.setData('text/plain', textToCopy);
-  e.preventDefault();
 });
 
 /***/ }),
@@ -46930,6 +46931,22 @@ fluent_reveal_effect__WEBPACK_IMPORTED_MODULE_0__["FluentRevealEffect"].applyEff
   openPage(itemUrl);
   history.replaceState(null, null, ' ');
 })();
+
+/***/ }),
+
+/***/ "./resources/js/components/introduction.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/introduction.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(function () {
+  $(document).on('click', '.js-show', function () {
+    var div = $(this).attr('data-show-div');
+    $(div).slideToggle();
+  });
+});
 
 /***/ }),
 
@@ -47594,7 +47611,7 @@ $(function () {
       feed_id: $(this).data('feed-id')
     }).done(function (data) {
       if (data.status === 'success') {
-        $(that).html('Following').css('background-color', 'whitesmoke').css('color', 'gray');
+        $(that).html('Following').css('background-color', 'whitesmoke').css('color', 'gray').prop('disabled', true).css('backgroundImage', '');
         $('.refreshNotice').show();
       } else {
         showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.message.substr(0, 300));

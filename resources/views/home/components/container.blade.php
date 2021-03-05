@@ -25,7 +25,7 @@
     <iframe
         id="welcomeFrame"
         class="content-frame"
-        src="{{ $userFeedItems->count() === 0 ? route('settings.index') : route('welcome.index') }}"
+        src="{{ route('welcome.index') }}"
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock allow-modals"
         allowfullscreen="allowfullscreen"
         mozallowfullscreen="mozallowfullscreen"

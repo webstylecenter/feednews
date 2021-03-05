@@ -12,5 +12,4 @@ $(function () {
 document.addEventListener('copy', function(e){
     /** global: textToCopy */
     e.clipboardData.setData('text/plain', textToCopy);
-    e.preventDefault();
 });
