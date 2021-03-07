@@ -28,6 +28,7 @@ $(function () {
         let color = $(this).parent().find("[name='color']").val();
         let icon = $(this).parent().find("[name='icon']").val();
         let website = $(this).parent().find("[name='website']").val();
+        let category = $(this).parent().find("[name='category']").val();
 
         let autoPin = $(this).parent().find("[name='autoPin']").prop('checked');
 
@@ -41,7 +42,8 @@ $(function () {
             website: website,
             color: color,
             icon: icon,
-            autoPin: !!autoPin
+            autoPin: !!autoPin,
+            category: category
         })
             .done(function (data) {
                 if (data.status === 'success') {

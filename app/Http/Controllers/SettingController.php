@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feed;
+use App\Models\FeedCategory;
 use App\Models\User;
 use App\Models\UserFeed;
 use App\Services\FeedService;
@@ -21,12 +22,15 @@ class SettingController extends BaseController
             'isAdmin' => Auth::user()->is_admin,
             'availableFeeds' => $feedService->getAvailableFeeds(),
             'userFeeds' => Auth::user()->userFeeds->sortBy('feed.name'),
-            'users' => User::all()
+            'users' => User::all(),
+            'categories' => FeedCategory::all(),
         ]);
     }
 
     public function add(Request $request, ImportService $importService, FeedService $feedService): array
     {
+        // TODO: Validate category id
+
         $url = $importService->validateUrl($request);
 
         if (strpos($url, 'Error') !== false) {
@@ -40,6 +44,7 @@ class SettingController extends BaseController
 
         try {
             $feed->name = $importService->getFeedName($feed);
+            $feed->category_id = $request->get('category', null);
             $feed->save();
         } catch (\Exception $exception) {
             return [

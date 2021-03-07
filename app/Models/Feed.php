@@ -18,6 +18,7 @@ class Feed extends Model
         'name',
         'url',
         'color',
+        'category_id'
     ];
 
     protected $attributes = [
