@@ -77,7 +77,8 @@ task('deploy', [
     'build',
     'release',
     'cleanup',
-    'success'
+    'flush_opcache',
+    'success',
 ]);
 
 task('update_database', function () {
@@ -86,6 +87,10 @@ task('update_database', function () {
 
 task('upload', function () {
     upload(__DIR__ . "/.build/current/", '{{release_path}}');
+});
+
+task('flush_opcache', function () {
+    run('curl https://www.feednews.me/flush-opcache.php?driiuyasktkjeagsrfiqwrkbjasfhboa8');
 });
 
 // [Optional] if deploy fails automatically unlock.
