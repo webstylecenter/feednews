@@ -1,5 +1,5 @@
 <?php
 
-if (isset($_GET['765driiuyasktkjeagsrfiqwrkbjasfhboa8'])) {
+if (isset($_GET['driiuyasktkjeagsrfiqwrkbjasfhboa8'])) {
     opcache_reset();
 }
