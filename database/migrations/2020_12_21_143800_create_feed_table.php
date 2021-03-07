@@ -17,7 +17,6 @@ class CreateFeedTable extends Migration
             $table->id();
             $table->string('name');
             $table->longText('url');
-            $table->string('color');
             $table->timestamps();
         });
     }

@@ -24,6 +24,7 @@ class SettingController extends BaseController
             'userFeeds' => Auth::user()->userFeeds->sortBy('feed.name'),
             'users' => User::all(),
             'categories' => FeedCategory::all(),
+            'feeds' => Feed::orderBy('created_at', 'desc')->limit(5)->get(),
         ]);
     }
 

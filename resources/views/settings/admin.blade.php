@@ -1,24 +1,9 @@
 @if($isAdmin)
-    <h1>Number of users: {{ \App\Models\User::all()->count() }}</h1>
+    <h1>Admin</h1>
 
-    <table>
-        <thead>
-        <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Last Login</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($users as $user)
-            <tr>
-                <td>{{ $user->id }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->last_login }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <h2>Users</h2>
+    @include('settings.components.userlist')
+
+    <h2>Feeds</h2>
+    @include('settings.components.latest-feeds')
 @endif
