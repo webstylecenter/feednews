@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Error;
 use App\Models\Feed;
 use App\Models\FeedCategory;
 use App\Models\User;
@@ -25,6 +26,7 @@ class SettingController extends BaseController
             'users' => User::all(),
             'categories' => FeedCategory::all(),
             'feeds' => Feed::orderBy('created_at', 'desc')->limit(5)->get(),
+            'errors' => Error::orderBy('occurrences', 'desc')->limit(50)->get(),
         ]);
     }
 

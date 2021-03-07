@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Models\Feed;
+use App\Repositories\ErrorRepository;
 use App\Services\FeedService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 class UpdateFeeds extends Command
@@ -15,13 +17,15 @@ class UpdateFeeds extends Command
     private Feed $feed;
     private FeedService $feedService;
     private FeedsFacade $feedsReader;
+    private ErrorRepository $errorRepository;
 
-    public function __construct(Feed $feed, FeedService $feedService, FeedsFacade $feedsReader)
+    public function __construct(Feed $feed, FeedService $feedService, FeedsFacade $feedsReader, ErrorRepository $errorRepository)
     {
         parent::__construct();
         $this->feed = $feed;
         $this->feedService = $feedService;
         $this->feedsReader = $feedsReader;
+        $this->errorRepository = $errorRepository;
     }
 
     public function handle()
@@ -35,9 +39,16 @@ class UpdateFeeds extends Command
             try {
                 $this->feedService->parseFeed($feed, $this);
             } catch (\Throwable $e) {
+                $this->errorRepository->report(
+                    3,
+                    $e->getMessage(),
+                    null,
+                    $feed
+                );
+
                 // TODO: Add error logging
                 $this->error(Carbon::now() . ' ' . $feed->name . ': Parsing failed.');
-                $this->error($e);
+                $this->error($e->getMessage());
                 continue;
             }
 

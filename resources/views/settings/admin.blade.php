@@ -6,4 +6,7 @@
 
     <h2>Feeds</h2>
     @include('settings.components.latest-feeds')
+
+    <h2>Error log</h2>
+    @include('settings.components.error-log')
 @endif

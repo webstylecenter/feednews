@@ -59,6 +59,10 @@ class FeedService
 
         $items = $feedData->get_items();
 
+        if (count($items) === 0) {
+            throw new \Exception('Empty XML Feed (no items found)');
+        }
+
         if ($command) {
             $command->info(Carbon::now() . ' ' . $feed->name . ': Found ' . count($items) . ' items');
         }
@@ -82,8 +86,8 @@ class FeedService
             $feedItem = FeedItem::create([
                 'feed_id' => $feed->id,
                 'guid' => $item->get_id(),
-                'title' => html_entity_decode($item->get_title()),
-                'description' => html_entity_decode(substr($item->get_description() ?? $item->get_content(), 0, 255)),
+                'title' => utf8_encode(html_entity_decode($item->get_title())),
+                'description' => utf8_encode(html_entity_decode(substr($item->get_description() ?? $item->get_content(), 0, 255))),
                 'url' => $item->get_link(),
                 'created_at' => Carbon::parse($item->get_date())
             ]);
