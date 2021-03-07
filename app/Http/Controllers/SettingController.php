@@ -25,16 +25,65 @@ class SettingController extends BaseController
         ]);
     }
 
-    public function add()
+    public function add(Request $request, ImportService $importService, FeedService $feedService): array
     {
-        // TODO: Add functionality to method
+        $url = $importService->validateUrl($request);
+
+        if (strpos($url, 'Error') !== false) {
+            return [
+                'status' => 'error',
+                'message' => $url
+            ];
+        }
+
+        $feed = $feedService->findOrCreateFeedByUrl($url);
+
+        try {
+            $feed->name = $importService->getFeedName($feed);
+            $feed->save();
+        } catch (\Exception $exception) {
+            return [
+                'status' => 'error',
+                'message' => '<b>Not a valid feed</b><br />Url: ' . $url . '<br /><br /><small style="color:gray;">' . $exception . '</small>'
+            ];
+        }
+
+        if (!$feed->id) {
+            return [
+                'status' => 'error',
+                'message' => '<b>Not a valid feed (' . $url . ')</b><br /><small>No feed data has been found</small>'
+            ];
+        }
+
+        if ($this->isTheFeedAlreadyBeingFollowedByUser(Auth::user()->id, $feed->id)) {
+            return [
+                'status' => 'error',
+                'message' => 'This feed is already added to your account. Please refresh the browser if you\'re not seeing the feed. It might take some time before items show up, depending on feed updates.'
+            ];
+        }
+
+        $userFeed = UserFeed::create([
+            'user_id' => Auth::user()->id,
+            'feed_id' => $feed->id,
+            'color' => $request->get('color'),
+            'icon' => $request->get('icon'),
+            'auto_pin' => $request->get('autoPin') === "true"
+        ]);
+
+        // TODO: Move to a queue
+        $feedService->parseFeed($feed);
+
+        return [
+            'id' => $userFeed->id,
+            'status' => 'success'
+        ];
     }
 
     public function follow(Request $request, ImportService $importService): array
     {
         $feed = Feed::find($request->get('feed_id'));
 
-        if (UserFeed::where('user_id', '=', Auth::user()->id)->where('feed_id', '=', $feed->id)->get()->count()) {
+        if ($this->isTheFeedAlreadyBeingFollowedByUser(Auth::user()->id, $feed->id)) {
             return [
                 'status' => 'error',
                 'message' => 'This feed is already added to your account. Please refresh the browser if you\'re not seeing the feed. It might take some time before items show up, depending on feed updates.'
@@ -104,13 +153,8 @@ class SettingController extends BaseController
         return redirect(route('welcome.index'));
     }
 
-    protected function validateUrl()
+    protected function isTheFeedAlreadyBeingFollowedByUser(int $userId, int $feedId): bool
     {
-        // TODO: Add functionality to method
-    }
-
-    protected function createUserFeed()
-    {
-        // TODO: Add functionality to method
+        return UserFeed::where('user_id', '=', $userId)->where('feed_id', '=', $feedId)->get()->count() > 0;
     }
 }

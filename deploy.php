@@ -64,8 +64,6 @@ task('release', [
     'deploy:shared',
     'deploy:vendors',
     'update_database',
-    'deploy:cache:clear',
-    // 'deploy:cache:warmup',
     'deploy:writable',
    // 'artisan:storage:link',
     'artisan:view:cache',

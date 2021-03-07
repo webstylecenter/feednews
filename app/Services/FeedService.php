@@ -49,10 +49,13 @@ class FeedService
         return $availableFeeds->sortBy(['category', 'name']);
     }
 
-    public function parseFeed(Feed $feed, ?Command $command): void
+    public function parseFeed(Feed $feed, ?Command $command = null): void
     {
         $feedData = $this->feedReader::make($feed->url);
-        $command->info(Carbon::now() . ' ' . $feed->name . ': Parsing...');
+
+        if ($command) {
+            $command->info(Carbon::now() . ' ' . $feed->name . ': Parsing...');
+        }
 
         $items = $feedData->get_items();
 
@@ -66,7 +69,7 @@ class FeedService
 
             $guid = $item->get_id();
 
-            if ($this->isInCache($guid)) {
+            if ($this->isInCache($guid) && $command !== null) {
                 $skippedCacheItems++;
                 continue;
             }
@@ -127,6 +130,19 @@ class FeedService
         }
 
         return $output;
+    }
+
+    public function findOrCreateFeedByUrl($url)
+    {
+        $feed = Feed::where('url', '=', $url)->first();
+
+        if (!$feed) {
+            $feed = new Feed();
+            $feed->url = $url;
+            return $feed;
+        }
+
+        return $feed;
     }
 
     protected function createUserFeedItems(Feed $feed, FeedItem $feedItem): void
