@@ -45,8 +45,6 @@ class UpdateFeeds extends Command
                     null,
                     $feed
                 );
-
-                // TODO: Add error logging
                 $this->error(Carbon::now() . ' ' . $feed->name . ': Parsing failed.');
                 $this->error($e->getMessage());
                 continue;
