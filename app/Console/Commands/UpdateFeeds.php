@@ -50,8 +50,10 @@ class UpdateFeeds extends Command
                 continue;
             }
 
-            $feed->updated_at = Carbon::now();
-            $feed->save();
+            $feed->update([
+               'updated_at' => Carbon::now()
+            ]);
+
             $this->info(Carbon::now() . ' ' . $feed->name . ': Parsed!');
 
         }

@@ -17,7 +17,8 @@ class Feed extends Model
     protected $fillable = [
         'name',
         'url',
-        'category_id'
+        'category_id',
+        'updated_at'
     ];
 
     protected $attributes = [
