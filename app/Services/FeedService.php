@@ -13,7 +13,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use SimplePie;
 use willvincent\Feeds\Facades\FeedsFacade;
 
 class FeedService
@@ -51,7 +53,12 @@ class FeedService
 
     public function parseFeed(Feed $feed, ?Command $command = null): void
     {
-        $feedData = $this->feedReader::make($feed->url);
+        $feedData = new SimplePie();
+        $feedData->set_feed_url($feed->url);
+        $feedData->set_useragent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36');
+        $feedData->enable_cache(false);
+        $feedData->init();
+        $feedData->handle_content_type();
 
         if ($command) {
             $command->info(Carbon::now() . ' ' . $feed->name . ': Parsing...');
