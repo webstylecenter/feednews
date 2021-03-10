@@ -88,12 +88,14 @@ class UserController extends BaseController
                 'last_login' => Carbon::now(),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'password' => sha1(uniqid())
+                'password' => sha1(uniqid()),
+                'avatar' => $user->getAvatar(),
             ]);
         } else {
             $dbUser->last_login = Carbon::now();
             $dbUser->ip_address = $request->ip();
             $dbUser->user_agent = $request->userAgent();
+            $dbUser->avatar = $user->getAvatar();
             $dbUser->save();
         }
 
@@ -122,12 +124,14 @@ class UserController extends BaseController
                 'last_login' => Carbon::now(),
                 'ip_address' => $request->ip(),
                 'user_agent' => $request->userAgent(),
-                'password' => sha1(uniqid())
+                'password' => sha1(uniqid()),
+                'avatar' => $user->getAvatar(),
             ]);
         } else {
             $dbUser->last_login = Carbon::now();
             $dbUser->ip_address = $request->ip();
             $dbUser->user_agent = $request->userAgent();
+            $dbUser->avatar = $user->getAvatar();
             $dbUser->save();
         }
 

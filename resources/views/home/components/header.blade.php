@@ -34,7 +34,16 @@
 
         <span data-balloon="Refresh for latest items" data-balloon-pos="down" class="js-refresh-feed-items show-if-mobile hide-if-desktop hide-if-tablet"><span class="fa fa-sync fa-x4"></span></span>
 
-        <div data-balloon="Click to open menu" data-balloon-pos="down" class="action-user js-open-profile-menu fluent-dark">
+        <div
+            data-balloon="Click to open menu"
+            data-balloon-pos="down"
+            class="action-user js-open-profile-menu "
+            @if(\Illuminate\Support\Facades\Auth::user()->avatar)
+                style="background-image:url('{{ \Illuminate\Support\Facades\Auth::user()->avatar }}');"
+            @else
+                style="background-image:url('/images/FeedNews-Logo.png');"
+            @endif
+        >
             {{ \Illuminate\Support\Facades\Auth::user()->name }}
         </div>
     </div>

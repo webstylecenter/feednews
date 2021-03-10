@@ -24,7 +24,8 @@ class User extends Authenticatable
         'hide_xframe_notice',
         'ip_address',
         'user_agent',
-        'enabled'
+        'enabled',
+        'avatar',
     ];
 
     /**
