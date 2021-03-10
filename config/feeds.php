@@ -96,7 +96,7 @@ return [
     |
     | Array of CURL options (see curl_setopt())
     | Set to null to disable
-    |
+    |l
     */
     'curl.options' => null,
 

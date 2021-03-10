@@ -28,6 +28,7 @@
         <form method="post" action="{{ route('register.submit') }}">
             <input type="text" name="name" id="name" placeholder="Name" value="{{ $request->old('name') }}"  />
             <input type="text" name="email" placeholder="Email address" value="{{ $request->old('email') }}" />
+            <input autocomplete="false" type="text" name="address" class="hide-if-mobile hide-if-desktop hide-if-tablet" />
             <input type="password" name="password" id="password" placeholder="Password"  />
 
             <input type="checkbox" value="on" name="gdpr" id="gdpr" /><label for="gdpr">I agree that the above filled in data will be stored on Feednews servers for login purposes as described in our <a href="{{ route('homepage.privacy.policy') }}">Privacy Policy</a>.</label><br />&nbsp;<br />

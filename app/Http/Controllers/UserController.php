@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Rules\ValueIsEmpty;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,7 @@ class UserController extends BaseController
         $request->validate([
             'email' => ['required', 'email', 'unique:users'],
             'name' => ['required'],
+            'address' => new ValueIsEmpty(),
             'password' => ['required', 'min:6'],
             'gdpr' => ['required']
         ]);
