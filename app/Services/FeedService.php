@@ -86,8 +86,8 @@ class FeedService
             $feedItem = FeedItem::create([
                 'feed_id' => $feed->id,
                 'guid' => $item->get_id(),
-                'title' => utf8_encode(html_entity_decode($item->get_title())),
-                'description' => utf8_encode(html_entity_decode(substr($item->get_description() ?? $item->get_content(), 0, 255))),
+                'title' => html_entity_decode($item->get_title(), null, 'UTF-8'),
+                'description' => html_entity_decode(mb_substr($item->get_description() ?? $item->get_content(), 0, 255), null, 'UTF-8'),
                 'url' => $item->get_link(),
                 'created_at' => Carbon::parse($item->get_date())
             ]);
