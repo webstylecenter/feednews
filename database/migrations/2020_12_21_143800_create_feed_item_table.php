@@ -17,8 +17,8 @@ class CreateFeedItemTable extends Migration
             $table->id();
             $table->bigInteger('feed_id')->unsigned()->nullable();
             $table->string('guid');
-            $table->string('title');
-            $table->string('description')->nullable();
+            $table->string('title', 255);
+            $table->text('description')->nullable();
             $table->longText('url');
             $table->timestamps();
 

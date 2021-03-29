@@ -11,18 +11,11 @@ class Feed extends Model
 {
     use HasTimestamps;
 
-    const COLOR_BLACK = '#000';
-    const COLOR_DEFAULT = self::COLOR_BLACK;
-
     protected $fillable = [
         'name',
         'url',
         'category_id',
         'updated_at'
-    ];
-
-    protected $attributes = [
-        'color' => self::COLOR_DEFAULT
     ];
 
     public function feedItems(): hasMany

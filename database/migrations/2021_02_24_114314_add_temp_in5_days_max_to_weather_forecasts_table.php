@@ -14,7 +14,7 @@ class AddTempIn5DaysMaxToWeatherForecastsTable extends Migration
     public function up()
     {
         Schema::table('weather_forecasts', function (Blueprint $table) {
-            $table->float('temp_in_5_days_max')->after('temp_in_4_days_min');
+            $table->float('temp_in_5_days_max')->after('temp_in_4_days_min')->default(0);
         });
     }
 

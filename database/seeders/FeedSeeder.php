@@ -13,13 +13,11 @@ class FeedSeeder extends Seeder
         Feed::create([
             'name' => 'iDownloadBlog.com',
             'url' => 'https://www.idownloadblog.com/feed/',
-            'color' => '#c5c5c5'
         ]);
 
         Feed::create([
             'name' => 'Neowin',
             'url' => 'http://feeds.feedburner.com/neowin-main',
-            'color' => '#4c91d4'
         ]);
 
         FeedItem::factory(250)->create();
