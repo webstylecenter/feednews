@@ -7,13 +7,13 @@ const HEADER_BLACKLIST = [
   'cross-origin-opener-policy',
 ];
 
-const API_URL = 'https://www.feednews.me';
+const API_URL = 'https://feednews.me';
 
 const pushLink = (link) => {
     const formData = new FormData();
     formData.append('url', link);
 
-    fetch(`${API_URL}/feed/chrome-import/peter%40webstylecenter.com`, { method: 'POST', body: formData })
+    fetch(`${API_URL}/feed/chrome-import`, { method: 'POST', body: formData })
         .then(response => response.json())
         .then(result => {
             if (result.status !== 'success') {
