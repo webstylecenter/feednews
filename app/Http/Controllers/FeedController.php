@@ -12,6 +12,7 @@ use App\Services\MetaService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -96,6 +97,48 @@ class FeedController extends BaseController
             'url' => $meta->url,
             'id' => $feedItem->id,
         ];
+    }
+
+    public function androidImport(
+        string $url,
+        Request $request,
+        MetaService $metaService,
+        FeedItem $feedItem,
+        UserFeedItem $userFeedItem
+    ): View {
+        // TODO: Remove duplicate code
+        try {
+            $meta = $metaService->getMetaByUrl(base64_decode($url));
+
+            $feedItem = $feedItem->create([
+                'guid' => sha1(time()),
+                'title' => $meta->title,
+                'description' => $meta->description,
+                'url' => $meta->url
+            ]);
+
+            $userFeedItem->create([
+                'user_id' => Auth::user()->id,
+                'feed_item_id' => $feedItem->id,
+                'pinned' => true
+            ]);
+        } catch (\Throwable $e) {
+            return view('android.import', [
+                'title' => 'Something went wrong',
+                'description' => $e->getMessage(),
+                'url' => base64_decode($url),
+                'status' => 'Failed',
+                'bodyClass'=>'android-import'
+            ]);
+        }
+
+        return view('android.import', [
+            'title' => $meta->title,
+            'description' => $meta->description,
+            'url' => base64_decode($url),
+            'status' => 'Succeeded',
+            'bodyClass'=>'android-import'
+        ]);
     }
 
     public function getMetaData(Request $request, MetaService $metaService): array
