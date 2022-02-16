@@ -20,7 +20,7 @@ Route::name('feed.')->prefix('feed')->middleware(['web'])->group(function() {
         Route::post('/create-feed-item', [FeedController::class, 'createFeedItem'])->name('create');
     });
 
-    Route::post('/chrome-import/{email?}', [FeedController::class, 'chromeImport'])->name('chrome.import');
+    Route::post('/chrome-import/', [FeedController::class, 'chromeImport'])->name('chrome.import');
 });
 
 Route::name('feed.')->group(function() {
