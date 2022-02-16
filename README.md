@@ -1,64 +1,77 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+#  FeedNews.me
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## This is a work in progress version of my "Homepage" repository that was build in Symfony. It's currently transitioning to this Laravel based project. If you want to use a working version, use that one instead.
 
-## About Laravel
+![alt text](https://www.petervdam.nl/storage/app/media/FeedNewsPreview.png)
+A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# Use online version
+In case you wish to use the functionality, or just have a look around but you don't want to go through all the installation hussle. Visit [Feednews.me](http://feednews.me) and create a account.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# Beta stage
+Until our 2.0 release, some functionality may be added, changed or removed. At it's current state, it's stable enough to use but it might contain a bug or two. No showstoppers. If you want a more stable release, use our old Silex version from our 1.5 release.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Functionality
+- Read and manage RSS Feeds
+    - Assign colors to different sources
+    - Assign FontAwesome icons to each source (optional)
+    - Search items
+    - Pin items to read later
+    - Add pages to view later
+    - Share a page with friends
+    - Youtube support (theme switches to dark mode when watching video)
 
-## Learning Laravel
+- Screensaver functionality (image at the bottom of this readme)
+    - Set [yourdomain]/screensaver/ as screensaver to any OS and display random images with your news
+    - Option to combine images from services like Unsplash with your own image gallery services
+    - Show current weather condition and temperature
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Todo list
+    - Need to keep track of things? Simply use the searchbar to add items, or use the todo page to manage your list. Quick and easy
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Weather radar
+    - It currently displays just weather of the Netherlands, but  will add support for more countries later
+    - Show the current weather conditions of your location (set up in config)
 
-## Laravel Sponsors
+- Image share functionality
+    - Share an image with a shortlink from mobile or from clipboard (soon available)
+    - View and remove shared images
+    - Share previous shared images
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- Notes
+    - Add one or more notes with autosaving. It's saved while you type.
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+# Wishlist
+- Plugins
+    - Some options might not be interesting for the public. For that a plugin way of adding icons without git's interference would be a nice addition, and adds flexibility for those who like to use this tool.
+    - Plugin share aka Play Store?
+- Themes
+    - Design always has a different taste with each and everyone. So adding theme support would be nice.
+- Documentation
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Installation
+Use the config.php.dist file in the app directory to create your config file. You need to set your database config and enter you openWeatherMap API key. This is a required step for now. To setup your database, use the db-structure.sql file located in the database folder.
 
-## Code of Conduct
+After saving your config, make sure to run the following commands from your terminal. Currently all commands need to run on both dev and production env. This will probably change in the future.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- fill .env file with server settings
+- composer install
+- php artisan reset
 
-## Security Vulnerabilities
+If you want to change styling, also run:
+- yarn install
+- yarn build
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Run `php artisan shedule:work` for the feeds to be updated every 10 minutes and perform maintenance tasks when needed
 
-## License
+# Mobile support
+This tool with all it's beauty also runs on your mobile device. To get the best experience, use chrome for Android or Safari on iOS and save the page as icon to your homescreen. This way you get a fullscreen experience on your mobile device, and have quick access to it's functionality, like the todo that is usefull for shoppinglists for example.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Idea's?
+I wish to hear your thoughts and idea's for this project. I've been working on this project for a year now, and love to improve it a lot more. It's not ready for multiusers yet. But if you know how to work with git, composer, npm this tool can be used daily. It's been my browsers homepage for a year now, can't live without! I have so many ideas poping in every day and I hope I can make something that many people will enjoy! Any help is appreciated. So if you want to help, code away and submit a pull request! If it's good I'm sure to add it!
+
+
+
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/webstylecenter/homepage)

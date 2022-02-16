@@ -14,5 +14,18 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14"
+    },
+    "dependencies": {
+        "balloon-css": "^1.2.0",
+        "fluent-reveal-effect": "^2.0.8",
+        "handlebars": "^4.7.7",
+        "jquery": "^3.6.0",
+        "jquery-hammerjs": "^2.0.0",
+        "jquery-jscroll": "^0.0.2",
+        "jquery-modal": "^0.9.2",
+        "jquery-ui": "^1.13.1",
+        "spectrum-colorpicker": "^1.8.1",
+        "webpack-notifier": "^1.15.0",
+        "wowjs": "^1.1.3"
     }
 }

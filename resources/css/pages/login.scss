@@ -1,0 +1,39 @@
+.error403, .register {
+    .header {
+        height: 80px;
+        background-image: url("/images/FeedNews-Logo.png");
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: contain;
+        margin-bottom: 10px;
+
+        h1 {
+            color: $blue;
+            padding: 20px 0 0 100px;
+        }
+    }
+
+    .createAccount {
+        margin-left: 20px;
+    }
+
+    .signinBox {
+        button {
+            background-color: $blue;
+            border: 1px solid $blue;
+            border-radius: 10px;
+            color: white;
+            padding: 5px 10px;
+
+            &:hover {
+                cursor: pointer;
+                color: $blue;
+                background-color: white;
+            }
+        }
+        form {
+            display: none;
+        }
+    }
+
+}
