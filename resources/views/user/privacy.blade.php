@@ -26,10 +26,14 @@
         <li>The feed-items you add manually</li>
         <li>What feed-items you have pinned</li>
         <li>Your IP-address only when you register and login for security reasons.</li>
+        <li>An url to your Facebook/Google avater if you use those platforms to login</li>
     </ul>
 
     <h3>Who has access to your data?</h3>
-    <p>Only the webmaster has access to the database and can look into the data.</p>
+    <p>The above mentioned data is accessible to yourself when you sign in, and to the webmaster of FeedNews. We do not share any data with anyone.</p>
+
+    <h3>Data storage purposes</h3>
+    <p>The above mentioned data is saved on our server so you can access your feeds, notes, todo lists from any device from any location. When you login with Facebook or Google  we will also save your avater url so we can display your avatar picture in the top right of the desktop website.</p>
 
     <h3>Am I being tracked?</h3>
     <p>We only save the date of your last login in case we need to wipe data in the future, but we don't use any
@@ -52,6 +56,9 @@
     <h3>Can my data be removed?</h3>
     <p>We will soon at a feature to remove data with a simple click, for now. Please contact us at peter@petervdam.nl
         with your email address. And your data will be removed within 48 hours.</p>
+
+    <h3>How long is my data saved</h3>
+    <p>If we notice that you haven't signed in for a couple of months, the webmaster will manually delete all your content. This includes your email address and all data you've added during your usage.</p>
 
     <p><a class="button" href="{{ route('register') }}">Register now!</a></p>
 @endsection
