@@ -8,6 +8,7 @@ Route::middleware('web')->group(function() {
     Route::post('login', [UserController::class, 'authenticate'])->name('authenticate')->middleware('throttle:5:10');
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
     Route::get('register', [UserController::class, 'register'])->name('register');
+    Route::get('remove/{id}', [UserController::class, 'remove'])->name('remove');
     Route::post('register/submit', [UserController::class, 'submitRegistration'])->name('register.submit');
 
     // Google

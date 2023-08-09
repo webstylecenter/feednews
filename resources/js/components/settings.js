@@ -149,4 +149,21 @@ $(function () {
               showDialog('Cannot add Feed', 'An error occured while adding the feed:<br /><br />' + data.toString().substr(0, 300));
           });
     })
+
+    $('.remove-user').on('click', function() {
+        let name = $(this).data('user-name');
+        let url = $(this).data('user-remove-url');
+
+        let question = confirm('Are you sure you want to remove ' + name + '?');
+
+        if (!question) {
+            return;
+        }
+
+
+        $.get(url).done(function(data) {
+            alert(data.message);
+        })
+
+    })
 });

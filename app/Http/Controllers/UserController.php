@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\UserRepository;
 use App\Rules\ValueIsEmpty;
 use Carbon\Carbon;
+use Http\Discovery\Exception\NotFoundException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
@@ -142,5 +146,21 @@ class UserController extends BaseController
     public function facebookRemoveUser()
     {
         // TODO: Make this functionality work
+    }
+
+    public function remove(string $userId, UserRepository $userRepository): JsonResponse
+    {
+        if (Auth::user()->is_admin !== 1) {
+            throw new AuthorizationException();
+        }
+
+        $user = User::where('id', '=', $userId)->first();
+        if (!$user) {
+            throw new NotFoundException();
+        }
+
+        $userRepository->remove($user);
+
+        return new JsonResponse(['status' => 'success', 'message' => 'User removed!']);
     }
 }

@@ -13,6 +13,8 @@ class HomepageController extends BaseController
 {
     public function index(MobileDetect $mobileDetect, UserRepository $userRepository, Weather $weather): View
     {
+        $userRepository->updateLatestLoginDate();
+
         return view('home.index', [
             'bodyClass' => 'Homepage',
             'device' => $mobileDetect,

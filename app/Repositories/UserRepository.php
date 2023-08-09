@@ -2,11 +2,18 @@
 
 namespace App\Repositories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class UserRepository
 {
+    protected User $user;
+    public function __construct()
+    {
+        $this->user = Auth::user();
+    }
+
     public function getFeedItems(int $limit = 50, $page = null): Collection
     {
         $feedItems = Auth::user()
@@ -86,5 +93,16 @@ class UserRepository
             ->orderBy('user_feed_items.opened_at', 'DESC')
             ->take(25)
             ->get();
+    }
+
+    public function updateLatestLoginDate(): void
+    {
+        $this->user->last_login = new \DateTime('NOW');
+        $this->user->save();
+    }
+
+    public function remove(User $user): void
+    {
+        $user->delete();
     }
 }
