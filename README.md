@@ -1,14 +1,8 @@
 #  FeedNews.me
-
-## This is a work in progress version of my "Homepage" repository that was build in Symfony. It's currently transitioning to this Laravel based project. If you want to use a working version, use that one instead.
-
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
 # Use online version
 In case you wish to use the functionality, or just have a look around but you don't want to go through all the installation hussle. Visit [Feednews.me](http://feednews.me) and create a account.
-
-# Beta stage
-Until our 2.0 release, some functionality may be added, changed or removed. At it's current state, it's stable enough to use but it might contain a bug or two. No showstoppers. If you want a more stable release, use our old Silex version from our 1.5 release.
 
 # Functionality
 - Read and manage RSS Feeds
