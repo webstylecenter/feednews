@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserRepository
 {
-    protected User $user;
+    protected ?User $user;
     public function __construct()
     {
         $this->user = Auth::user();
