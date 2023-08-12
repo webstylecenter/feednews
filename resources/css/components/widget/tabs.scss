@@ -33,6 +33,7 @@
       background-color: #e6e6e6;
       height: $tag-height;
       display: block;
+      color: black;
 
       select {
         background-color: #e6e6e6;
@@ -40,6 +41,15 @@
         border: 0;
         width: 100%;
         height: $tab-height;
+
+        option {
+          color: $blue;
+          font-size: 12pt;
+
+          &:hover {
+            color: $blue;
+          }
+        }
 
         &:hover {
           background-color: rgba(197, 197, 197, 0.5);

@@ -2,6 +2,8 @@ $(function () {
   $('.tabBar button').on('click', function() {
     switchToTab(this);
   })
+
+ loadTags();
 });
 
 function switchToTab(el) {
@@ -39,5 +41,23 @@ function loadHistory() {
     });
 
     window.wow.sync();
+  });
+}
+
+function loadTags()
+{
+  $.getJSON(route('tag.index'), function (data) {
+    if (data.status !== 'success') {
+      return;
+    }
+
+    $(data.tags).each(function(key, tag) {
+
+      $('.tags select').append($('<option>', {
+        value: tag.name,
+        text: tag.name + ' (?? items)'
+      }));
+    });
+
   });
 }
