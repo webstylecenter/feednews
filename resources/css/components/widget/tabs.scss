@@ -27,7 +27,25 @@
         padding: 10px 20px;
         margin-bottom: 0;
       }
+    }
 
+    .tags {
+      background-color: #e6e6e6;
+      height: $tag-height;
+      display: block;
+
+      select {
+        background-color: #e6e6e6;
+        padding: 3px 10px;
+        border: 0;
+        width: 100%;
+        height: $tab-height;
+
+        &:hover {
+          background-color: rgba(197, 197, 197, 0.5);
+          cursor: pointer;
+        }
+      }
     }
   }
 
@@ -53,6 +71,25 @@
   padding-top: 5px;
   width: $sidebar-width;
   box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
+
+  .tags {
+    background-color: #e6e6e6;
+    height: $tag-height;
+    display: block;
+
+    select {
+      background-color: #e6e6e6;
+      padding: 3px 10px;
+      border: 0;
+      width: 100%;
+      height: $tab-height;
+
+      &:hover {
+        background-color: rgba(197, 197, 197, 0.5);
+        cursor: pointer;
+      }
+    }
+  }
 
   button {
     outline: none;
@@ -87,13 +124,13 @@
 
   @include respond-to(mobile) {
     width: 100%;
-    height: $tab-mobile-height;
+    height: 80px;
     top: auto;
     bottom: $footer-height;
-    padding-top: 10px;
+    padding-top: 0;
 
     button {
-      padding: 10px 20px;
+      padding: 15px 20px 5px 20px;
       font-size: 12pt;
 
       @media only screen and (max-width: 500px) {

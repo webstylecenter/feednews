@@ -3,7 +3,7 @@
   background: #f7f7f7;
   width: $sidebar-width;
   position: fixed;
-  top: $header-height-with-tabs;
+  top: $header-height-with-tabs + $tag-height;
   bottom: 0px;
   overflow-y: auto;
 

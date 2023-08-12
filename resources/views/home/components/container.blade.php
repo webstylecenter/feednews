@@ -4,6 +4,11 @@
 
 <div class="tabs {{ $darkTheme }}">
     <div class="tab tab--recent">
+        <div class="tags hide-if-mobile">
+            <select name="tags" class="{{ $darkTheme }}">
+                <option selected>All items</option>
+            </select>
+        </div>
         <aside data-is-mobile="{{ $device->isMobile() }}" data-hideXframe="{{ $user->hide_xframe_notice }}"
                class="feed-list feed-list--type-sidebar {{ $darkTheme }}">
             @include('home.components.newsfeed', ['userFeedItems' => $userFeedItems])
@@ -16,6 +21,11 @@
     </div>
 </div>
 <div class="tabBar {{ $darkTheme }}">
+    <div class="tags hide-if-desktop hide-if-tablet">
+        <select name="tags" class="{{ $darkTheme }}">
+            <option selected>All items</option>
+        </select>
+    </div>
     <button class="active" data-open-tab="recent"><span class="fa fa-clock fa-x4"></span> Recent items</button>
     <button data-open-tab="history"><span class="fa fa-history fa-x4"></span> Last opened</button>
     <button data-open-tab="search"><span class="fa fa-search fa-x4"></span> Search</button>
