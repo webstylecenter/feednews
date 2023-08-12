@@ -55,7 +55,7 @@ function loadTags()
 
       $('.tags select').append($('<option>', {
         value: tag.name,
-        text: tag.name + ' (?? items)'
+        text: tag.name + ' (' + tag.count + ' items)'
       }));
     });
 

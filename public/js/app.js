@@ -3077,7 +3077,7 @@ function loadTags() {
     $(data.tags).each(function (key, tag) {
       $('.tags select').append($('<option>', {
         value: tag.name,
-        text: tag.name + ' (?? items)'
+        text: tag.name + ' (' + tag.count + ' items)'
       }));
     });
   });
