@@ -2200,6 +2200,7 @@ __webpack_require__(/*! ./components/register */ "./resources/js/components/regi
 __webpack_require__(/*! ./components/tabs */ "./resources/js/components/tabs.js");
 __webpack_require__(/*! ./components/hotlink */ "./resources/js/components/hotlink.js");
 __webpack_require__(/*! ./components/introduction */ "./resources/js/components/introduction.js");
+__webpack_require__(/*! ./components/tab-overlay */ "./resources/js/components/tab-overlay.js");
 window.showDialog = function (title, description) {
   $('.dialog .title').html(title);
   $('.dialog .description').html(description);
@@ -2405,11 +2406,13 @@ $(function () {
 /***/ (() => {
 
 $(function () {
-  $('.js-button-parse-url').on('click', function () {
-    getUrlMetaData();
+  $('.js-open-add-new-feed-form').on('click', function () {
+    $('.tabOverlay .message-content').load(route('overlay.add-new-feed-item'), function () {
+      $('.tabOverlay').css('display', 'flex');
+    });
   });
-  $('.js-form-feed [name="url"]').on('blur', function () {
-    getUrlMetaData();
+  $(document).on('blur', '.js-auto-load-meta-data', function (el) {
+    // TODO: FIX THIS getUrlMetaData(el);
   });
   $('.widget-note textarea').on('blur', function () {
     saveNote($(this));
@@ -2477,26 +2480,11 @@ $(function () {
     $(this).slideUp().then($('.signinBox form').slideDown());
   });
 });
-function getUrlMetaData() {
-  var Url = $('.js-form-feed [name="url"]').val();
+function getUrlMetaData(el) {
+  var Url = $(el).val();
   if (Url.length > 0) {
-    $('.js-form-feed [name="title"]').val("Loading info...");
-    $('.js-form-feed [name="description"]').val("");
-    $.ajax({
-      method: "POST",
-      url: route('feed.metadata'),
-      data: {
-        url: Url
-      }
-    }).done(function (response) {
-      if (response.status == 'success') {
-        $('.js-form-feed [name="title"]').val(response.data.title);
-        $('.js-form-feed [name="description"]').val(response.data.description);
-      } else {
-        $('.js-form-feed [name="title"]').val("");
-        $('.js-form-feed [name="description"]').val("");
-      }
-    });
+    $('.js-overlay-form-container [name="title"]').val("Loading info...");
+    $('.js-overlay-form-container [name="description"]').val("");
   }
 }
 function saveNote($el) {
@@ -2616,10 +2604,6 @@ $(function () {
     $($(this).data('modal-target')).modal({
       fadeDuration: 100
     });
-  }).on('click', '.js-form-feed button', function () {
-    $.post(route('feed.add'), $('.js-form-feed').serialize(), function (data) {
-      data.status === 'success' ? $.modal.close() : showDialog('Adding item failed!', 'Failed to add item due to a server error.');
-    }, 'json');
   }).on('click', '.js-open-new-window', function () {
     window.open($('.urlbar a').attr('href'));
   }).on('click', '.js-visbility-toggle', function () {
@@ -3023,6 +3007,36 @@ $(function () {
     });
   });
 });
+
+/***/ }),
+
+/***/ "./resources/js/components/tab-overlay.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/tab-overlay.js ***!
+  \************************************************/
+/***/ (() => {
+
+$(function () {
+  $('.js-button-submit-tab-overlay').submit(function (event) {
+    event.preventDefault();
+  });
+  $('.js-button-submit-tab-overlay').on('click', function (el) {
+    var actionUrl = $('.js-overlay-form-container').attr('data-action-url');
+    var data = $('.js-overlay-form-container').serialize();
+    $.post(actionUrl, data, function (response) {
+      console.log(response);
+      closeOverlay();
+    }).fail(function (response) {
+      alert(response.responseJSON.message);
+    });
+  });
+  $('.js-close-tab-overlay').on('click', function () {
+    closeOverlay();
+  });
+});
+function closeOverlay() {
+  $('.tabOverlay').fadeOut();
+}
 
 /***/ }),
 

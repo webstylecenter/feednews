@@ -25,3 +25,4 @@ require 'welcome.php';
 require 'weather.php';
 require 'introduction.php';
 require 'tag.php';
+require 'overlay.php';

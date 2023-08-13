@@ -34,6 +34,7 @@ require('./components/register');
 require('./components/tabs');
 require('./components/hotlink');
 require('./components/introduction');
+require('./components/tab-overlay');
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);

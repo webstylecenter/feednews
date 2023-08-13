@@ -3433,16 +3433,25 @@ a:hover {
   display: block;
   color: black;
 }
+.tabs .tab .tags .add-tag {
+  padding: 10px;
+  float: right;
+}
+.tabs .tab .tags .add-tag:hover {
+  color: #337dff;
+  cursor: pointer;
+}
 .tabs .tab .tags select {
   background-color: #e6e6e6;
   padding: 3px 10px;
   border: 0;
-  width: 100%;
+  width: 400px;
   height: 37px;
 }
 .tabs .tab .tags select option {
   color: #337dff;
   font-size: 12pt;
+  width: 450px;
 }
 .tabs .tab .tags select option:hover {
   color: #337dff;
@@ -3481,11 +3490,19 @@ a:hover {
   height: 37px;
   display: block;
 }
+.tabBar .tags .add-tag {
+  padding: 10px;
+  float: right;
+}
+.tabBar .tags .add-tag:hover {
+  color: #337dff;
+  cursor: pointer;
+}
 .tabBar .tags select {
   background-color: #e6e6e6;
   padding: 3px 10px;
   border: 0;
-  width: 100%;
+  width: calc(100% - 50px);
   height: 37px;
 }
 .tabBar .tags select:hover {
@@ -3553,6 +3570,49 @@ a:hover {
 
 .tabs.darkTheme {
   background-color: #1a1a1a;
+}
+
+.tabOverlay {
+  width: 450px;
+  position: fixed;
+  top: 111px;
+  bottom: 0px;
+  overflow-y: auto;
+  background-color: rgba(230, 230, 230, 0.42);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 200ms ease;
+}
+.tabOverlay .close {
+  text-align: right;
+  padding: 20px;
+  z-index: 9999;
+}
+.tabOverlay .close button {
+  background: none;
+  border: none;
+  font-size: 16pt;
+}
+.tabOverlay .close button:hover {
+  color: #337dff;
+  cursor: pointer;
+}
+.tabOverlay .message {
+  margin-top: -90px;
+  padding: 20px;
+}
+.tabOverlay .message input {
+  margin-top: 5px;
+  width: 100%;
+}
+.tabOverlay .save {
+  text-align: center;
+}
+.tabOverlay .save button {
+  padding: 10px 50px;
 }
 
 .screenshot-list {
@@ -3737,7 +3797,7 @@ a:hover {
   right: 0;
   left: 0;
   height: 20vh;
-  background-image: url("/images/background.jpg");
+  background-image: url("https://picsum.photos/1920/1080");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -3829,7 +3889,7 @@ a:hover {
   right: 0;
   left: 0;
   height: 100vh;
-  background-image: url("/images/background.jpg");
+  background-image: url("https://picsum.photos/1920/1080");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

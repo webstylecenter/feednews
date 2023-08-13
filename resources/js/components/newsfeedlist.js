@@ -73,13 +73,6 @@ $(function () {
         .on('click', '.js-modal-trigger', function () {
             $($(this).data('modal-target')).modal({fadeDuration: 100});
         })
-        .on('click', '.js-form-feed button', function () {
-            $.post(route('feed.add'), $('.js-form-feed').serialize(), function (data) {
-                data.status === 'success'
-                    ? $.modal.close()
-                    : showDialog('Adding item failed!', 'Failed to add item due to a server error.');
-            }, 'json');
-        })
         .on('click', '.js-open-new-window', function () {
             window.open($('.urlbar a').attr('href'));
         })

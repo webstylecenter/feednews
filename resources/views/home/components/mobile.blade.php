@@ -5,7 +5,7 @@
                 <span class="js-open-url footer--bar-weather-icon" data-url="/weather/mobile-page/">@include('weather.icon')</span>
             </div>
             <div class="other">
-                <span data-modal-target=".js-form-feed" class="js-modal-trigger fa fa-file fa-x4"></span>
+                <span class="js-open-add-new-feed-form fa fa-file fa-x4"></span>
                 <span data-url="{{ route('checklist.index') }}" class="js-open-url fa fa-check fa-x4"></span>
             </div>
         </div>

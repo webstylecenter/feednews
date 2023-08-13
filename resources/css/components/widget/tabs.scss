@@ -35,16 +35,27 @@
       display: block;
       color: black;
 
+      .add-tag {
+        padding: 10px;
+        float: right;
+
+        &:hover {
+          color: $blue;
+          cursor: pointer;
+        }
+      }
+
       select {
         background-color: #e6e6e6;
         padding: 3px 10px;
         border: 0;
-        width: 100%;
+        width: $sidebar-width - 50px;
         height: $tab-height;
 
         option {
           color: $blue;
           font-size: 12pt;
+          width: $sidebar-width;
 
           &:hover {
             color: $blue;
@@ -87,11 +98,21 @@
     height: $tag-height;
     display: block;
 
+    .add-tag {
+      padding: 10px;
+      float: right;
+
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+
     select {
       background-color: #e6e6e6;
       padding: 3px 10px;
       border: 0;
-      width: 100%;
+      width: calc(100% - 50px);
       height: $tab-height;
 
       &:hover {
@@ -164,4 +185,51 @@
 }
 .tabs.darkTheme {
   background-color: #1a1a1a;
+}
+
+.tabOverlay {
+  width: $sidebar-width;
+  position: fixed;
+  top: $header-height-with-tabs + $tag-height;
+  bottom: 0px;
+  overflow-y: auto;
+  background-color: rgba(230, 230, 230, 0.42);
+  backdrop-filter: blur(5px);
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 200ms ease;
+
+  .close {
+    text-align: right;
+    padding: 20px;
+    z-index: 9999;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 16pt;
+
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+  }
+  .message {
+    margin-top: -90px;
+    padding: 20px;
+
+    input {
+      margin-top: 5px;
+      width: 100%;
+    }
+  }
+  .save {
+    text-align: center;
+    button {
+      padding: 10px 50px;
+    }
+  }
 }
