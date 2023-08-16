@@ -38,4 +38,9 @@ class UserFeedItem extends Model
     {
         return $this->belongsTo(UserFeed::class);
     }
+
+    public function tag(): BelongsTo
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }

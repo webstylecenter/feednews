@@ -182,9 +182,25 @@
   .active {
     color: $blue;
   }
+
+
 }
 .tabs.darkTheme {
   background-color: #1a1a1a;
+
+  .tab {
+    .tags {
+      background-color: #1a1a1a;
+
+      select {
+        background-color: #1a1a1a;
+      }
+      .add-tag {
+        background-color: #1a1a1a;
+        color: #828282;
+      }
+    }
+  }
 }
 
 .tabOverlay {
@@ -231,5 +247,21 @@
     button {
       padding: 10px 50px;
     }
+  }
+}
+
+.tabOverlay.darkTheme {
+  background-color: rgba(0, 0, 0, 0.32);
+
+  input {
+    background-color: #4b4b4b;
+    color: $blue;
+  }
+}
+
+@include respond-to(mobile) {
+  .tabOverlay {
+    width: 100%;
+    top: $header-height;
   }
 }

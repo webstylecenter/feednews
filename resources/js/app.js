@@ -42,6 +42,18 @@ window.showDialog = function(title, description) {
     $('.dialog').modal({fadeDuration: 100});
 }
 
+window.showTabOverlay = function (route) {
+  $('.tabOverlay .message-content').load(route, function() {
+    $('.tabOverlay').css('display', 'flex');
+
+    $(".spectrum").spectrum({
+      color: $(this).val(),
+      allowEmpty: false,
+      preferredFormat: "hex"
+    });
+  })
+}
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

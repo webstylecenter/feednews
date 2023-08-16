@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TagRepository
 {
-    private ?User $user;
-    public function __construct(private Tag $tag, )
-    {
-        $this->user = Auth::user();
-    }
-
     public function get(): ?Collection
     {
         return Auth::user()->tags()->get();
@@ -23,20 +17,21 @@ class TagRepository
 
     public function add(string $name, string $color): Tag
     {
-        if ($this->user === null) {
+        if (Auth::user() === null) {
             throw new AuthorizationException;
         }
 
-        $this->tag->user_id = $this->user->id;
-        $this->tag->name = $name;
-        $this->tag->color = $color;
-        $this->tag->save();
+        $tag = new Tag();
+        $tag->user_id = Auth::user()->id;
+        $tag->name = $name;
+        $tag->color = $color;
+        $tag->save();
 
-        return $this->tag;
+        return $tag;
     }
 
     public function remove(string $name)
     {
-        $this->user->tags()->where('name', '=', $name)->delete();
+        Auth::user()->tags()->where('name', '=', $name)->delete();
     }
 }

@@ -65,6 +65,10 @@ $(function () {
             e.stopImmediatePropagation();
             openInPictureInPicture(parseUrl($(this).parent().data('url'), false));
         })
+        .on('click', '.js-tag-feed-item', function(e) {
+          e.stopImmediatePropagation();
+          showTabOverlay(route('overlay.tag-feed-item', {'id': $(this).attr('data-feed-item-id')}));
+        })
         .on('click', '.js-close-pip', function () {
             $('.content-pictureInPictureFrame').remove();
             $('.content-close-pip').hide();

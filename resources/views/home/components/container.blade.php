@@ -8,7 +8,7 @@
             <select name="tags" class="{{ $darkTheme }} fluent-light">
                 <option selected>All items</option>
             </select>
-            <span class="add-tag action-add-tag fa fa-tag"> +</span>
+            <span class="add-tag js-open-add-tag fa fa-tag"> +</span>
         </div>
         <aside data-is-mobile="{{ $device->isMobile() }}" data-hideXframe="{{ $user->hide_xframe_notice }}"
                class="feed-list feed-list--type-sidebar {{ $darkTheme }}">
@@ -26,7 +26,7 @@
         <select name="tags" class="{{ $darkTheme }}">
             <option selected>All items</option>
         </select>
-        <span class="add-tag action-add-tag fa fa-tag"> +</span>
+        <span class="add-tag js-open-add-tag fa fa-tag"> +</span>
     </div>
     <button class="active" data-open-tab="recent"><span class="fa fa-clock fa-x4"></span> Recent items</button>
     <button data-open-tab="history"><span class="fa fa-history fa-x4"></span> Last opened</button>

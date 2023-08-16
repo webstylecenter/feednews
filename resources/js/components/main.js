@@ -1,10 +1,8 @@
 $(function () {
 
-  $('.js-open-add-new-feed-form').on('click', function() {
-    $('.tabOverlay .message-content').load(route('overlay.add-new-feed-item'), function() {
-      $('.tabOverlay').css('display', 'flex');
-    })
-
+  $('.js-open-add-new-feed-form').on('click', function() {showTabOverlay(route('overlay.add-feed-item'))});
+  $('.js-open-add-tag').on('click', function() {
+    showTabOverlay(route('overlay.add-tag'))
   });
 
   $(document).on('blur', '.js-auto-load-meta-data', function (el) {

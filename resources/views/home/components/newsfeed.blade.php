@@ -75,7 +75,13 @@
         <div data-balloon="Pin item" data-balloon-pos="left" class="pin" data-pin-id="{{ $item->user_feed_item_id }}">
             <span class="fa fa-thumbtack"></span>
         </div>
-        <div data-balloon="Open in popup" data-balloon-pos="left" class="pip hide-if-mobile">
+
+        <div data-feed-item-id="{{ $item->user_feed_item_id }}" class="js-tag-feed-item feed-item-action-icons hide-if-mobile"
+             @if ($item->tag !== null) style="visibility: visible; color:#{{ $item->tag->color }}" title="{{ $item->tag->name }}" @endif>
+            <span class="fa fa-tag"></span>
+        </div>
+
+        <div data-balloon="Open in popup" data-balloon-pos="left" class="pip feed-item-action-icons hide-if-mobile">
             <span class="fa fa-window-restore"></span>
         </div>
 

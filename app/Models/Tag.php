@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tag extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'color'
