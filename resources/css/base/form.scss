@@ -10,7 +10,7 @@ input[type="text"], input[type="password"] {
   border: 1px solid $blue;
   background-color: white;
   padding: 5px 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   color: $blue;
   display: block;
   margin-bottom: 10px;
@@ -21,7 +21,7 @@ input[type="text"], input[type="password"] {
 input[type="submit"], input[type="button"] {
   background-color: $blue;
   color: white;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px 15px;
   border: 1px solid $blue;
   font-size: 16pt;

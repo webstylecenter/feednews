@@ -27,7 +27,46 @@
         padding: 10px 20px;
         margin-bottom: 0;
       }
+    }
 
+    .tags {
+      background-color: #e6e6e6;
+      height: $tag-height;
+      display: block;
+      color: black;
+
+      .add-tag {
+        padding: 10px;
+        float: right;
+
+        &:hover {
+          color: $blue;
+          cursor: pointer;
+        }
+      }
+
+      select {
+        background-color: #e6e6e6;
+        padding: 3px 10px;
+        border: 0;
+        width: $sidebar-width - 50px;
+        height: $tab-height;
+
+        option {
+          color: $blue;
+          font-size: 12pt;
+          width: $sidebar-width;
+
+          &:hover {
+            color: $blue;
+          }
+        }
+
+        &:hover {
+          background-color: rgba(197, 197, 197, 0.5);
+          cursor: pointer;
+        }
+      }
     }
   }
 
@@ -53,6 +92,35 @@
   padding-top: 5px;
   width: $sidebar-width;
   box-shadow: 1px 0 1px rgba(0, 0, 0, 0.1);
+
+  .tags {
+    background-color: #e6e6e6;
+    height: $tag-height;
+    display: block;
+
+    .add-tag {
+      padding: 10px;
+      float: right;
+
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+
+    select {
+      background-color: #e6e6e6;
+      padding: 3px 10px;
+      border: 0;
+      width: calc(100% - 50px);
+      height: $tab-height;
+
+      &:hover {
+        background-color: rgba(197, 197, 197, 0.5);
+        cursor: pointer;
+      }
+    }
+  }
 
   button {
     outline: none;
@@ -87,13 +155,13 @@
 
   @include respond-to(mobile) {
     width: 100%;
-    height: $tab-mobile-height;
+    height: 80px;
     top: auto;
     bottom: $footer-height;
-    padding-top: 10px;
+    padding-top: 0;
 
     button {
-      padding: 10px 20px;
+      padding: 15px 20px 5px 20px;
       font-size: 12pt;
 
       @media only screen and (max-width: 500px) {
@@ -114,7 +182,107 @@
   .active {
     color: $blue;
   }
+
+
 }
 .tabs.darkTheme {
   background-color: #1a1a1a;
+
+  input {
+    background-color: #1a1a1a;
+    color: #828282;
+  }
+
+  .tab {
+    .tags {
+      background-color: #1a1a1a;
+
+      select {
+        background-color: #1a1a1a;
+      }
+      .add-tag {
+        background-color: #1a1a1a;
+        color: #828282;
+      }
+    }
+  }
+}
+
+.tabBar.darkTheme {
+  .tags {
+    background-color: #1a1a1a;
+  }
+  select {
+    background-color: #1a1a1a;
+    color: #828282;
+  }
+}
+
+.tabOverlay {
+  width: $sidebar-width;
+  position: fixed;
+  top: $header-height-with-tabs + $tag-height;
+  bottom: 0px;
+  overflow-y: auto;
+  background-color: rgba(230, 230, 230, 0.42);
+  backdrop-filter: blur(5px);
+
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 200ms ease;
+
+  .close {
+    text-align: right;
+    padding: 20px;
+    z-index: 9999;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 16pt;
+
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+  }
+  .message {
+    margin-top: -90px;
+    padding: 20px;
+
+    input {
+      margin-top: 5px;
+      width: 100%;
+    }
+  }
+  .save {
+    text-align: center;
+    button {
+      padding: 10px 50px;
+    }
+  }
+}
+
+.tabOverlay.darkTheme {
+  background-color: rgba(0, 0, 0, 0.32);
+
+  .close {
+    button {
+      color: $blue;
+    }
+  }
+
+  input {
+    background-color: #4b4b4b;
+    color: $blue;
+  }
+}
+
+@include respond-to(mobile) {
+  .tabOverlay {
+    width: 100%;
+    top: $header-height;
+  }
 }

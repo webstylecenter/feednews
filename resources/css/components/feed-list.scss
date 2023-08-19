@@ -3,7 +3,7 @@
   background: #f7f7f7;
   width: $sidebar-width;
   position: fixed;
-  top: $header-height-with-tabs;
+  top: $header-height-with-tabs + $tag-height;
   bottom: 0px;
   overflow-y: auto;
 
@@ -67,7 +67,7 @@
       visibility: visible;
       color: red;
     }
-    .pip {
+    .feed-item-action-icons {
       visibility: visible;
       :hover {
         color: red;
@@ -126,7 +126,7 @@
     font-size: 12pt;
   }
 
-  .pip {
+  .feed-item-action-icons {
     color: #c5c5c5;
     visibility: hidden;
     width: 20px;

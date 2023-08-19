@@ -34,11 +34,24 @@ require('./components/register');
 require('./components/tabs');
 require('./components/hotlink');
 require('./components/introduction');
+require('./components/tab-overlay');
 
 window.showDialog = function(title, description) {
     $('.dialog .title').html(title);
     $('.dialog .description').html(description);
     $('.dialog').modal({fadeDuration: 100});
+}
+
+window.showTabOverlay = function (route) {
+  $('.tabOverlay .message-content').load(route, function() {
+    $('.tabOverlay').css('display', 'flex');
+
+    $(".spectrum").spectrum({
+      color: $(this).val(),
+      allowEmpty: false,
+      preferredFormat: "hex"
+    });
+  })
 }
 
 $.ajaxSetup({

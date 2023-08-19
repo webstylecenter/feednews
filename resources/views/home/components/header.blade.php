@@ -29,7 +29,7 @@
         <span data-balloon="Copy link to clipboard" data-balloon-pos="down" class="js-copy-to-clipboard hide-if-mobile" data-clipboard-action="copy" data-clipboard-text="#"><span class="fa fa-share-square fa-x4"></span></span>
 
         <span data-balloon="Open your todo list" data-balloon-pos="down" data-url="{{ route('checklist.index') }}" class="js-open-url hide-if-mobile"><span class="fa fa-check fa-x4"></span></span>
-        <span data-balloon="Add new item to your feed" data-balloon-pos="down" data-modal-target=".js-form-feed" class="js-modal-trigger hide-if-mobile"><span class="fa fa-file fa-x4"></span></span>
+        <span data-balloon="Add new item to your feed" data-balloon-pos="down" class="js-open-add-new-feed-form hide-if-mobile"><span class="fa fa-file fa-x4"></span></span>
         <span data-balloon="Open settings" data-balloon-pos="down" data-url="{{ route('settings.index') }}" class="js-open-url hide-if-mobile"><span class="fa fa-cog fa-x4"></span></span>
 
         <span data-balloon="Refresh for latest items" data-balloon-pos="down" class="js-refresh-feed-items show-if-mobile hide-if-desktop hide-if-tablet"><span class="fa fa-sync fa-x4"></span></span>

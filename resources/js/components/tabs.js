@@ -2,6 +2,8 @@ $(function () {
   $('.tabBar button').on('click', function() {
     switchToTab(this);
   })
+
+ loadTags();
 });
 
 function switchToTab(el) {
@@ -36,8 +38,28 @@ function loadHistory() {
       mc.on('swiperight', function(ev) {
           $(that).find('.pin').trigger('click');
       });
+      mc.on('swipeleft', function(ev) {
+        $(that).find('.js-tag-feed-item').trigger('click');
+      });
     });
 
     window.wow.sync();
+  });
+}
+
+function loadTags()
+{
+  $.getJSON(route('tag.index'), function (data) {
+    if (data.status !== 'success') {
+      return;
+    }
+
+    $(data.tags).each(function(key, tag) {
+      $('.tags select').append($('<option>', {
+        value: tag.id,
+        text: tag.name + ' (' + tag.count + ' items)'
+      }));
+    });
+
   });
 }
