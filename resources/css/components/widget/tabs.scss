@@ -188,6 +188,11 @@
 .tabs.darkTheme {
   background-color: #1a1a1a;
 
+  input {
+    background-color: #1a1a1a;
+    color: #828282;
+  }
+
   .tab {
     .tags {
       background-color: #1a1a1a;
@@ -200,6 +205,16 @@
         color: #828282;
       }
     }
+  }
+}
+
+.tabBar.darkTheme {
+  .tags {
+    background-color: #1a1a1a;
+  }
+  select {
+    background-color: #1a1a1a;
+    color: #828282;
   }
 }
 
@@ -252,6 +267,12 @@
 
 .tabOverlay.darkTheme {
   background-color: rgba(0, 0, 0, 0.32);
+
+  .close {
+    button {
+      color: $blue;
+    }
+  }
 
   input {
     background-color: #4b4b4b;

@@ -76,7 +76,7 @@
             <span class="fa fa-thumbtack"></span>
         </div>
 
-        <div data-feed-item-id="{{ $item->user_feed_item_id }}" class="js-tag-feed-item feed-item-action-icons hide-if-mobile"
+        <div data-feed-item-id="{{ $item->user_feed_item_id }}" class="js-tag-feed-item feed-item-action-icons"
              @if ($item->tag !== null) style="visibility: visible; color:#{{ $item->tag->color }}" title="{{ $item->tag->name }}" @endif>
             <span class="fa fa-tag"></span>
         </div>

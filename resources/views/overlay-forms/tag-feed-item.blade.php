@@ -1,4 +1,4 @@
-<form class="js-overlay-form-container" data-action-url="{{ route('tag.add') }}">
+<form class="js-overlay-form-container" data-action-url="{{ route('tag.tag') }}">
     <h1>Tag item</h1>
 
     <div class="add-tag-to-user-feed-item-preview">

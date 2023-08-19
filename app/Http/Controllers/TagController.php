@@ -23,7 +23,14 @@ class TagController extends BaseController
         return new JsonResponse([
             'status' => 'success',
             'total_feed_items' => Auth::user()?->feedItems()?->count(),
-            'tags' => $this->tagRepository->get()->toArray()
+            'tags' => array_map(function($tag) {
+                return [
+                    'id' => $tag->id,
+                    'name' => $tag->name,
+                    'color' => $tag->color,
+                    'count' => $tag->count()
+                ];
+            }, $this->tagRepository->get()->all()),
         ]);
     }
 

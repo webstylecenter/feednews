@@ -32,6 +32,9 @@ var searchFeeds = function (searchQuery) {
             mc.on('swiperight', function(ev) {
                 $(that).find('.pin').trigger('click');
             });
+            mc.on('swipeleft', function(ev) {
+              $(that).find('.js-tag-feed-item').trigger('click');
+            });
         });
 
         window.wow.sync();

@@ -136,6 +136,16 @@ class FeedService
         return $output;
     }
 
+    public function getByTag(int $tagId): array
+    {
+        $output = [];
+        foreach ($this->userRepository->getByTag($tagId) as $userFeedItem) {
+            $output[] = $userFeedItem;
+        }
+
+        return $output;
+    }
+
     public function findOrCreateFeedByUrl($url)
     {
         $feed = Feed::where('url', '=', $url)->first();

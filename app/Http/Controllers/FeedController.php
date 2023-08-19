@@ -193,18 +193,7 @@ class FeedController extends BaseController
 
         return [
             'status' => 'success',
-            'data' => array_map(function (UserFeedItem $userFeedItem) {
-                return [
-                    'id' => $userFeedItem->user_feed_item_id,
-                    'title' => $userFeedItem->title,
-                    'description' => $userFeedItem->description,
-                    'url' => $userFeedItem->url,
-                    'color' => $userFeedItem->feed_color ?? '',
-                    'feedIcon' => $userFeedItem->feed_icon ?? '',
-                    'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
-                    'pinned' => $userFeedItem->pinned
-                ];
-            }, $feedService->search($request->get('query')))
+            'data' => array_map('self::mapUserFeedItemToArray', $feedService->search($request->get('query')))
         ];
     }
 
@@ -259,18 +248,29 @@ class FeedController extends BaseController
     {
         return [
             'status' => 'success',
-            'items' => array_map(function (UserFeedItem $userFeedItem) {
-                return [
-                    'id' => $userFeedItem->user_feed_item_id,
-                    'title' => $userFeedItem->title,
-                    'description' => $userFeedItem->description,
-                    'url' => $userFeedItem->url,
-                    'color' => $userFeedItem->feed_color ?? '',
-                    'feedIcon' => $userFeedItem->feed_icon ?? '',
-                    'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
-                    'pinned' => $userFeedItem->pinned
-                ];
-            }, $feedService->getOpenedItems())
+            'items' => array_map('self::mapUserFeedItemToArray', $feedService->getOpenedItems())
+        ];
+    }
+
+    public function getItemsByTag(int $tagId, FeedService $feedService): array
+    {
+        return [
+            'status' => 'success',
+            'items' => array_map('self::mapUserFeedItemToArray', $feedService->getByTag($tagId))
+        ];
+    }
+
+    static private function mapUserFeedItemToArray(UserFeedItem $userFeedItem): array
+    {
+        return [
+            'id' => $userFeedItem->user_feed_item_id,
+            'title' => $userFeedItem->title,
+            'description' => strlen($userFeedItem->description) > 0 ? $userFeedItem->description : $userFeedItem?->feedItem?->feed?->name,
+            'url' => $userFeedItem->url,
+            'color' => $userFeedItem->feed_color ?? '',
+            'feedIcon' => $userFeedItem->feed_icon ?? '',
+            'shareId' => ($userFeedItem->name ? Str::slug($userFeedItem->name) : 'item') . '/' . $userFeedItem->id . '/',
+            'pinned' => $userFeedItem->pinned
         ];
     }
 }

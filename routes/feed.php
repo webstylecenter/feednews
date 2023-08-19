@@ -12,6 +12,7 @@ Route::name('feed.')->prefix('feed')->middleware(['web'])->group(function() {
         Route::post('/pin', [FeedController::class, 'pin'])->name('pin');
         Route::get('/load-more/{page}', [FeedController::class, 'loadMore'])->name('load.more');
         Route::get('/search', [FeedController::class, 'search'])->name('search');
+        Route::get('/tag/{tag}', [FeedController::class, 'getItemsByTag'])->name('tag');
         Route::get('/overview', [FeedController::class, 'overview'])->name('overview');
         Route::post('/check-x-frame-header', [FeedController::class, 'checkForXFrameHeader'])->name('check.x.frame.header');
         Route::get('/popup-has-been-opened', [FeedController::class, 'popupOpened'])->name('popup.opened');

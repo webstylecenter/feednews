@@ -5,16 +5,18 @@
 <div class="tabs {{ $darkTheme }}">
     <div class="tab tab--recent">
         <div class="tags hide-if-mobile">
-            <select name="tags" class="{{ $darkTheme }} fluent-light">
-                <option selected>All items</option>
+            <select name="tags" class="{{ $darkTheme }} fluent-light js-action-filter-by-tag">
+                <option value="" selected>All items</option>
             </select>
             <span class="add-tag js-open-add-tag fa fa-tag"> +</span>
         </div>
+        <div class="action-filter-by-tag-results"></div>
         <aside data-is-mobile="{{ $device->isMobile() }}" data-hideXframe="{{ $user->hide_xframe_notice }}"
                class="feed-list feed-list--type-sidebar {{ $darkTheme }}">
             @include('home.components.newsfeed', ['userFeedItems' => $userFeedItems])
         </aside>
     </div>
+    <div class="tab tab--recent-tag-filtered"></div>
     <div class="tab tab--history"></div>
     <div class="tab tab--search">
         <input type="text" name="query" class="search-query js-search-feed" placeholder="Search feed items"/>
@@ -23,8 +25,8 @@
 </div>
 <div class="tabBar {{ $darkTheme }}">
     <div class="tags hide-if-desktop hide-if-tablet">
-        <select name="tags" class="{{ $darkTheme }}">
-            <option selected>All items</option>
+        <select name="tags" class="{{ $darkTheme }} js-action-filter-by-tag">
+            <option value="" selected>All items</option>
         </select>
         <span class="add-tag js-open-add-tag fa fa-tag"> +</span>
     </div>
