@@ -10,9 +10,6 @@
                 @section('headerTitle')
                 @show
             </h1>
-            <div class="weather">
-                @include('widgets/weather')
-            </div>
         </header>
 
         <div class="mainContent">

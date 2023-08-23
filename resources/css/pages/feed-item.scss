@@ -1,0 +1,58 @@
+.page--feed-item {
+  .content-left {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+
+    @include respond-to(mobile) {
+      display: block;
+      width: 100%;
+      float: none;
+    }
+
+    a {
+      background-color: $blue;
+      color: #fff;
+      border: 0;
+      border-radius: 5px;
+      padding: 3px 5px;
+      display: block;
+      clear: both;
+      width: 100px;
+      margin: 20px 0;
+
+      &:hover {
+        text-decoration: none;
+        background-color: #80abff;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .content-right {
+    width: 20%;
+    box-sizing: border-box;
+    float: right;
+
+    @include respond-to(mobile) {
+      display: none;
+    }
+  }
+
+  a {
+    color: $blue;
+  }
+
+  .button {
+    background-color: $blue;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    padding: 3px 5px;
+    float: right;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

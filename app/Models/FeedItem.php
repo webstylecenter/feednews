@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasTimestamps;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FeedItem extends Model
 {
@@ -23,5 +24,10 @@ class FeedItem extends Model
     public function feed(): BelongsTo
     {
         return $this->belongsTo(Feed::class);
+    }
+
+    public function feedContent(): HasOne
+    {
+        return $this->HasOne(FeedItemContent::class);
     }
 }

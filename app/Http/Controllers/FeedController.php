@@ -216,13 +216,20 @@ class FeedController extends BaseController
         }
 
         return [
-            'found' => isset($header['X-Frame-Options']),
+            'found' => isset($header['X-Frame-Options']) || isset($header['x-frame-options']),
         ];
     }
 
-    public function popupOpened(): View
+    public function view(int $id): View
     {
-        return view('widgets.opened-in-popup');
+        $feedItem = UserFeedItem::find($id);
+
+        return view('feed-item.index', [
+            'bodyClass' => 'feedItemContent',
+            'feed_title' => $feedItem->feedItem->feed->name,
+            'feed_item_title' => $feedItem->feedItem->title,
+            'feed_item_content' => $feedItem->feedItem->feedContent->content,
+        ]);
     }
 
     public function openSharedItem(string $feedName, int $userFeedItemId): RedirectResponse

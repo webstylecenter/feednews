@@ -110,6 +110,8 @@ class ImportService
             return 'Error: No RSS Feed found on website';
         }
 
+        $url = str_replace('http://www.youtube.com/https://www.youtube.com', 'https://www.youtube.com', $url);
+
         return $url;
     }
 

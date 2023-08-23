@@ -141,22 +141,25 @@ window.openPage = (url, shareId, userFeedItemId) => {
     $('.profileMenu').slideUp();
 
     if (isMobile === "1") {
-        hasXFrameHeader(url, shareId);
+        hasXFrameHeader(url, shareId, userFeedItemId);
     } else {
         if (disableXcheck === "1") {
-            openInFrame(url, shareId);
+          openInFrame(url, shareId);
+        } else if(url.replace('https://www.youtube.com/watch?v=', '') !== url) {
+          openInFrame(url, shareId);
         } else {
-            hasXFrameHeader(url, shareId);
+          $('.feed-list, .tabBar, .tabs, .tabOverlay').removeClass('darkTheme', '', 2000, 'easeInOutQuad');
+          hasXFrameHeader(url, shareId, userFeedItemId);
         }
     }
 
     setItemToOpened(userFeedItemId);
 }
 
-function hasXFrameHeader(url, shareId) {
+function hasXFrameHeader(url, shareId, feedItemId) {
     $.post(route('feed.check.x.frame.header'), {url: url}).then(function (data) {
         if (data.found === true) {
-            openInNewWindow(url);
+            openFeedItem(feedItemId);
         } else {
             openInFrame(url, shareId)
         }
@@ -178,11 +181,9 @@ function openInFrame(url, shareId) {
     $('.js-copy-to-clipboard').attr('data-clipboard-text', 'https://' + window.location.hostname + '/share/' + shareId);
 }
 
-function openInNewWindow(url) {
-    window.open(url);
-
-    if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
-        $('.content-frame').attr('src', route('feed.popup.opened'));
+function openFeedItem(id) {
+  if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
+        $('.content-frame').attr('src', route('feed.view', {id: id}));
     }
 }
 
@@ -221,8 +222,8 @@ function createIframe(className, url) {
 }
 
 function parseUrl(url, changeColors) {
+    let videoId = url.replace('https://www.youtube.com/watch?v=', '');
 
-    var videoId = url.replace('https://www.youtube.com/watch?v=', '');
     if (url !== videoId) {
         if (changeColors) {
             $('.feed-list, .tabBar, .tabs, .tabOverlay').addClass('darkTheme', 2000, 'easeInOutQuad');

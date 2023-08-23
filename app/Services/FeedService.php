@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Feed;
 use App\Models\FeedItem;
+use App\Models\FeedItemContent;
 use App\Models\UserFeed;
 use App\Models\UserFeedItem;
 use App\Repositories\UserRepository;
@@ -70,7 +71,6 @@ class FeedService
         $newItems = 0;
         $skippedCacheItems = 0;
         foreach ($items as $item) {
-
             $guid = $item->get_id();
 
             if ($this->isInCache($guid) && $command !== null) {
@@ -87,9 +87,14 @@ class FeedService
                 'feed_id' => $feed->id,
                 'guid' => $item->get_id(),
                 'title' => html_entity_decode($item->get_title(), null, 'UTF-8'),
-                'description' => html_entity_decode(mb_substr($item->get_description() ?? $item->get_content(), 0, 255), null, 'UTF-8'),
+                'description' => html_entity_decode(mb_substr(strip_tags($item->get_description() ?? $item->get_content(), '<b><i><u><strong>'), 0, 255), null, 'UTF-8'),
                 'url' => $item->get_link(),
                 'created_at' => Carbon::parse($item->get_date())
+            ]);
+
+            $feedContent = FeedItemContent::create([
+                'feed_item_id' => $feedItem->id,
+                'content' => $item->get_description() ?? $item->get_content()
             ]);
 
             $this->createUserFeedItems($feed, $feedItem);
