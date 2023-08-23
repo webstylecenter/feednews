@@ -1,5 +1,14 @@
 .page--multi-tab {
 
+  a {
+    color: $blue;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   .mainContent {
     width: 80%;
     margin: 30px auto;

@@ -229,6 +229,8 @@ class FeedController extends BaseController
             'feed_title' => $feedItem?->feedItem?->feed?->name,
             'feed_item_title' => $feedItem?->feedItem?->title,
             'feed_item_content' => $feedItem?->feedItem?->feedContent?->content,
+            'feed_item_date' => $feedItem?->feedItem?->created_at,
+            'feed_item_url' => $feedItem?->feedItem?->url,
         ]);
     }
 

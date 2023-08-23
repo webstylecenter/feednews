@@ -182,9 +182,7 @@ function openInFrame(url, shareId) {
 }
 
 function openFeedItem(id) {
-  if (!$('.feed-list--type-sidebar').attr('data-is-mobile')) {
-        $('.content-frame').attr('src', route('feed.view', {id: id}));
-    }
+  openInFrame(route('feed.view', {id: id, shareId: id}));
 }
 
 function switchToPicutreInPicture() {
