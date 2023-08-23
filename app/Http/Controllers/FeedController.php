@@ -226,9 +226,9 @@ class FeedController extends BaseController
 
         return view('feed-item.index', [
             'bodyClass' => 'feedItemContent',
-            'feed_title' => $feedItem->feedItem->feed->name,
-            'feed_item_title' => $feedItem->feedItem->title,
-            'feed_item_content' => $feedItem->feedItem->feedContent->content,
+            'feed_title' => $feedItem?->feedItem?->feed?->name,
+            'feed_item_title' => $feedItem?->feedItem?->title,
+            'feed_item_content' => $feedItem?->feedItem?->feedContent?->content,
         ]);
     }
 
