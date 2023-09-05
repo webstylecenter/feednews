@@ -16,6 +16,7 @@
 
             <div class="feed-item-grid">
                 <div class="content-left">
+                    <base target="_blank" />
                     <p class="publish-date">Published: {{ $feed_item_date }}</p>
                     {!! $feed_item_content !!}
                 </div>

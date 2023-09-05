@@ -57,7 +57,6 @@ class FeedController extends BaseController
     }
 
     public function chromeImport(
-        ?string $email = null,
         Request $request,
         MetaService $metaService,
         FeedItem $feedItem,
@@ -79,10 +78,6 @@ class FeedController extends BaseController
                 'pinned' => true
             ]);
         } catch (\Throwable $e) {
-            if (strlen($email) > 0) {
-                Auth::logout();
-            }
-
             return [
                 'status' => 'error',
                 'message' => 'Something went wrong'
