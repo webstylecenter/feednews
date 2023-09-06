@@ -1,8 +1,13 @@
 @extends('multi-tab-view')
 
 @section('headerTitle')
-    Android import: {{ $status }}
+    Feednews
 @endsection
+
+@section('tabs')
+    <span class="js-homepage-showpage" data-page="settings">Import {{ $status }}</span>
+@endsection
+
 
 @section('content')
     <div class="page--settings">
@@ -12,5 +17,4 @@
             <p>{{ $url }}</p>
         </div>
     </div>
-
 @endsection
