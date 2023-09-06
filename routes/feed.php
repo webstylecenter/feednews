@@ -22,7 +22,7 @@ Route::name('feed.')->prefix('feed')->middleware(['web'])->group(function() {
     Route::post('/chrome-import/', [FeedController::class, 'chromeImport'])->name('chrome.import');
 });
 
-Route::get('/android-import/{url}', [FeedController::class, 'androidImport'])->name('android.import');
+Route::get('/android-share/{url}', [FeedController::class, 'androidImport'])->name('android.import');
 
 Route::name('feed.')->group(function() {
     Route::get('/share/{feedName}/{id}', [FeedController::class, 'openSharedItem'])->name('open.shared.item');

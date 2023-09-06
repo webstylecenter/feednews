@@ -7,6 +7,7 @@ const HEADER_BLACKLIST = [
   'cross-origin-opener-policy',
 ];
 
+// const API_URL = 'https://feednews.me';
 const API_URL = 'https://feednews.ddev.site';
 
 const pushLink = (link) => {
