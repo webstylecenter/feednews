@@ -1,26 +1,8 @@
 /*!
- * Sizzle CSS Selector Engine v2.2.0-pre
- * http://sizzlejs.com/
+ * The buffer module from node.js, for the browser.
  *
- * Copyright 2008, 2014 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2014-12-16
- */
-
-/*!
- * jQuery JavaScript Library v2.1.4
- * http://jquery.com/
- *
- * Includes Sizzle.js
- * http://sizzlejs.com/
- *
- * Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2015-04-28T16:01Z
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
  */
 
 /*!
@@ -56,10 +38,18 @@
  * @Supports AMD pattern
  */
 
-/*! Hammer.JS - v2.0.7 - 2016-04-22
- * http://hammerjs.github.io/
+/*! Hammer.JS - v1.1.3 - 2014-05-20
+ * http://eightmedia.github.io/hammer.js
  *
- * Copyright (c) 2016 Jorik Tangelder;
+ * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
+ * Licensed under the MIT license */
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/*! jQuery plugin for Hammer.JS - v1.1.3 - 2014-05-20
+ * http://eightmedia.github.com/hammer.js
+ *
+ * Copyright (c) 2014 Jorik Tangelder <j.tangelder@gmail.com>;
  * Licensed under the MIT license */
 
 /**
