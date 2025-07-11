@@ -6,6 +6,17 @@ const HEADER_BLACKLIST = [
 
 const API_URL = 'https://feednews.me';
 
+// Global notification click handler
+const notificationUrlMap = {};
+
+chrome.notifications.onClicked.addListener((notificationId) => {
+  const url = notificationUrlMap[notificationId];
+  if (url) {
+    chrome.tabs.create({ url: url });
+    delete notificationUrlMap[notificationId]; // Clean up
+  }
+});
+
 // Use chrome.notifications instead of the Notification API
 function createNotification(title, message, url = null) {
   chrome.notifications.create('', {
@@ -15,11 +26,7 @@ function createNotification(title, message, url = null) {
     message: message
   }, (notificationId) => {
     if (url) {
-      chrome.notifications.onClicked.addListener((clickedId) => {
-        if (clickedId === notificationId) {
-          chrome.tabs.create({ url: url });
-        }
-      });
+      notificationUrlMap[notificationId] = url;
     }
   });
 }
