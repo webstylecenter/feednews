@@ -1,9 +1,3 @@
-const HEADER_BLACKLIST = [
-  'content-security-policy',
-  'x-frame-options',
-  'cross-origin-opener-policy',
-];
-
 const API_URL = 'https://feednews.me';
 
 // Global notification click handler
