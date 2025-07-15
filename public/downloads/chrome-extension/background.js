@@ -11,7 +11,11 @@ chrome.notifications.onClicked.addListener((notificationId) => {
   }
 });
 
-// Use chrome.notifications instead of the Notification API
+/**
+ * Creates a Chrome notification with the specified title and message, optionally associating a URL to be opened when the notification is clicked.
+ * 
+ * If a URL is provided, it is mapped to the notification ID for later retrieval when the user interacts with the notification.
+ */
 function createNotification(title, message, url = null) {
   chrome.notifications.create('', {
     type: 'basic',
