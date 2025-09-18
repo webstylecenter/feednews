@@ -1,3 +1,9 @@
+# 2025 update:
+This project is being moved back to a symfony/svelte project with my latest programming skills.
+Please checkout https://github.com/webstylecenter/feednewsapp
+
+
+
 #  FeedNews.me
 A powerful dashboard tool to keep track of your favorite news sites, daily tasks, reminders, and so much more. FeedNews.me, previously called "It's my Homepage" brings you a site that you can set as startpage of your browser, or use Electron to run it as an app. I personally use it all day, with my news sources like Neowin, iDownloadblog and many more next to my Youtube subscriptions, todo-list and weather updates all in one place.
 
